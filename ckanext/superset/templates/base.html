@@ -1,0 +1,12 @@
+{% ckan_extends %}
+
+{% block styles %}
+    {{ super() }}
+    {% asset 'superset/superset-css' %}
+{% endblock %}
+
+{% block body_extras %}
+    {{ super() }}
+    {% asset 'superset/superset-js' %}
+
+{% endblock %}

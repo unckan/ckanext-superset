@@ -1,0 +1,14 @@
+superset-js:
+  filter: rjsmin
+  output: ckanext-superset/%(version)s-superset.js
+  contents:
+    - js/superset.js
+  extra:
+    preload:
+      - base/main
+
+superset-css:
+  filter: cssrewrite
+  output: ckanext-superset/%(version)s-superset.css
+  contents:
+    - css/superset.css
