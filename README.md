@@ -1,4 +1,4 @@
-[![Tests](https://github.com/unckan/ckanext-superset/workflows/Test%20Build/badge.svg?branch=main)](https://github.com/unckan/ckanext-superset/actions)
+[![Tests](https://github.com/unckan/ckanext-superset/actions/workflows/test-superset-extension.yml/badge.svg?branch=main)](https://github.com/unckan/ckanext-superset/actions)
 
 # CKAN Apache Superset extension
 

@@ -40,26 +40,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install OS dependencies
         run: |
           apk add --no-cache coreutils libffi-dev gcc libc-dev postgresql-client tar proj-util proj-dev
 
-      - name: Install dev-reqs
-        run: pip install -r dev-requirements.txt
-
-      - name: flake8
-        run: python3 -m flake8 ckanext --count --show-source --max-complexity=12 --max-line-length=130 --statistics
-
-      - name: Install requirements
-        shell: bash
-        # Install any extra requirements your extension has here (dev requirements, other extensions etc)
+      - name: Install Python dependencies
         run: |
+          pip install -r dev-requirements.txt
           pip install -r requirements.txt
           pip install -e .
+
+      - name: flake8
+        run: |
+          flake8 ckanext --count --show-source --max-complexity=12 --max-line-length=130 --statistics
 
       - name: Setup extension
         shell: bash
         run: |
+          # use = config:/srv/app/src/ckan/test-core.ini
+          # Replace default path to CKAN core config file with the one on the container
+          sed -i -e 's/use = config:.*/use = config:\/srv\/app\/src\/ckan\/test-core.ini/' test.ini
           ckan -c test.ini db init
           # echo "Applying migrations for superset"
           # ckan -c test.ini db upgrade -p superset
