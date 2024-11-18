@@ -1,6 +1,6 @@
 [![Tests](https://github.com/unckan/ckanext-superset/workflows/Test%20Build/badge.svg?branch=main)](https://github.com/unckan/ckanext-superset/actions)
 
-# CKAN SDuperset extension
+# CKAN Apache Superset extension
 
 CKAN extension to connect an Apache Superset instance to CKAN.  
 
