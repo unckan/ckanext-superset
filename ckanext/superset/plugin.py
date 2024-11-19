@@ -1,12 +1,16 @@
 import logging
 from ckan import plugins
 from ckan.plugins import toolkit
+from ckanext.superset.actions import superset_dataset as superset_dataset_actions
+from ckanext.superset.auth import superset_dataset as superset_dataset_auth
 
 
 log = logging.getLogger(__name__)
 
 
 class SupersetPlugin(plugins.SingletonPlugin):
+    plugins.implements(plugins.IActions)
+    plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IConfigurer)
 
     # IConfigurer
@@ -15,3 +19,17 @@ class SupersetPlugin(plugins.SingletonPlugin):
         toolkit.add_template_directory(config_, "templates")
         toolkit.add_public_directory(config_, "public")
         toolkit.add_resource("assets", "superset")
+
+    # IActions
+
+    def get_actions(self):
+        return {
+            "superset_dataset_list": superset_dataset_actions.superset_dataset_list
+        }
+
+    # IAuthFunctions
+
+    def get_auth_functions(self):
+        return {
+            "superset_dataset_list": superset_dataset_auth.superset_dataset_list
+        }
