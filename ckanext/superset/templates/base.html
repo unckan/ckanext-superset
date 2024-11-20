@@ -5,6 +5,11 @@
     {% asset 'superset/superset-css' %}
 {% endblock %}
 
+{% block content_primary_nav %}
+  {{ super() }}
+  {{ h.build_nav_icon('example_extension.endpoint', _('Superset'), icon='trophy') }}
+{% endblock %}
+
 {% block body_extras %}
     {{ super() }}
     {% asset 'superset/superset-js' %}
