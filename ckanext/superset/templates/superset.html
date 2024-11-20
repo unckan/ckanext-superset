@@ -1,8 +1,12 @@
 {% ckan_extends %}
 
-<div class="dashboard">
-  <h2>Superset Dashboard</h2>
-  <p>URL de la instancia de Superset: <a href="{{ superset_url }}" target="_blank">{{ superset_url }}</a></p>
-  <p>Datasets: {{ datasets_count }}</p>
-  <p>Bases de Datos: {{ databases_count }}</p>
-</div>
+{% block content_primary_nav %}
+
+    <div class="dashboard">
+    <h2>Superset Dashboard</h2>
+    <p>URL de la instancia de Superset: <a href="{{ superset_url }}" target="_blank">{{ superset_url }}</a></p>
+    <p>Datasets: {{ datasets_count }}</p>
+    <p>Bases de Datos: {{ databases_count }}</p>
+    </div>
+        
+{% endblock %}

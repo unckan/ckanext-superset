@@ -7,7 +7,7 @@
 
 {% block content_primary_nav %}
   {{ super() }}
-  {{ h.build_nav_icon('example_extension.endpoint', _('Superset'), icon='trophy') }}
+  {{ h.build_nav_icon('superset', _('Superset'), url_for('superset.index')) }}
 {% endblock %}
 
 {% block body_extras %}
