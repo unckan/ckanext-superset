@@ -11,8 +11,8 @@ superset_bp = Blueprint('superset_blueprint', __name__, url_prefix='/apache-supe
 def index():
     # Datos informativos
     superset_url = config.get('ckanext.superset.instance.url')
-    datasets_count = 3
-    databases_count = 5
+    datasets_count = config.get('ckanext.superset.datasets.count')
+    databases_count = config.get('ckanext.superset.databases.count')
 
     extra_vars = {
         'superset_url': superset_url,
