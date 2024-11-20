@@ -5,11 +5,6 @@
     {% asset 'superset/superset-css' %}
 {% endblock %}
 
-{% block content_primary_nav %}
-  {{ super() }}
-  {{ h.build_nav_icon('superset', _('Superset'), url_for('superset.index')) }}
-{% endblock %}
-
 {% block body_extras %}
     {{ super() }}
     {% asset 'superset/superset-js' %}

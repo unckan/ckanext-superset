@@ -1,7 +1,7 @@
 import logging
 from ckan import plugins
 from ckan.plugins import toolkit
-from ckanext.superset import blueprints
+from ckanext.superset.blueprints.superset import superset_bp
 from ckanext.superset.actions import superset_dataset as superset_dataset_actions
 from ckanext.superset.auth import superset_dataset as superset_dataset_auth
 from ckanext.superset.actions import superset_database as superset_database_actions
@@ -14,6 +14,7 @@ log = logging.getLogger(__name__)
 class SupersetPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
+    plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IConfigurer)
 
     # IConfigurer
@@ -40,7 +41,7 @@ class SupersetPlugin(plugins.SingletonPlugin):
         }
 
     # IBlueprint
-    def get_blueprints(self):
+    def get_blueprint(self):
         return [
-            blueprints.superset
+            superset_bp
         ]
