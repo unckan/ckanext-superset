@@ -18,18 +18,18 @@ Compatibility with core CKAN versions:
 
 ### Apache Superset instance
 
-ckanext.superser.instance.url = http://superset:8088  
-ckanext.superser.instance.user = admin  
-ckanext.superser.instance.pass = admin  
-ckanext.superser.instance.provider = db  
-ckanext.superser.instance.refresh = true  
+ckanext.superset.instance.url = http://superset:8088  
+ckanext.superset.instance.user = admin  
+ckanext.superset.instance.pass = admin  
+ckanext.superset.instance.provider = db  
+ckanext.superset.instance.refresh = true  
 
 ### Proxy (only if needed)
 
-ckanext.superser.proxy.url = http://superset:8088  
-ckanext.superser.proxy.port = 3128  
-ckanext.superser.proxy.user = admin@example.com  
-ckanext.superser.proxy.pass = pass  
+ckanext.superset.proxy.url = http://superset:8088  
+ckanext.superset.proxy.port = 3128  
+ckanext.superset.proxy.user = admin@example.com  
+ckanext.superset.proxy.pass = pass  
 
 
 ## License

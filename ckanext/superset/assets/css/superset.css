@@ -1,0 +1,15 @@
+.fa.fa-superset {
+  /* Add the icon PNG file as font awesome icon */
+    background-image: url("../../base/images/superset-ico.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 2em;
+    height: 1.5em;
+    margin-right: 0.5em;
+    vertical-align: -0.5em;
+    background-color: white;
+    border-radius: 50%;
+    padding: 0.2em;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
+}

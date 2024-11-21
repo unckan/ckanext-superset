@@ -1,0 +1,29 @@
+{% extends "page.html" %}
+
+{% block primary_content %}
+<section class="module">
+    <div class="module-content">
+        <h2>Superset Dashboard</h2>
+        <p>URL de la instancia de Superset: <a href="{{ superset_url }}" target="_blank">{{ superset_url }}</a></p>
+        <p>Datasets: {{ datasets_count }}</p>
+        <p>Bases de Datos: {{ databases_count }}</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block secondary_content %}
+
+<div class="module module-narrow module-shallow">
+    <h2 class="module-heading">
+      {{ _('Apache Superset') }}
+    </h2>
+    <div class="module-content">
+      <img src="{{ h.url_for_static('/base/images/apache-superset-logo.png') }}" alt="Apache Superset" style="max-width: 200px; display: block; margin: 0 auto;">
+      <p>
+        Apache Superset es una herramienta de visualización de datos de código abierto que permite a los usuarios
+        crear paneles de control y visualizaciones interactivas.
+    </p>
+    </div>
+  </div>
+
+{% endblock %}
