@@ -1,7 +1,7 @@
 import logging
 from ckan.plugins import toolkit
 from ckanext.superset.config import get_config
-from ckanext.superset.connect import SupersetCKAN
+from ckanext.superset.data.main import SupersetCKAN
 
 
 log = logging.getLogger(__name__)

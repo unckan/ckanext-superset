@@ -4,6 +4,7 @@ Connect to the superset API (through a proxy server if required)
 import logging
 import urllib.parse
 import httpx
+from ckanext.superset.data.dataset import SupersetDataset
 
 
 log = logging.getLogger(__name__)
@@ -39,6 +40,21 @@ class SupersetCKAN:
         self.client = None
         # In case we need to login
         self.access_token = None
+
+        self.datasets_response = None
+        self.datasets = []  # {ID: data}
+
+    def load_datasets(self, force=False):
+        """ Get and load all datasets """
+        if self.datasets and not force:
+            return
+
+        self.datasets_response = self.get("dataset/")
+        datasets = self.datasets_response.get("result", {})
+        for dataset in datasets:
+            ds = SupersetDataset()
+            ds.load(dataset)
+            self.datasets.append(ds)
 
     def prepare_connection(self):
         """ Define the client and login if required """

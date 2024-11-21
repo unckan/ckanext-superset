@@ -1,7 +1,7 @@
 import logging
 from ckan.plugins import toolkit
 from ckanext.superset.config import get_config
-from ckanext.superset.connect import SupersetCKAN
+from ckanext.superset.data.main import SupersetCKAN
 
 
 log = logging.getLogger(__name__)
@@ -15,6 +15,6 @@ def superset_dataset_list(context, data_dict):
 
     # Get the configuration values
     cfg = get_config()
-    SC = SupersetCKAN(**cfg)
-
-    return SC.get("dataset/")
+    sc = SupersetCKAN(**cfg)
+    sc.load_datasets()
+    return sc.datasets_response
