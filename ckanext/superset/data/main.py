@@ -63,7 +63,10 @@ class SupersetCKAN:
             return
 
         self.databases_response = self.get("database/")
-        self.databases = self.databases_response.get("result", [])
+        self.databases = sorted(
+            self.databases_response.get("result", []),
+            key=lambda x: x["id"]
+        )
 
         return self.databases
 
