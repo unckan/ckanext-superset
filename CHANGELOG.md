@@ -4,7 +4,9 @@ Features:
 
  - New API endpoint at `/api/action/superset_database_list` to get data from Superset URL at `/api/v1/database/`
   [#2](https://github.com/unckan/ckanext-superset/pull/2)
- - Databases_list [#8] (https://github.com/unckan/ckanext-superset/pull/8)
+ - Superset admin tab [#6] (https://github.com/unckan/ckanext-superset/pull/6)
+ - Datasets list [#7] (https://github.com/unckan/ckanext-superset/pull/7)
+ - Databases list [#8] (https://github.com/unckan/ckanext-superset/pull/8)
 
 # 0.1.3
 
