@@ -4,7 +4,6 @@ Connect to the superset API (through a proxy server if required)
 import logging
 import urllib.parse
 import httpx
-from datetime import datetime
 from ckanext.superset.data.dataset import SupersetDataset
 
 
@@ -45,13 +44,6 @@ class SupersetCKAN:
         self.datasets_response = None
         self.datasets = []  # {ID: data}
 
-    def format_date(self, date_string, input_format='%Y-%m-%dT%H:%M:%S.%f', output_format='%d/%m/%Y %H:%M:%S'):
-        try:
-            date_obj = datetime.strptime(date_string, input_format)
-            return date_obj.strftime(output_format)
-        except (ValueError, TypeError):
-            return date_string
-
     def load_datasets(self, force=False):
         """ Get and load all datasets """
         if self.datasets and not force:
@@ -63,16 +55,8 @@ class SupersetCKAN:
         for dataset in datasets:
             ds = SupersetDataset()
             ds.load(dataset)
-
-            # Formatea el campo 'changed_on_utc' antes de agregarlo al objeto
-            if 'changed_on_utc' in ds.data:
-                ds.data['changed_on'] = self.format_date(
-                    ds.data['changed_on_utc'],  # Formatea este campo
-                    input_format='%Y-%m-%dT%H:%M:%S.%f%z',
-                    output_format='%d/%m/%Y %H:%M:%S'
-                )
-
             self.datasets.append(ds)
+        return self.datasets
 
     def load_databases(self, force=False):
         if hasattr(self, 'databases') and self.databases and not force:
@@ -81,14 +65,7 @@ class SupersetCKAN:
         self.databases_response = self.get("database/")
         self.databases = self.databases_response.get("result", [])
 
-        # Formatear las fechas en los datos de las bases de datos
-        for database in self.databases:
-            if 'changed_on' in database:
-                database['changed_on'] = self.format_date(
-                    database['changed_on'],
-                    input_format='%Y-%m-%dT%H:%M:%S.%f',
-                    output_format='%d/%m/%Y %H:%M:%S'
-                )
+        return self.databases
 
     def prepare_connection(self):
         """ Define the client and login if required """
