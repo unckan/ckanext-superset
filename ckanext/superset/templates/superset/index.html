@@ -39,6 +39,32 @@
           </tbody>
       </table>
   </div>
+  <div class="module-content">
+    <h3>Databases</h3>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>{{ _('Nombre de la base de datos') }}</th>
+                <th>{{ _('SQL') }}</th>
+                <th>{{ _('Actualizado') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for database in databases %}
+            <tr>
+                <td>{{ database.database_name }}</td>
+                <td {% if database.sqlalchemy_uri %}title="{{ database.sqlalchemy_uri }}"{% endif %}>
+                  {% if database.sqlalchemy_uri %}
+                  {{ database.sqlalchemy_uri[:20] }} ...
+                  {% endif %}
+                </td>
+                <td>{{ database.changed_on_delta_humanized }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+  </div>
 </section>
 {% endblock %}
 

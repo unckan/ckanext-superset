@@ -19,12 +19,15 @@ def index():
     sc.load_datasets()
     datasets_count = sc.datasets_response.get('count', 'ERROR')
     datasets = sc.datasets
-    databases_count = 0
+    sc.load_databases()
+    databases = sc.databases
+    databases_count = len(databases)
 
     extra_vars = {
         'superset_url': superset_url,
         'datasets_count': datasets_count,
         'datasets': datasets,
         'databases_count': databases_count,
+        'databases': databases,
     }
     return render('superset/index.html', extra_vars)
