@@ -49,6 +49,7 @@ class SupersetCKAN:
         if self.datasets and not force:
             return
 
+        # Ver ckanext/superset/data/samples/datasets.json
         self.datasets_response = self.get("dataset/")
         datasets = self.datasets_response.get("result", {})
         for dataset in datasets:

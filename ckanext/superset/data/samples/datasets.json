@@ -1,0 +1,95 @@
+{
+    "help": "http://localhost:5000/api/3/action/help_show?name=superset_dataset_list",
+    "success": true,
+    "result": {
+      "count": 9,
+      "description_columns": {
+  
+      },
+      "ids": [30, ...],
+      "label_columns": {
+        "changed_by.first_name": "Changed By First Name",
+        "changed_by.last_name": "Changed By Last Name",
+        "changed_by_name": "Changed By Name",
+        "changed_on_delta_humanized": "Changed On Delta Humanized",
+        "changed_on_utc": "Changed On Utc",
+        "database.database_name": "Database Database Name",
+        "database.id": "Database Id",
+        "datasource_type": "Datasource Type",
+        "default_endpoint": "Default Endpoint",
+        "description": "Description",
+        "explore_url": "Explore Url",
+        "extra": "Extra",
+        "id": "Id",
+        "kind": "Kind",
+        "owners.first_name": "Owners First Name",
+        "owners.id": "Owners Id",
+        "owners.last_name": "Owners Last Name",
+        "schema": "Schema",
+        "sql": "Sql",
+        "table_name": "Table Name"
+      },
+      "list_columns": [
+        "id",
+        "database.id",
+        "database.database_name",
+        "changed_by_name",
+        "changed_by.first_name",
+        "changed_by.last_name",
+        "changed_on_utc",
+        "changed_on_delta_humanized",
+        "default_endpoint",
+        "description",
+        "datasource_type",
+        "explore_url",
+        "extra",
+        "kind",
+        "owners.id",
+        "owners.first_name",
+        "owners.last_name",
+        "schema",
+        "sql",
+        "table_name"
+      ],
+      "list_title": "List Sqla Table",
+      "order_columns": [
+        "table_name",
+        "schema",
+        "changed_by.first_name",
+        "changed_on_delta_humanized",
+        "database.database_name"
+      ],
+      "result": [
+        {
+          "changed_by": {
+            "first_name": "Superset",
+            "last_name": "Admin"
+          },
+          "changed_by_name": "Superset Admin",
+          "changed_on_delta_humanized": "4 months ago",
+          "changed_on_utc": "2024-08-16T14:08:59.147300+0000",
+          "database": {
+            "database_name": "dbname",
+            "id": 5
+          },
+          "datasource_type": "table",
+          "default_endpoint": null,
+          "description": null,
+          "explore_url": "/explore/?datasource_type=table&datasource_id=30",
+          "extra": null,
+          "id": 30,
+          "kind": "physical",
+          "owners": [
+            {
+              "first_name": "Superset",
+              "id": 1,
+              "last_name": "Admin"
+            }
+          ],
+          "schema": "schema_name",
+          "sql": "",
+          "table_name": "table_name"
+        }
+      ]
+    }
+  }

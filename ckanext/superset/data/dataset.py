@@ -20,3 +20,6 @@ class SupersetDataset:
 
     def __getitem__(self, key):
         return self.data.get(key)
+
+    # TODO get raw data
+    # Quizas DATA: /api/v1/chart/ID/data/?format=csv, JSON METADATA + DATA: /api/v1/chart/ID/data/
