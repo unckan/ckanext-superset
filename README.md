@@ -4,6 +4,10 @@
 
 CKAN extension to connect an Apache Superset instance to CKAN.  
 
+![Apache admin tab](/docs/images/admin-tab-view.png)
+
+![Apache admin](/docs/images/admin-view.png)
+
 ## Requirements
 
 Compatibility with core CKAN versions:
