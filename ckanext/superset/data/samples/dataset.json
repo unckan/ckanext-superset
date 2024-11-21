@@ -1,0 +1,30 @@
+{
+    "changed_by": {
+        "first_name": "Superset",
+        "last_name": "Admin"
+    },
+    "changed_by_name": "Superset Admin",
+    "changed_on_delta_humanized": "4 months ago",
+    "changed_on_utc": "2024-08-16T14:08:59.147300+0000",
+    "database": {
+        "database_name": "DB_NAME",
+        "id": 5
+    },
+    "datasource_type": "table",
+    "default_endpoint": null,
+    "description": null,
+    "explore_url": "/explore/?datasource_type=table&datasource_id=30",
+    "extra": null,
+    "id": 30,
+    "kind": "physical",
+    "owners": [
+        {
+        "first_name": "Superset",
+        "id": 1,
+        "last_name": "Admin"
+        }
+    ],
+    "schema": "schema_name",
+    "sql": "",
+    "table_name": "table_name"
+}
