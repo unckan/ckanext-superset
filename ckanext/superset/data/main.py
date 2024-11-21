@@ -56,6 +56,19 @@ class SupersetCKAN:
             ds = SupersetDataset()
             ds.load(dataset)
             self.datasets.append(ds)
+        return self.datasets
+
+    def load_databases(self, force=False):
+        if hasattr(self, 'databases') and self.databases and not force:
+            return
+
+        self.databases_response = self.get("database/")
+        self.databases = sorted(
+            self.databases_response.get("result", []),
+            key=lambda x: x["id"]
+        )
+
+        return self.databases
 
     def prepare_connection(self):
         """ Define the client and login if required """

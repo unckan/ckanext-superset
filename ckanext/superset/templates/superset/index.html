@@ -39,6 +39,30 @@
           </tbody>
       </table>
   </div>
+  <div class="module-content">
+    <h3>Databases</h3>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>{{ _('ID') }}</th>
+                <th>{{ _('Nombre de la base de datos') }}</th>
+                <th>{{ _('Autor') }}</th>
+                <th>{{ _('Actualizado') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for database in databases %}
+            <tr>
+                <td>{{ database.id }}</td>
+                <td>{{ database.database_name }}</td>
+                <td>{{ database.created_by.first_name }}, {{ database.created_by.last_name }}</td>
+                <td>{{ database.changed_on }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+  </div>
 </section>
 {% endblock %}
 
