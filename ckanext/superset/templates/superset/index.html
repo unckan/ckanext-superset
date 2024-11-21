@@ -54,7 +54,7 @@
             <tr>
                 <td>{{ database.database_name }}</td>
                 <td>{{ database.created_by.first_name }}, {{ database.created_by.last_name }}</td>
-                <td>{{ database.changed_on_delta_humanized }}</td>
+                <td>{{ database.changed_on }}</td>
             </tr>
             {% endfor %}
         </tbody>
