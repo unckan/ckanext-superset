@@ -17,7 +17,6 @@ class SupersetDataset:
         """
         self.data = json_data
         self.id = json_data.get("id")
-        return self
 
     def __getitem__(self, key):
         return self.data.get(key)
