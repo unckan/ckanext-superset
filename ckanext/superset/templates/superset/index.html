@@ -32,7 +32,7 @@
                     {{ dataset.sql[:20] }} ...
                     {% endif %}
                   </td>
-                  <td>{{ dataset.changed_on_delta_humanized }}</td>
+                  <td>{{ dataset.changed_on }}</td>
                   <td>{{ dataset.database.database_name }} ({{ dataset.database.id }})</td>
               </tr>
               {% endfor %}

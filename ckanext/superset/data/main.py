@@ -64,11 +64,11 @@ class SupersetCKAN:
             ds = SupersetDataset()
             ds.load(dataset)
 
-            # Formatea la fecha antes de agregarla al objeto
-            if 'changed_on' in ds.data:
-                ds.data['changed_on_delta_humanized'] = self.format_date(
-                    ds.data['changed_on_delta_humanized'],
-                    input_format='%Y-%m-%dT%H:%M:%S.%f',
+            # Formatea el campo 'changed_on_utc' antes de agregarlo al objeto
+            if 'changed_on_utc' in ds.data:
+                ds.data['changed_on'] = self.format_date(
+                    ds.data['changed_on_utc'],  # Formatea este campo
+                    input_format='%Y-%m-%dT%H:%M:%S.%f%z',
                     output_format='%d/%m/%Y %H:%M:%S'
                 )
 
