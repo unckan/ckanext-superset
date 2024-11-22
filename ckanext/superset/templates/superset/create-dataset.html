@@ -4,7 +4,25 @@
 <section class="module">
     <div class="module-content">
         <h2>Create CKAN dataset from Superset dataset</h2>
-        
+
+        <form action="{{ h.url_for('superset_blueprint.create_dataset', superset_dataset_id=superset_dataset.id) }}" method="post">
+
+          {{ h.csrf_input() }}
+
+          <div class="form-group">
+            <label for="ckan_dataset_title">Dataset title</label>
+            <input
+                type="text" class="form-control"
+                id="ckan_dataset_title" name="ckan_dataset_title" required
+                value="{{ superset_dataset.table_name }}"
+            >
+          </div>
+
+          
+
+          <button type="submit" class="btn btn-primary">Create CKAN dataset</button>
+
+        </form>
     </div>
 
 </section>
