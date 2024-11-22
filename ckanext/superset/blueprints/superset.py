@@ -31,3 +31,18 @@ def index():
         'databases': databases,
     }
     return render('superset/index.html', extra_vars)
+
+
+@superset_bp.route('/create-dataset/<string:superset_dataset_id>')
+@require_sysadmin_user
+def create_dataset(superset_dataset_id):
+    """ Create a new CKAN dataset from a Superset dataset """
+    # Check if the dataset exists in CKAN
+    cfg = get_config()
+    sc = SupersetCKAN(**cfg)
+    superset_dataset = sc.get_dataset(superset_dataset_id)
+
+    extra_vars = {
+        'superset_dataset': superset_dataset,
+    }
+    return render('superset/create-dataset.html', extra_vars)

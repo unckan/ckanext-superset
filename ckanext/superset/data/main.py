@@ -53,7 +53,7 @@ class SupersetCKAN:
         self.datasets_response = self.get("dataset/")
         datasets = self.datasets_response.get("result", {})
         for dataset in datasets:
-            ds = SupersetDataset()
+            ds = SupersetDataset(superset_instance=self)
             ds.load(dataset)
             self.datasets.append(ds)
         return self.datasets
@@ -69,6 +69,17 @@ class SupersetCKAN:
         )
 
         return self.databases
+
+    def get_dataset(self, dataset_id):
+        """ Get a dataset by ID """
+        for dataset in self.datasets:
+            if dataset.id == dataset_id:
+                return dataset
+        # Get from the API
+        dataset = SupersetDataset(superset_instance=self)
+        dataset.get_from_superset(dataset_id)
+        self.datasets.append(dataset)
+        return dataset
 
     def prepare_connection(self):
         """ Define the client and login if required """

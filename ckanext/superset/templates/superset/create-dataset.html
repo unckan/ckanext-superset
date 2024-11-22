@@ -1,0 +1,40 @@
+{% extends "page.html" %}
+
+{% block primary_content %}
+<section class="module">
+    <div class="module-content">
+        <h2>Create CKAN dataset from Superset dataset</h2>
+        
+    </div>
+
+</section>
+{% endblock %}
+
+{% block secondary_content %}
+
+<div class="module module-narrow module-shallow">
+    <h2 class="module-heading">
+      {{ _('Importing Apache Superset dataset') }}
+    </h2>
+    <div class="module-content">
+      <img src="{{ h.url_for_static('/base/images/apache-superset-logo.png') }}" alt="Apache Superset" style="max-width: 200px; display: block; margin: 0 auto;">
+      <hr>
+      <p>
+        Dataset ID: <b>{{ superset_dataset.id }}</b><br/>
+        Dataset schema: <b>{{ superset_dataset.schema if superset_dataset.schema else "" }}</b><br/>
+        Table name: <b>{{ superset_dataset.table_name if superset_dataset.table_name else "" }}</b><br/>
+        SQL: <b>{{ superset_dataset.sql if superset_dataset.sql else "" }}</b><br/>
+        Changed on: <b>{{ superset_dataset.changed_on_delta_humanized }}</b><br/>
+        Database: <b>{{ superset_dataset.database.database_name }} (ID: {{ superset_dataset.database.id }})</b>
+      </p>
+    </div>
+    <div class="module-content">
+      <hr>
+      <p>
+        Apache Superset es una herramienta de visualización de datos de código abierto que permite a los usuarios
+        crear paneles de control y visualizaciones interactivas.
+      </p>
+    </div>
+  </div>
+
+{% endblock %}
