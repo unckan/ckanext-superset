@@ -17,8 +17,30 @@
                 value="{{ superset_dataset.table_name }}"
             >
           </div>
+          <!-- Organizations list -->
+          <div class="form-group">
+            <label for="ckan_organization_id">Organization</label>
+            <select class="form-control" id="ckan_organization_id" name="ckan_organization_id" required>
+              <option value="">Select organization</option>
+              {% for organization in organizations %}
+                <option value="{{ organization.id }}">{{ organization.title }}</option>
+              {% endfor %}
+            </select>
+          </div>
 
-          
+          <!-- CKAN notes/description -->
+          <div class="form-group">
+            <label for="ckan_dataset_notes">Dataset description</label>
+            <textarea class="form-control" id="ckan_dataset_notes" name="ckan_dataset_notes" rows="3"
+            >Dataset creado desde Apache Superset
+            </textarea>
+          </div>
+
+          <!-- Private -->
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="ckan_dataset_private" name="ckan_dataset_private">
+            <label class="form-check label" for="ckan_dataset_private">Private dataset</label>
+          </div>
 
           <button type="submit" class="btn btn-primary">Create CKAN dataset</button>
 
