@@ -21,20 +21,17 @@
       <table class="table table-striped table-bordered">
           <thead>
               <tr>
-                  {% block superset_index_admin_table_headers %}
                   <th>{{ _('CKAN') }}</th>
                   <th>{{ _('Schema') }}</th>
                   <th>{{ _('Nombre de tabla') }}</th>
                   <th>{{ _('SQL') }}</th>
                   <th>{{ _('Actualizado') }}</th>
                   <th>{{ _('Base de datos') }}</th>
-                  {% endblock %}
               </tr>
           </thead>
           <tbody>
               {% for dataset in datasets %}
               <tr>
-                  {% block superset_index_admin_table_row %}
                   <td>
                     {#
                       Create CKAN dataset action or if exists, link to the dataset
@@ -57,7 +54,6 @@
                   </td>
                   <td>{{ dataset.changed_on_delta_humanized }}</td>
                   <td>{{ dataset.database.database_name }} ({{ dataset.database.id }})</td>
-                  {% endblock %}
               </tr>
               {% endfor %}
           </tbody>

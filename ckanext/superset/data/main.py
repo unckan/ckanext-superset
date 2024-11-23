@@ -100,15 +100,15 @@ class SupersetCKAN:
 
         return self.client
 
-    def get(self, endpoint):
+    def get(self, endpoint, timeout=30, format_='json'):
         """ Get data from the Superset API """
         if not self.client:
             self.prepare_connection()
 
-        headers = self.get_headers()
+        headers = self.get_headers(format_=format_)
 
         url = f'{self.superset_url}/api/v1/{endpoint}'
-        api_response = self.client.get(url, headers=headers)
+        api_response = self.client.get(url, headers=headers, timeout=timeout)
         try:
             api_response.raise_for_status()
         except httpx.HTTPStatusError as e:
@@ -119,15 +119,18 @@ class SupersetCKAN:
                 "response": api_response.text,
             }
 
-        data = api_response.json()
-        return data
+        if format_ == 'csv':
+            return api_response.content
+        elif format_ == 'json':
+            return api_response.json()
 
-    def get_headers(self):
+    def get_headers(self, format_='json'):
         """ Get the headers for the httpx client """
-        headers = {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-        }
+        if format_ == 'json':
+            headers = {"Content-Type": "application/json", "Accept": "application/json"}
+        elif format_ == 'csv':
+            headers = {"Content-Type": "text/csv", "Accept": "text/csv", "Accept-Encoding": "gzip"}
+
         if self.access_token:
             headers["Authorization"] = f"Bearer {self.access_token}"
 

@@ -18,11 +18,11 @@
             >
           </div>
           <!-- Organizations list -->
+          {% set organizations_available = h.organizations_available('create_dataset') %}
           <div class="form-group">
             <label for="ckan_organization_id">Organization</label>
-            <select class="form-control" id="ckan_organization_id" name="ckan_organization_id" required>
-              <option value="">Select organization</option>
-              {% for organization in organizations %}
+            <select class="form-control form-select" id="ckan_organization_id" name="ckan_organization_id" required>
+              {% for organization in organizations_available %}
                 <option value="{{ organization.id }}">{{ organization.title }}</option>
               {% endfor %}
             </select>
@@ -37,9 +37,18 @@
           </div>
 
           <!-- Private -->
-          <div class="form-check">
+          <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="ckan_dataset_private" name="ckan_dataset_private">
             <label class="form-check label" for="ckan_dataset_private">Private dataset</label>
+          </div>
+
+          <div class="form-group">
+            <label for="ckan_dataset_resource_name">Resource name</label>
+            <input
+                type="text" class="form-control"
+                id="ckan_dataset_resource_name" name="ckan_dataset_resource_name" required
+                value="{{ superset_dataset.table_name }}.csv"
+            >
           </div>
 
           <button type="submit" class="btn btn-primary">Create CKAN dataset</button>
