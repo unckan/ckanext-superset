@@ -5,6 +5,7 @@ import logging
 import urllib.parse
 import httpx
 from ckanext.superset.data.dataset import SupersetDataset
+from ckanext.superset.exceptions import SupersetRequestException
 
 
 log = logging.getLogger(__name__)
@@ -83,20 +84,43 @@ class SupersetCKAN:
 
     def prepare_connection(self):
         """ Define the client and login if required """
-
+        log.info(f"Connecting to {self.superset_url}")
         if self.proxy_url:
+            log.info(f"Using proxy {self.proxy_url}:{self.proxy_port}")
             self.client = httpx.Client(proxies=self.proxies, http2=False)
         else:
             self.client = httpx.Client()
 
         # If we have a user, then we need to login
         if self.superset_user:
+            # prepare a user session
+            # For some reason we need the API token AND the session cookie
+            log.info(f"Logging Superset in as {self.superset_user}")
+            # Get an access token for the API (works for data but not for CSV)
             login_url = f"{self.superset_url}/api/v1/security/login"
-            log.info(f"Login response: {login_url} {self.login_payload}")
             login_response = self.client.post(login_url, json=self.login_payload)
-            login_response.raise_for_status()
             data = login_response.json()
             self.access_token = data["access_token"]
+            
+            # Get a session for the user (works for CSV)
+            # POST to /login/ form with the username and password
+            login_url = f"{self.superset_url}/login/"
+            # Get the CSRF token from the login page
+            # <input id="csrf_token" name="csrf_token" type="hidden" value="IjI1----">
+            login_response = self.client.get(login_url)
+            login_response.raise_for_status()
+            csrf_token = login_response.text.split('csrf_token" type="hidden" value="')[1].split('"')[0]
+            data = {
+                "username": self.superset_user,
+                "password": self.superset_pass,
+                "csrf_token": csrf_token
+            }
+            login_response = self.client.post(login_url, data=data)
+            # Get expect a 302 redirect to /
+            if login_response.status_code != 302:
+                login_response.raise_for_status()
+            # Save cookies from the login response
+            self.client.cookies.update(login_response.cookies)
 
         return self.client
 
@@ -112,12 +136,14 @@ class SupersetCKAN:
         try:
             api_response.raise_for_status()
         except httpx.HTTPStatusError as e:
-            log.error(f"Error getting {url}: {e}")
-            log.error(f"Response: {api_response.text}")
-            return {
-                "error": f"Error getting {url}: {e}",
-                "response": api_response.text,
-            }
+            error = (
+                f"Error getting {url}\n\tStatus: {api_response.status_code}\n\t"
+                f"ERR: {e}\n\t"
+                f"Response: {api_response.text}\n\t"
+            )
+            private_error = f"{error}\n\t Headers: {headers}"
+            log.error(private_error)
+            raise SupersetRequestException(error)
 
         if format_ == 'csv':
             return api_response.content
@@ -129,7 +155,7 @@ class SupersetCKAN:
         if format_ == 'json':
             headers = {"Content-Type": "application/json", "Accept": "application/json"}
         elif format_ == 'csv':
-            headers = {"Content-Type": "text/csv", "Accept": "text/csv", "Accept-Encoding": "gzip"}
+            headers = {"Content-Type": "text/csv", "Accept": "text/csv", "Accept-Encoding": "gzip, deflate, br, zstd"}
 
         if self.access_token:
             headers["Authorization"] = f"Bearer {self.access_token}"

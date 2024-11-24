@@ -1,0 +1,2 @@
+class SupersetRequestException(Exception):
+    pass

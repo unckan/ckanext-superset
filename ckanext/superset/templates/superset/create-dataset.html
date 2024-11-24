@@ -66,7 +66,12 @@
       {{ _('Importing Apache Superset dataset') }}
     </h2>
     <div class="module-content">
-      <img src="{{ h.url_for_static('/base/images/apache-superset-logo.png') }}" alt="Apache Superset" style="max-width: 200px; display: block; margin: 0 auto;">
+      <a href="{{ h.url_for('superset_blueprint.index') }}">
+        <img src="{{ h.url_for_static('/base/images/apache-superset-logo.png') }}" alt="Apache Superset" style="max-width: 200px; display: block; margin: 0 auto;">
+      </a>
+      <a href="{{ h.url_for('superset_blueprint.index') }}">
+        <p>Back to Apache Superset dataset list</p>
+      </a>
       <hr>
       <p>
         Dataset ID: <b>{{ superset_dataset.id }}</b><br/>

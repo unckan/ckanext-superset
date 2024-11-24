@@ -45,14 +45,10 @@ class SupersetDataset:
         format_ = format_.lower()
         url = f'chart/{self.id}/data/?format={format_}'
         response = self.superset_instance.get(url, format_=format_)
-        log.info(f'RESPONSE: {url} :: {response}')
-        log.info(f"Downloaded dataset {self.id} as {format_}: {response.status_code}")
-        csv_data = response.content
+        log.info(f'RESPONSE: {url} :: {type(response)}')
+        csv_data = response
         return csv_data
 
     def get_chart_csv(self):
         """ Get the dataset as CSV """
         return self.get_chart_file("csv")
-
-    # TODO get raw data
-    # Quizas DATA: /api/v1/chart/ID/data/?format=csv, JSON METADATA + DATA: /api/v1/chart/ID/data/

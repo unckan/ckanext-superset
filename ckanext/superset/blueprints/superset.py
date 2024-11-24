@@ -9,6 +9,7 @@ from ckan.plugins import toolkit as tk
 from ckanext.superset.config import get_config
 from ckanext.superset.decorators import require_sysadmin_user
 from ckanext.superset.data.main import SupersetCKAN
+from ckanext.superset.exceptions import SupersetRequestException
 from ckanext.superset.utils import slug
 
 
@@ -65,7 +66,7 @@ def create_dataset(superset_dataset_id):
         c = 2
         while pkg := model.Session.query(model.Package).filter(model.Package.name == ckan_dataset_name).first():
             log.warning(f'Package name {ckan_dataset_name} already exists for package {pkg.id}')
-            ckan_dataset_name = f'{ckan_dataset_name}-{superset_dataset_id}-{c}'
+            ckan_dataset_name = f'{slug(ckan_dataset_title)}-{superset_dataset_id}-{c}'
             c += 1
 
         # Create the dataset
@@ -81,19 +82,28 @@ def create_dataset(superset_dataset_id):
         }
         pkg = action(context, data)
         # Create the resource
-        f = tempfile.NamedTemporaryFile()
-        csv_data = superset_dataset.get_chart_csv()
+        try:
+            csv_data = superset_dataset.get_chart_csv()
+        except SupersetRequestException as e:
+            tk.abort(500, f"Superset Error getting CSV data {e}")
+        except Exception as e:
+            tk.abort(500, f"Unknown Error getting CSV data {e}")
+
+        resource_name = request.form.get('ckan_dataset_resource_name')
+        f = tempfile.NamedTemporaryFile(mode='w+b', delete=False)
         f.write(csv_data)
         f.close()
+        upload_file = FileStorage(filename=resource_name, stream=open(f.name, 'rb'))
         action = tk.get_action("resource_create")
         context = {'user': current_user.name}
         data = {
             'package_id': pkg['id'],
-            'upload': FileStorage(filename=f.name, stream=open(f.name, 'rb')),
+            'upload': upload_file,
             'url_type': 'upload',
             'format': 'csv',
-            'name': request.form.get('ckan_dataset_resource_name'),
+            'name': resource_name,
         }
+        action(context, data)
 
         # redirect to the new CKAN dataset
         url = tk.h.url_for('dataset.read', id=pkg['name'])
