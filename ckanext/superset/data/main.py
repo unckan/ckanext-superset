@@ -101,7 +101,7 @@ class SupersetCKAN:
             login_response = self.client.post(login_url, json=self.login_payload)
             data = login_response.json()
             self.access_token = data["access_token"]
-            
+
             # Get a session for the user (works for CSV)
             # POST to /login/ form with the username and password
             login_url = f"{self.superset_url}/login/"
