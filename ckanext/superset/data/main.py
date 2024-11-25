@@ -5,6 +5,7 @@ import logging
 import urllib.parse
 import httpx
 from ckanext.superset.data.dataset import SupersetDataset
+from ckanext.superset.exceptions import SupersetRequestException
 
 
 log = logging.getLogger(__name__)
@@ -53,7 +54,7 @@ class SupersetCKAN:
         self.datasets_response = self.get("dataset/")
         datasets = self.datasets_response.get("result", {})
         for dataset in datasets:
-            ds = SupersetDataset()
+            ds = SupersetDataset(superset_instance=self)
             ds.load(dataset)
             self.datasets.append(ds)
         return self.datasets
@@ -70,53 +71,92 @@ class SupersetCKAN:
 
         return self.databases
 
+    def get_dataset(self, dataset_id):
+        """ Get a dataset by ID """
+        for dataset in self.datasets:
+            if dataset.id == dataset_id:
+                return dataset
+        # Get from the API
+        dataset = SupersetDataset(superset_instance=self)
+        dataset.get_from_superset(dataset_id)
+        self.datasets.append(dataset)
+        return dataset
+
     def prepare_connection(self):
         """ Define the client and login if required """
-
+        log.info(f"Connecting to {self.superset_url}")
         if self.proxy_url:
+            log.info(f"Using proxy {self.proxy_url}:{self.proxy_port}")
             self.client = httpx.Client(proxies=self.proxies, http2=False)
         else:
             self.client = httpx.Client()
 
         # If we have a user, then we need to login
         if self.superset_user:
+            # prepare a user session
+            # For some reason we need the API token AND the session cookie
+            log.info(f"Logging Superset in as {self.superset_user}")
+            # Get an access token for the API (works for data but not for CSV)
             login_url = f"{self.superset_url}/api/v1/security/login"
-            log.info(f"Login response: {login_url} {self.login_payload}")
             login_response = self.client.post(login_url, json=self.login_payload)
-            login_response.raise_for_status()
             data = login_response.json()
             self.access_token = data["access_token"]
 
+            # Get a session for the user (works for CSV)
+            # POST to /login/ form with the username and password
+            login_url = f"{self.superset_url}/login/"
+            # Get the CSRF token from the login page
+            # <input id="csrf_token" name="csrf_token" type="hidden" value="IjI1----">
+            login_response = self.client.get(login_url)
+            login_response.raise_for_status()
+            csrf_token = login_response.text.split('csrf_token" type="hidden" value="')[1].split('"')[0]
+            data = {
+                "username": self.superset_user,
+                "password": self.superset_pass,
+                "csrf_token": csrf_token
+            }
+            login_response = self.client.post(login_url, data=data)
+            # Get expect a 302 redirect to /
+            if login_response.status_code != 302:
+                login_response.raise_for_status()
+            # Save cookies from the login response
+            self.client.cookies.update(login_response.cookies)
+
         return self.client
 
-    def get(self, endpoint):
+    def get(self, endpoint, timeout=30, format_='json'):
         """ Get data from the Superset API """
         if not self.client:
             self.prepare_connection()
 
-        headers = self.get_headers()
+        headers = self.get_headers(format_=format_)
 
         url = f'{self.superset_url}/api/v1/{endpoint}'
-        api_response = self.client.get(url, headers=headers)
+        api_response = self.client.get(url, headers=headers, timeout=timeout)
         try:
             api_response.raise_for_status()
         except httpx.HTTPStatusError as e:
-            log.error(f"Error getting {url}: {e}")
-            log.error(f"Response: {api_response.text}")
-            return {
-                "error": f"Error getting {url}: {e}",
-                "response": api_response.text,
-            }
+            error = (
+                f"Error getting {url}\n\tStatus: {api_response.status_code}\n\t"
+                f"ERR: {e}\n\t"
+                f"Response: {api_response.text}\n\t"
+            )
+            private_error = f"{error}\n\t Headers: {headers}"
+            log.error(private_error)
+            raise SupersetRequestException(error)
 
-        data = api_response.json()
-        return data
+        if format_ == 'csv':
+            return api_response.content
+        elif format_ == 'json':
+            return api_response.json()
 
-    def get_headers(self):
+    def get_headers(self, format_='json'):
         """ Get the headers for the httpx client """
-        headers = {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-        }
+        if format_ == 'json':
+            headers = {"Content-Type": "application/json", "Accept": "application/json"}
+        elif format_ == 'csv':
+            headers = {"Content-Type": "text/csv", "Accept": "text/csv", "Accept-Encoding": "gzip, deflate, br, zstd"}
+
         if self.access_token:
             headers["Authorization"] = f"Bearer {self.access_token}"
 

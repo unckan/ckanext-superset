@@ -1,0 +1,94 @@
+{% extends "page.html" %}
+
+{% block primary_content %}
+<section class="module">
+    <div class="module-content">
+        <h2>Create CKAN dataset from Superset dataset</h2>
+
+        <form action="{{ h.url_for('superset_blueprint.create_dataset', superset_dataset_id=superset_dataset.id) }}" method="post">
+
+          {{ h.csrf_input() }}
+
+          <div class="form-group">
+            <label for="ckan_dataset_title">Dataset title</label>
+            <input
+                type="text" class="form-control"
+                id="ckan_dataset_title" name="ckan_dataset_title" required
+                value="{{ superset_dataset.table_name }}"
+            >
+          </div>
+          <!-- Organizations list -->
+          {% set organizations_available = h.organizations_available('create_dataset') %}
+          <div class="form-group">
+            <label for="ckan_organization_id">Organization</label>
+            <select class="form-control form-select" id="ckan_organization_id" name="ckan_organization_id" required>
+              {% for organization in organizations_available %}
+                <option value="{{ organization.id }}">{{ organization.title }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!-- CKAN notes/description -->
+          <div class="form-group">
+            <label for="ckan_dataset_notes">Dataset description</label>
+            <textarea class="form-control" id="ckan_dataset_notes" name="ckan_dataset_notes" rows="3"
+            >Dataset creado desde Apache Superset
+            </textarea>
+          </div>
+
+          <!-- Private -->
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="ckan_dataset_private" name="ckan_dataset_private">
+            <label class="form-check label" for="ckan_dataset_private">Private dataset</label>
+          </div>
+
+          <div class="form-group">
+            <label for="ckan_dataset_resource_name">Resource name</label>
+            <input
+                type="text" class="form-control"
+                id="ckan_dataset_resource_name" name="ckan_dataset_resource_name" required
+                value="{{ superset_dataset.table_name }}.csv"
+            >
+          </div>
+
+          <button type="submit" class="btn btn-primary">Create CKAN dataset</button>
+
+        </form>
+    </div>
+
+</section>
+{% endblock %}
+
+{% block secondary_content %}
+
+<div class="module module-narrow module-shallow">
+    <h2 class="module-heading">
+      {{ _('Importing Apache Superset dataset') }}
+    </h2>
+    <div class="module-content">
+      <a href="{{ h.url_for('superset_blueprint.index') }}">
+        <img src="{{ h.url_for_static('/base/images/apache-superset-logo.png') }}" alt="Apache Superset" style="max-width: 200px; display: block; margin: 0 auto;">
+      </a>
+      <a href="{{ h.url_for('superset_blueprint.index') }}">
+        <p>Back to Apache Superset dataset list</p>
+      </a>
+      <hr>
+      <p>
+        Dataset ID: <b>{{ superset_dataset.id }}</b><br/>
+        Dataset schema: <b>{{ superset_dataset.schema if superset_dataset.schema else "" }}</b><br/>
+        Table name: <b>{{ superset_dataset.table_name if superset_dataset.table_name else "" }}</b><br/>
+        SQL: <b>{{ superset_dataset.sql if superset_dataset.sql else "" }}</b><br/>
+        Changed on: <b>{{ superset_dataset.changed_on_delta_humanized }}</b><br/>
+        Database: <b>{{ superset_dataset.database.database_name }} (ID: {{ superset_dataset.database.id }})</b>
+      </p>
+    </div>
+    <div class="module-content">
+      <hr>
+      <p>
+        Apache Superset es una herramienta de visualización de datos de código abierto que permite a los usuarios
+        crear paneles de control y visualizaciones interactivas.
+      </p>
+    </div>
+  </div>
+
+{% endblock %}
