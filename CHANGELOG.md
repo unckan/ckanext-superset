@@ -1,5 +1,10 @@
 # Next release
 
+# 0.1.6
+
+Bug fix:
+ - Pin to httpx==0.27.2 to avoid breaking changes in httpx 0.28.0 [#13](https://github.com/unckan/ckanext-superset/pull/13).
+
 # 0.1.5
 
 Features:
