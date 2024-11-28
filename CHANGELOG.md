@@ -1,5 +1,7 @@
 # Next release
 
+# 0.1.5
+
 Features:
  - Allow creating CKAN dataset with resource for Superset [#10](https://github.com/unckan/ckanext-superset/pull/10).
 
