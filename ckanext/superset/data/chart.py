@@ -69,4 +69,4 @@ class SupersetChart:
         except SupersetRequestException:
             return None
 
-        return 
+        return image
