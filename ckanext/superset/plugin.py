@@ -2,6 +2,7 @@ import logging
 from ckan import plugins
 from ckan.plugins import toolkit
 from ckanext.superset.blueprints.superset import superset_bp
+from ckanext.superset.blueprints.images import superset_images_bp
 from ckanext.superset.actions import superset_dataset as superset_dataset_actions
 from ckanext.superset.auth import superset_dataset as superset_dataset_auth
 from ckanext.superset.actions import superset_database as superset_database_actions
@@ -43,5 +44,6 @@ class SupersetPlugin(plugins.SingletonPlugin):
     # IBlueprint
     def get_blueprint(self):
         return [
-            superset_bp
+            superset_bp,
+            superset_images_bp,
         ]
