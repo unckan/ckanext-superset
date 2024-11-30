@@ -5,7 +5,7 @@
     <div class="module-content">
         <h2>Create CKAN dataset from Superset dataset</h2>
 
-        <form action="{{ h.url_for('superset_blueprint.create_dataset', superset_dataset_id=superset_dataset.id) }}" method="post">
+        <form action="{{ h.url_for('superset_blueprint.create_dataset', chart_id=superset_chart.id) }}" method="post">
 
           {{ h.csrf_input() }}
 
@@ -14,7 +14,7 @@
             <input
                 type="text" class="form-control"
                 id="ckan_dataset_title" name="ckan_dataset_title" required
-                value="{{ superset_dataset.table_name }}"
+                value="{{ superset_chart.slice_name }}"
             >
           </div>
           <!-- Organizations list -->
@@ -32,7 +32,8 @@
           <div class="form-group">
             <label for="ckan_dataset_notes">Dataset description</label>
             <textarea class="form-control" id="ckan_dataset_notes" name="ckan_dataset_notes" rows="3"
-            >Dataset creado desde Apache Superset
+            >{% if superset_chart.description %}{{ superset_chart.description }}. {% endif %}
+            Dataset creado desde Apache Superset
             </textarea>
           </div>
 
@@ -47,7 +48,7 @@
             <input
                 type="text" class="form-control"
                 id="ckan_dataset_resource_name" name="ckan_dataset_resource_name" required
-                value="{{ superset_dataset.table_name }}.csv"
+                value="{{ superset_chart.slice_name }}.csv"
             >
           </div>
 
@@ -74,12 +75,9 @@
       </a>
       <hr>
       <p>
-        Dataset ID: <b>{{ superset_dataset.id }}</b><br/>
-        Dataset schema: <b>{{ superset_dataset.schema if superset_dataset.schema else "" }}</b><br/>
-        Table name: <b>{{ superset_dataset.table_name if superset_dataset.table_name else "" }}</b><br/>
-        SQL: <b>{{ superset_dataset.sql if superset_dataset.sql else "" }}</b><br/>
-        Changed on: <b>{{ superset_dataset.changed_on_delta_humanized }}</b><br/>
-        Database: <b>{{ superset_dataset.database.database_name }} (ID: {{ superset_dataset.database.id }})</b>
+        Chart ID: <b>{{ superset_chart.id }}</b><br/>
+        Chart slice name: <b>{{ superset_chart.slice_name if superset_chart.slice_name else "" }}</b><br/>
+        Changed on: <b>{{ superset_chart.changed_on_delta_humanized }}</b><br/>
       </p>
     </div>
     <div class="module-content">
