@@ -4,6 +4,7 @@ Connect to the superset API (through a proxy server if required)
 import logging
 import urllib.parse
 import httpx
+from ckanext.superset.data.chart import SupersetChart
 from ckanext.superset.data.dataset import SupersetDataset
 from ckanext.superset.exceptions import SupersetRequestException
 
@@ -42,6 +43,9 @@ class SupersetCKAN:
         # In case we need to login
         self.access_token = None
 
+        self.charts_response = None
+        self.charts = []  # {ID: data}
+
         self.datasets_response = None
         self.datasets = []  # {ID: data}
 
@@ -58,6 +62,20 @@ class SupersetCKAN:
             ds.load(dataset)
             self.datasets.append(ds)
         return self.datasets
+
+    def load_charts(self, force=False):
+        """ Get and load all datasets """
+        if self.charts and not force:
+            return
+
+        # Ver ckanext/superset/data/samples/datasets.json
+        self.charts_response = self.get("chart/")
+        charts = self.charts_response.get("result", {})
+        for chart in charts:
+            ds = SupersetChart(superset_instance=self)
+            ds.load(chart)
+            self.charts.append(ds)
+        return self.charts
 
     def load_databases(self, force=False):
         if hasattr(self, 'databases') and self.databases and not force:
@@ -81,6 +99,17 @@ class SupersetCKAN:
         dataset.get_from_superset(dataset_id)
         self.datasets.append(dataset)
         return dataset
+
+    def get_chart(self, chart_id):
+        """ Get a chart by ID """
+        for chart in self.charts:
+            if chart.id == chart_id:
+                return chart
+        # Get from the API
+        chart = SupersetChart(superset_instance=self)
+        chart.get_from_superset(chart_id)
+        self.charts.append(chart)
+        return chart
 
     def prepare_connection(self):
         """ Define the client and login if required """
@@ -149,6 +178,8 @@ class SupersetCKAN:
             return api_response.content
         elif format_ == 'json':
             return api_response.json()
+        elif format_ == 'image':  # Thumbnail images
+            return api_response.content
 
     def get_headers(self, format_='json'):
         """ Get the headers for the httpx client """
@@ -156,6 +187,8 @@ class SupersetCKAN:
             headers = {"Content-Type": "application/json", "Accept": "application/json"}
         elif format_ == 'csv':
             headers = {"Content-Type": "text/csv", "Accept": "text/csv", "Accept-Encoding": "gzip, deflate, br, zstd"}
+        elif format_ == 'image':
+            headers = {"Content-Type": "image/png", "Accept": "image/png"}
 
         if self.access_token:
             headers["Authorization"] = f"Bearer {self.access_token}"

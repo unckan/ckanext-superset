@@ -24,36 +24,30 @@ def index():
     superset_url = tk.config.get('ckanext.superset.instance.url')
     cfg = get_config()
     sc = SupersetCKAN(**cfg)
-    sc.load_datasets()
-    datasets_count = sc.datasets_response.get('count', 'ERROR')
-    datasets = sc.datasets
-    sc.load_databases()
-    databases = sc.databases
-    databases_count = len(databases)
+    sc.load_charts()
+    charts_count = sc.charts_response.get('count', 'ERROR')
+    charts = sc.charts
 
     extra_vars = {
         'superset_url': superset_url,
-        'datasets_count': datasets_count,
-        'datasets': datasets,
-        'databases_count': databases_count,
-        'databases': databases,
+        'charts_count': charts_count,
+        'charts': charts,
     }
     return tk.render('superset/index.html', extra_vars)
 
 
-@superset_bp.route('/create-dataset/<string:superset_dataset_id>', methods=['GET', 'POST'])
+@superset_bp.route('/create-dataset/<string:chart_id>', methods=['GET', 'POST'])
 @require_sysadmin_user
-def create_dataset(superset_dataset_id):
+def create_dataset(chart_id):
     """ Create a new CKAN dataset from a Superset dataset """
 
     cfg = get_config()
     sc = SupersetCKAN(**cfg)
-    superset_dataset = sc.get_dataset(superset_dataset_id)
-
+    superset_chart = sc.get_chart(chart_id)
     if request.method == 'GET':
 
         extra_vars = {
-            'superset_dataset': superset_dataset,
+            'superset_chart': superset_chart,
         }
         return tk.render('superset/create-dataset.html', extra_vars)
 
@@ -66,7 +60,7 @@ def create_dataset(superset_dataset_id):
         c = 2
         while pkg := model.Session.query(model.Package).filter(model.Package.name == ckan_dataset_name).first():
             log.warning(f'Package name {ckan_dataset_name} already exists for package {pkg.id}')
-            ckan_dataset_name = f'{slug(ckan_dataset_title)}-{superset_dataset_id}-{c}'
+            ckan_dataset_name = f'{slug(ckan_dataset_title)}-{chart_id}-{c}'
             c += 1
 
         # Create the dataset
@@ -83,7 +77,7 @@ def create_dataset(superset_dataset_id):
         pkg = action(context, data)
         # Create the resource
         try:
-            csv_data = superset_dataset.get_chart_csv()
+            csv_data = superset_chart.get_chart_csv()
         except SupersetRequestException as e:
             tk.abort(500, f"Superset Error getting CSV data {e}")
         except Exception as e:
