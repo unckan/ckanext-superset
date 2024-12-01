@@ -1,4 +1,5 @@
 import logging
+from ckan.plugins import toolkit
 from ckanext.superset.exceptions import SupersetRequestException
 
 
@@ -12,6 +13,7 @@ class SupersetChart:
         self.id = None
         self.data = {}
         self.superset_instance = superset_instance
+        self._ckan_dataset = None
 
     def load(self, json_data):
         """ Load the dataset from a JSON object
@@ -33,7 +35,19 @@ class SupersetChart:
     @property
     def ckan_dataset(self):
         """ Returns the CKAN dataset create from this Superset dataset """
-        # TODO
+        if self._ckan_dataset:
+            return self._ckan_dataset
+        # Search a CKAN package with the extra superset_chart_id: self.id
+        ctx = {"ignore_auth": True}
+        search = {
+            'fq': f'superset_chart_id:{self.id}',
+            'include_private': True,
+            'include_drafts': True,
+        }
+        pkgs = toolkit.get_action("package_search")(ctx, data_dict=search)
+        if pkgs.get("count") > 0:
+            self._ckan_dataset = pkgs.get("results")[0]
+            return self._ckan_dataset
         return None
 
     def get_chart_data(self):
