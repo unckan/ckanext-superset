@@ -1,5 +1,11 @@
 # Next release
 
+# 0.1.7
+
+Features:
+ - Move from Superset datasets to Charts [#15](https://github.com/unckan/ckanext-superset/pull/15)
+ - Define extra data to CKAN datasets to allow connect them [#16](https://github.com/unckan/ckanext-superset/pull/16)
+
 # 0.1.6
 
 Bug fix:
