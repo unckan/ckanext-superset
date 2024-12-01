@@ -72,7 +72,9 @@ def create_dataset(chart_id):
             'notes': request.form.get('ckan_dataset_notes'),
             'owner_org': request.form.get('ckan_organization_id'),
             'private': request.form.get('ckan_dataset_private'),
-            # 'superset_dataset_id': superset_dataset_id,
+            'extras': [
+                {'key': 'superset_chart_id', 'value': chart_id},
+            ],
         }
         pkg = action(context, data)
         # Create the resource

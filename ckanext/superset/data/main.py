@@ -1,6 +1,7 @@
 """
 Connect to the superset API (through a proxy server if required)
 """
+import json
 import logging
 import urllib.parse
 import httpx
@@ -64,17 +65,29 @@ class SupersetCKAN:
         return self.datasets
 
     def load_charts(self, force=False):
-        """ Get and load all datasets """
+        """ Get and load all datasets
+            Ver ckanext/superset/data/samples/chaerts.json
+        """
         if self.charts and not force:
             return
 
-        # Ver ckanext/superset/data/samples/datasets.json
-        self.charts_response = self.get("chart/")
-        charts = self.charts_response.get("result", {})
-        for chart in charts:
-            ds = SupersetChart(superset_instance=self)
-            ds.load(chart)
-            self.charts.append(ds)
+        q_data = {"page_size": 50, "page": 0}
+        while True:
+            params = {'q': json.dumps(q_data)}
+            self.charts_response = self.get("chart/", params=params)
+
+            if not self.charts_response or not self.charts_response.get("result", {}):
+                break
+
+            charts = self.charts_response.get("result", {})
+            for chart in charts:
+                ds = SupersetChart(superset_instance=self)
+                ds.load(chart)
+                self.charts.append(ds)
+            q_data["page"] += 1
+            if q_data["page"] > 20:
+                log.error("Too many pages of charts")
+                break
         return self.charts
 
     def load_databases(self, force=False):
@@ -153,15 +166,18 @@ class SupersetCKAN:
 
         return self.client
 
-    def get(self, endpoint, timeout=30, format_='json'):
-        """ Get data from the Superset API """
+    def get(self, endpoint, timeout=30, format_='json', params=None):
+        """ Get data from the Superset API
+            parameter data is user as GET parameters. It must be a dictionary
+        """
         if not self.client:
             self.prepare_connection()
 
         headers = self.get_headers(format_=format_)
 
         url = f'{self.superset_url}/api/v1/{endpoint}'
-        api_response = self.client.get(url, headers=headers, timeout=timeout)
+        log.info(f"Superset GET {url} :: {params}")
+        api_response = self.client.get(url, headers=headers, params=params, timeout=timeout)
         try:
             api_response.raise_for_status()
         except httpx.HTTPStatusError as e:

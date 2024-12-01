@@ -21,7 +21,8 @@
           <thead>
               <tr>
                   <th>{{ _('CKAN') }}</th>
-                  <th>{{ _('Image') }}</th>
+                  <th>{{ _('Chart ID') }}</th>
+                  <!-- <th>{{ _('Image') }}</th> -->
                   <th>{{ _('Slice name') }}</th>
                   <th>{{ _('Tags') }}</th>
                   <th>{{ _('Dashboards') }}</th>
@@ -30,22 +31,26 @@
           </thead>
           <tbody>
               {% for chart in charts %}
-              <tr>
+              <tr class="superset-index-tr {% if chart.ckan_dataset %}superset-index-tr-ckan{%endif%}">
                   <td>
                     {#
                       Create CKAN dataset action or if exists, link to the dataset
                     #}
                     {% if chart.ckan_dataset %}
-                      <a href="{{ chart.ckan_dataset['url'] }}" target="_blank">View in CKAN</a>
+                    {% set pkg_name = chart.ckan_dataset.name %}
+                    <a href="{{ h.url_for('dataset.read', id=pkg_name) }}" target="_blank">View in CKAN</a>
                     {% else %}
                       <a href="{{ h.url_for('superset_blueprint.create_dataset', chart_id=chart.id) }}">
                         Create new CKAN dataset
                       </a>
                     {% endif %}
                   </td>
+                  <td>{{ chart.id }}</td>
+                  {#
                   <td>
                     <img src="{{ h.url_for('superset_images.chart_image', chart_id=chart.id ) }}" alt="{{ chart.slice_name }}" style="max-width: 100px;">
                   </td>
+                  #}
                   <td>{{ chart.slice_name if chart.slice_name else "" }}</td>
                   <td>
                     {% for tag in chart.tags %}
