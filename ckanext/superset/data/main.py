@@ -6,6 +6,7 @@ import logging
 import urllib.parse
 import httpx
 from ckanext.superset.data.chart import SupersetChart
+from httpx import Proxy
 from ckanext.superset.data.dataset import SupersetDataset
 from ckanext.superset.exceptions import SupersetRequestException
 
@@ -129,7 +130,10 @@ class SupersetCKAN:
         log.info(f"Connecting to {self.superset_url}")
         if self.proxy_url:
             log.info(f"Using proxy {self.proxy_url}:{self.proxy_port}")
-            self.client = httpx.Client(proxies=self.proxies, http2=False)
+            proxy = Proxy(
+                f"http://{self.proxy_user}:{self.proxy_pass}@{self.proxy_url}:{self.proxy_port}"
+            )
+            self.client = httpx.Client(transport=httpx.HTTPTransport(proxy=proxy))
         else:
             self.client = httpx.Client()
 
@@ -214,10 +218,7 @@ class SupersetCKAN:
     @property
     def proxies(self):
         """ The httpx proxies dictionary """
-        return {
-            "http://": f"http://{self.proxy_user}:{self.proxy_pass}@{self.proxy_url}:{self.proxy_port}",
-            "https://": f"http://{self.proxy_user}:{self.proxy_pass}@{self.proxy_url}:{self.proxy_port}",
-        }
+        return f"http://{self.proxy_user}:{self.proxy_pass}@{self.proxy_url}:{self.proxy_port}"
 
     @property
     def login_payload(self):
