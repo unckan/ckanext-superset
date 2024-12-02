@@ -134,7 +134,7 @@ class SupersetCKAN:
             proxy = Proxy(
                 f"http://{self.proxy_user}:{self.proxy_pass}@{self.proxy_url}:{self.proxy_port}"
             )
-            self.client = httpx.Client(transport=httpx.AsyncHTTPTransport(proxy=proxy))
+            self.client = httpx.Client(transport=httpx.HTTPTransport(proxy=proxy))
         else:
             self.client = httpx.Client()
 
