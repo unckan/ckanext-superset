@@ -1,0 +1,30 @@
+{% extends "page.html" %}
+
+{% block primary_content %}
+<section class="module">
+    <div class="module-content">
+        <h3>DataSets</h3>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dataset in datasets %}
+                <tr>
+                    <td>{{ dataset.titulo }}</td>
+                    <td>{{ dataset.description }}</td>
+                    <td>
+                        <a href="{{ h.url_for('superset_blueprint.list_datasets', dataset_id=dataset.id) }}">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
+{% block secondary_content %}
+{% endblock %}
