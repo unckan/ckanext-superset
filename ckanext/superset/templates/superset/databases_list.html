@@ -42,10 +42,7 @@
         crear paneles de control y visualizaciones interactivas.
       </p>
       <p>
-          <a href="{{ superset_url }}" class="btn btn-primary">
-            {{ ('Volver a Superset') }}
-          </a>
-          <a href="{{ charts_url }}" class="btn btn-secondary">
+          <a href="{{ h.url_for('superset_blueprint.index') }}" class="btn btn-primary">
             {{ ('Lista de Charts') }}
           </a>
       </p>
