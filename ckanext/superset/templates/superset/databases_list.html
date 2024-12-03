@@ -1,0 +1,55 @@
+{% extends "page.html" %}
+
+{% block primary_content %}
+<section class="module">
+    <div class="module-content">
+        <h3>Databases</h3>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>{{ _('ID') }}</th>
+                    <th>{{ _('Nombre de la base de datos') }}</th>
+                    <th>{{ _('Autor') }}</th>
+                    <th>{{ _('Actualizado') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for database in databases %}
+                <tr>
+                    <td>{{ database.id }}</td>
+                    <td>{{ database.database_name }}</td>
+                    <td>{{ database.created_by.first_name }}, {{ database.created_by.last_name }}</td>
+                    <td>{{ database.changed_on }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+    
+        </table>
+      </div>
+</section>
+{% endblock %}
+
+{% block secondary_content %}
+
+<div class="module module-narrow module-shallow">
+    <h2 class="module-heading">
+      {{ _('Apache Superset') }}
+    </h2>
+    <div class="module-content">
+      <img src="{{ h.url_for_static('/base/images/apache-superset-logo.png') }}" alt="Apache Superset" style="max-width: 200px; display: block; margin: 0 auto;">
+      <p>
+        Apache Superset es una herramienta de visualización de datos de código abierto que permite a los usuarios
+        crear paneles de control y visualizaciones interactivas.
+      </p>
+      <p>
+          <a href="{{ superset_url }}" class="btn btn-primary">
+            {{ ('Volver a Superset') }}
+          </a>
+          <a href="{{ charts_url }}" class="btn btn-secondary">
+            {{ ('Lista de Charts') }}
+          </a>
+      </p>
+    </div>
+  </div>
+
+{% endblock %}

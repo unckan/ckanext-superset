@@ -124,6 +124,12 @@ class SupersetCKAN:
         self.charts.append(chart)
         return chart
 
+    def get_databases(self):
+        """ Get a list_database """
+        # Get from the API
+        self.load_databases(self)
+        return self.databases
+
     def prepare_connection(self):
         """ Define the client and login if required """
         log.info(f"Connecting to {self.superset_url}")

@@ -9,6 +9,7 @@ from ckan.plugins import toolkit as tk
 from ckanext.superset.config import get_config
 from ckanext.superset.decorators import require_sysadmin_user
 from ckanext.superset.data.main import SupersetCKAN
+from ckanext.superset.data.chart import SupersetChart
 from ckanext.superset.exceptions import SupersetRequestException
 from ckanext.superset.utils import slug
 
@@ -104,3 +105,33 @@ def create_dataset(chart_id):
         # redirect to the new CKAN dataset
         url = tk.h.url_for('dataset.read', id=pkg['name'])
         return tk.redirect_to(url)
+
+
+@superset_bp.route('/list_databases', methods=['GET'])
+@require_sysadmin_user
+def list_databases():
+    cfg = get_config()
+    print("cfg", cfg)
+    sc = SupersetCKAN(**cfg)
+    print("sc", sc)
+    superset_database = sc.get_databases()
+    print("superset_database", superset_database)
+    superset_url = tk.config.get('ckanext.superset.instance.url')
+    print("superset_url", superset_url)
+    chart_id = SupersetChart(superset_instance=sc).id
+    log.debug(f"chart_id: {chart_id}")
+
+    cfg = get_config()
+    sc = SupersetCKAN(**cfg)
+    superset_chart = sc.get_chart(chart_id)
+    superset_url = tk.config.get('ckanext.superset.instance.url')
+    charts_url = f'{superset_url}/chart/{superset_chart.get("id")}'
+    if request.method == 'GET':
+
+        extra_vars = {
+            'databases': superset_database,
+            'superset_url': superset_url,
+            'charts_url': charts_url,
+        }
+        print("extra_vars", extra_vars)
+        return tk.render('superset/databases_list.html', extra_vars)
