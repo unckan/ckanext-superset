@@ -39,7 +39,6 @@ class SupersetCKAN:
             self.proxy_pass = urllib.parse.quote(proxy_pass)
         else:
             self.proxy_pass = None
-
         # Preserve a session for the client (httpx.Client)
         self.client = None
         # In case we need to login
