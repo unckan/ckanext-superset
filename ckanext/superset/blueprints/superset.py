@@ -177,12 +177,36 @@ def list_datasets():
     cfg = get_config()
     sc = SupersetCKAN(**cfg)
     sc.load_datasets()
+
+    # Verifica la respuesta inicial
+    print("Datasets Response:", sc.datasets_response)
+
     dataset_ids = sc.datasets_response.get('ids', [])
-    datasets = sc.get_list_datasets(dataset_ids)
+    dataset_ids = dataset_ids[-2:]  # Solo los últimos 10 datasets
+    raw_datasets = sc.get_list_datasets(dataset_ids)
+    # enviar solo los ultimo 10 datasets
+    raw_datasets = raw_datasets[-2:]
+    print("Raw Datasets:", raw_datasets)
+
+    # Procesa los datos para aplanarlos
+    datasets = [
+        {
+            'table_name': d['data'].get('table_name', 'Sin nombre') if d and 'data' in d else 'Sin nombre',
+            'description': d['data'].get('description', 'Sin descripción') if d and 'data' in d else 'Sin descripción',
+            'database_name': {d['data'].get('database', {}).get('database_name', 'Sin organización')
+                              if d and 'data' in d else 'Sin organización'},
+            'superset_chart_id': d['data'].get('id') if d and 'data' in d else None,
+            'private': False,  # Ajustar esta lógica si hay un indicador de privacidad
+        }
+        for d in raw_datasets if d is not None
+    ]
+
+    # Verifica los datos después de procesarlos
+    print("Processed Datasets:", datasets)
+
     superset_url = tk.config.get('ckanext.superset.instance.url')
     extra_vars = {
         'datasets': datasets,
         'superset_url': superset_url,
     }
-    log.info(f'Datasets: {datasets}')
     return tk.render('superset/list-datasets.html', extra_vars)
