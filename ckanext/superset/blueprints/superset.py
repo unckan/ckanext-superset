@@ -104,3 +104,17 @@ def create_dataset(chart_id):
         # redirect to the new CKAN dataset
         url = tk.h.url_for('dataset.read', id=pkg['name'])
         return tk.redirect_to(url)
+
+
+@superset_bp.route('/list_databases', methods=['GET'])
+@require_sysadmin_user
+def list_databases():
+    cfg = get_config()
+    sc = SupersetCKAN(**cfg)
+    superset_databases = sc.get_databases()
+    superset_url = tk.config.get('ckanext.superset.instance.url')
+    extra_vars = {
+        'databases': superset_databases,
+        'superset_url': superset_url,
+    }
+    return tk.render('superset/databases_list.html', extra_vars)

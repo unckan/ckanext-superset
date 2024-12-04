@@ -83,7 +83,12 @@
       <p>
         Apache Superset es una herramienta de visualización de datos de código abierto que permite a los usuarios
         crear paneles de control y visualizaciones interactivas.
-    </p>
+      </p>
+      <p>
+          <a href="{{ h.url_for('superset_blueprint.list_databases') }}" class="btn btn-primary">
+            {{ _('Databases') }}
+          </a>
+      </p>
     </div>
   </div>
 

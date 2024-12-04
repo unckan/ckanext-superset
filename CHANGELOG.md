@@ -2,6 +2,7 @@
 
 Features:
  - Move to https 0.28.0 droping the proxies parameter [#14](https://github.com/unckan/ckanext-superset/pull/14)
+ - Add databases list in admin [#21](https://github.com/unckan/ckanext-superset/pull/21)
 
 # 0.1.7
 
