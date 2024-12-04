@@ -152,6 +152,11 @@ class SupersetCKAN:
             login_url = f"{self.superset_url}/api/v1/security/login"
             login_response = self.client.post(login_url, json=self.login_payload)
             data = login_response.json()
+            if "access_token" not in data:
+                error = f"Error getting access token from Superset: {data}"
+                log.critical(error)
+                raise SupersetRequestException(error)
+
             self.access_token = data["access_token"]
 
             # Get a session for the user (works for CSV)
@@ -170,6 +175,8 @@ class SupersetCKAN:
             login_response = self.client.post(login_url, data=data)
             # Get expect a 302 redirect to /
             if login_response.status_code != 302:
+                error = f"Unexpected status code: {login_response.status_code} from Superset login"
+                log.critical(error)
                 login_response.raise_for_status()
             # Save cookies from the login response
             self.client.cookies.update(login_response.cookies)
