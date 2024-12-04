@@ -1,5 +1,8 @@
 # Next release
 
+Features:
+ - Move to https 0.28.0 droping the proxies parameter [#14](https://github.com/unckan/ckanext-superset/pull/14)
+
 # 0.1.7
 
 Features:
