@@ -20,31 +20,16 @@
       <table class="table table-striped table-bordered">
           <thead>
               <tr>
-                  <th>{{ _('CKAN') }}</th>
                   <th>{{ _('Chart ID') }}</th>
                   <!-- <th>{{ _('Image') }}</th> -->
                   <th>{{ _('Slice name') }}</th>
-                  <th>{{ _('Tags') }}</th>
-                  <th>{{ _('Dashboards') }}</th>
-                  <th>{{ _('Description') }}</th>
+                  <th>{{ _('Info') }}</th>
+                  <th>{{ _('Actions') }}</th>
               </tr>
           </thead>
           <tbody>
               {% for chart in charts %}
               <tr class="superset-index-tr {% if chart.ckan_dataset %}superset-index-tr-ckan{%endif%}">
-                  <td>
-                    {#
-                      Create CKAN dataset action or if exists, link to the dataset
-                    #}
-                    {% if chart.ckan_dataset %}
-                    {% set pkg_name = chart.ckan_dataset.name %}
-                    <a href="{{ h.url_for('dataset.read', id=pkg_name) }}" target="_blank">View in CKAN</a>
-                    {% else %}
-                      <a href="{{ h.url_for('superset_blueprint.create_dataset', chart_id=chart.id) }}">
-                        Create new CKAN dataset
-                      </a>
-                    {% endif %}
-                  </td>
                   <td>{{ chart.id }}</td>
                   {#
                   <td>
@@ -54,15 +39,28 @@
                   <td>{{ chart.slice_name if chart.slice_name else "" }}</td>
                   <td>
                     {% for tag in chart.tags %}
-                      <span class="label label-default">{{ tag }}</span>
+                    <br><span class="label label-default">Tag: {{ tag }}</span>
                     {% endfor %}
+                    {% for dashboard in chart.dashboards %}
+                      <br><span class="label label-default">Dash: {{ dashboard.dashboard_title }}</span>
+                    {% endfor %}
+                    {% if chart.description %}
+                      <br>Description: {{ chart.description }}
+                    {% endif %}
                   </td>
                   <td>
-                    {% for dashboard in chart.dashboards %}
-                      <span class="label label-default">{{ dashboard.dashboard_title }}</span>
-                    {% endfor %}
+                    {% if chart.ckan_dataset %}
+                    {% set pkg_name = chart.ckan_dataset.name %}
+                    <a class="btn btn-secondary" href="{{ h.url_for('dataset.read', id=pkg_name) }}" target="_blank">View in CKAN</a>
+                    <form action="{{ h.url_for('superset_blueprint.update_dataset', chart_id=chart.id) }}" method="POST">
+                      <button type="submit" class="btn btn-primary">Re-sync CSV</button>
+                    </form>
+                    {% else %}
+                      <a class="btn btn-primary" href="{{ h.url_for('superset_blueprint.create_dataset', chart_id=chart.id) }}">
+                        Create new CKAN dataset
+                      </a>
+                    {% endif %}
                   </td>
-                  <td>{{ chart.description if chart.description else "" }}</td>
               </tr>
               {% endfor %}
           </tbody>

@@ -101,9 +101,59 @@ def create_dataset(chart_id):
         }
         action(context, data)
 
+        # Add a flask message
+        tk.h.flash_success("Dataset created successfully.")
+
         # redirect to the new CKAN dataset
         url = tk.h.url_for('dataset.read', id=pkg['name'])
         return tk.redirect_to(url)
+
+
+@superset_bp.route('/update-dataset/<string:chart_id>', methods=['POST'])
+@require_sysadmin_user
+def update_dataset(chart_id):
+    """ Update the CKAN dataset just with the CSV data from the Superset chart """
+
+    cfg = get_config()
+    sc = SupersetCKAN(**cfg)
+    superset_chart = sc.get_chart(chart_id)
+
+    # Get/check the dataset previously imported
+    ckan_dataset = superset_chart.ckan_dataset
+    if not ckan_dataset:
+        tk.abort(404, f"CKAN Dataset not found for chart {chart_id}")
+
+    resources = ckan_dataset.get('resources', [])
+    if not resources:
+        tk.abort(400, f"CKAN Dataset from chart {chart_id} do not have resources")
+    elif len(resources) > 1:
+        tk.abort(400, f"CKAN Dataset from chart {chart_id} have more than one resource")
+
+    resource = resources[0]
+
+    # Update the resource
+    try:
+        csv_data = superset_chart.get_chart_csv()
+    except SupersetRequestException as e:
+        tk.abort(500, f"Superset Error getting CSV data {e}")
+    except Exception as e:
+        tk.abort(500, f"Unknown Error getting CSV data {e}")
+
+    resource_name = request.form.get('ckan_dataset_resource_name')
+    f = tempfile.NamedTemporaryFile(mode='w+b', delete=False)
+    f.write(csv_data)
+    f.close()
+    upload_file = FileStorage(filename=resource_name, stream=open(f.name, 'rb'))
+    action = tk.get_action("resource_patch")
+    context = {'user': current_user.name}
+    data = {'id': resource['id'], 'upload': upload_file}
+    action(context, data)
+
+    # Add a flask message
+    tk.h.flash_success("CSV resource updated successfully.")
+    # redirect to the updated CKAN dataset
+    url = tk.h.url_for('dataset.read', id=ckan_dataset['name'])
+    return tk.redirect_to(url)
 
 
 @superset_bp.route('/list_databases', methods=['GET'])
