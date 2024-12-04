@@ -50,6 +50,9 @@ class SupersetCKAN:
         self.datasets_response = None
         self.datasets = []  # {ID: data}
 
+        self.databases_response = None
+        self.databases = []  # {ID: data}
+
     def load_datasets(self, force=False):
         """ Get and load all datasets """
         if self.datasets and not force:
@@ -91,8 +94,8 @@ class SupersetCKAN:
         return self.charts
 
     def load_databases(self, force=False):
-        if hasattr(self, 'databases') and self.databases and not force:
-            return
+        if self.databases and not force:
+            return self.databases
 
         self.databases_response = self.get("database/")
         self.databases = sorted(
