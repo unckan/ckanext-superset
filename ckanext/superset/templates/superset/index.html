@@ -39,6 +39,9 @@
                     {% if chart.ckan_dataset %}
                     {% set pkg_name = chart.ckan_dataset.name %}
                     <a href="{{ h.url_for('dataset.read', id=pkg_name) }}" target="_blank">View in CKAN</a>
+                    <form action="{{ h.url_for('superset_blueprint.update_dataset', chart_id=chart.id) }}" method="POST">
+                      <button type="submit" class="btn btn-primary">Re-sync CSV from Superset</button>
+                    </form>
                     {% else %}
                       <a href="{{ h.url_for('superset_blueprint.create_dataset', chart_id=chart.id) }}">
                         Create new CKAN dataset
