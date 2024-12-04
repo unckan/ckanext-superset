@@ -129,9 +129,7 @@ class SupersetCKAN:
         log.info(f"Connecting to {self.superset_url}")
         if self.proxy_url:
             log.info(f"Using proxy {self.proxy_url}:{self.proxy_port}")
-            proxy = Proxy(
-                f"http://{self.proxy_user}:{self.proxy_pass}@{self.proxy_url}:{self.proxy_port}"
-            )
+            proxy = Proxy(self.proxy_full_url)
             self.client = httpx.Client(transport=httpx.HTTPTransport(proxy=proxy))
         else:
             self.client = httpx.Client()
@@ -215,8 +213,8 @@ class SupersetCKAN:
         return headers
 
     @property
-    def proxies(self):
-        """ The httpx proxies dictionary """
+    def proxy_full_url(self):
+        """ The httpx proxy full URL with user and password """
         return f"http://{self.proxy_user}:{self.proxy_pass}@{self.proxy_url}:{self.proxy_port}"
 
     @property
