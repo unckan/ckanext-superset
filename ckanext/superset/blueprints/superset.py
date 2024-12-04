@@ -168,7 +168,9 @@ def list_databases():
         'superset_url': superset_url,
     }
     return tk.render('superset/databases_list.html', extra_vars)
-@superset_bp.route('/list_datasets', methods=['GET'])
+
+
+@superset_bp.route('/datasets', methods=['GET'])
 @require_sysadmin_user
 def list_datasets():
     """ List all datasets created from Superset charts """
