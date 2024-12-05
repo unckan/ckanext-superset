@@ -1,9 +1,13 @@
 # Next release
 
+
+# 0.1.8
+
 Features:
  - Move to https 0.28.0 droping the proxies parameter [#14](https://github.com/unckan/ckanext-superset/pull/14)
  - Add databases list in admin [#21](https://github.com/unckan/ckanext-superset/pull/21)
  - Re-sync CSV resources for existing CKAN datasets [#23](https://github.com/unckan/ckanext-superset/pull/23)
+ - Add log.critical(error) [#25](https://github.com/unckan/ckanext-superset/pull/25)
 
 # 0.1.7
 
