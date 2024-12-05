@@ -1,5 +1,9 @@
 # Next release
 
+# 0.1.9
+
+Bug fix:
+ - Add missing `public` folder.
 
 # 0.1.8
 
