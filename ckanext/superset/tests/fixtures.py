@@ -3,5 +3,6 @@ import pytest
 
 @pytest.fixture
 def superset_migrate(migrate_db_for):
-    """ Apply the superset migrations """
+    # Migrar la base de datos de Superset
     migrate_db_for('superset')
+    return True
