@@ -116,6 +116,21 @@ class SupersetCKAN:
         self.datasets.append(dataset)
         return dataset
 
+    def get_list_datasets(self, dataset_ids):
+        """ Get a list of datasets """
+        list_datasets = []
+
+        for dataset_id in dataset_ids:
+            # Verificar si ya está en self.datasets
+            dataset = next((d for d in self.datasets if d.id == dataset_id), None)
+            if not dataset:
+                # Si no está, obtenerlo desde la API
+                dataset = SupersetDataset(superset_instance=self)
+                dataset.get_from_superset(dataset_id)
+                self.datasets.append(dataset)
+            list_datasets.append(dataset)
+        return list_datasets
+
     def get_chart(self, chart_id):
         """ Get a chart by ID """
         for chart in self.charts:
