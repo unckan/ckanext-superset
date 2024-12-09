@@ -178,15 +178,22 @@ def list_datasets():
     sc = SupersetCKAN(**cfg)
     sc.load_datasets()
 
-    # Verifica la respuesta inicial
-    print("Datasets Response:", sc.datasets_response)
-
-    dataset_ids = sc.datasets_response.get('ids', [])
-    dataset_ids = dataset_ids[-2:]  # Solo los últimos 10 datasets
+    # Extraer los IDs de datasets directamente desde sc.datasets
+    dataset_ids = [dataset.get('id') for dataset in sc.datasets if dataset.get('id')]
     raw_datasets = sc.get_list_datasets(dataset_ids)
-    # enviar solo los ultimo 10 datasets
-    raw_datasets = raw_datasets[-2:]
-    print("Raw Datasets:", raw_datasets)
+
+    # Procesa los datos para aplanarlos
+    datasets = [
+        {
+            'dataset_id': dataset.get('id'),
+            'table_name': dataset.get('table_name', 'Sin nombre'),
+            'description': dataset.get('description', 'Sin descripción'),
+            'database_name': dataset.get('database', {}).get('database_name', 'Sin organización'),
+            'changed_by_name': dataset.get('changed_by', {}).get('first_name', '') + ' ' + dataset.get('changed_by', {}).get('last_name', ''),
+            'sql': dataset.get('sql', 'No SQL query available'),
+        }
+        for dataset in sc.datasets
+    ]
 
     # Procesa los datos para aplanarlos
     datasets = [
@@ -202,7 +209,6 @@ def list_datasets():
     ]
 
     # Verifica los datos después de procesarlos
-    print("Processed Datasets:", datasets)
 
     superset_url = tk.config.get('ckanext.superset.instance.url')
     extra_vars = {

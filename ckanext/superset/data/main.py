@@ -58,13 +58,26 @@ class SupersetCKAN:
         if self.datasets and not force:
             return
 
-        # Ver ckanext/superset/data/samples/datasets.json
-        self.datasets_response = self.get("dataset/")
-        datasets = self.datasets_response.get("result", {})
-        for dataset in datasets:
-            ds = SupersetDataset(superset_instance=self)
-            ds.load(dataset)
-            self.datasets.append(ds)
+        q_data = {"page_size": 50, "page": 0}
+        log.debug("DENTRO DE load_datasets")
+        log.debug("Q_DATA:", q_data)
+        self.datasets = []
+        while True:
+            params = {'q': json.dumps(q_data)}
+            self.datasets_response = self.get("dataset/", params=params)
+
+            if not self.datasets_response or not self.datasets_response.get("result", {}):
+                break
+
+            datasets = self.datasets_response.get("result", [])
+            self.datasets.extend(datasets)
+
+            q_data["page"] += 1
+            print("Q_DATA['page']:", q_data["page"])
+            if q_data["page"] > 5:
+                log.error("Too many pages of datasets")
+                break
+
         return self.datasets
 
     def load_charts(self, force=False):
@@ -118,11 +131,14 @@ class SupersetCKAN:
 
     def get_list_datasets(self, dataset_ids):
         """ Get a list of datasets """
+        log.info("DENTRO DE get_list_datasets")
+        log.info("Dataset IDs:", dataset_ids)
+
         list_datasets = []
 
         for dataset_id in dataset_ids:
             # Verificar si ya está en self.datasets
-            dataset = next((d for d in self.datasets if d.id == dataset_id), None)
+            dataset = next((d for d in self.datasets if d.get('id') == dataset_id), None)
             if not dataset:
                 # Si no está, obtenerlo desde la API
                 dataset = SupersetDataset(superset_instance=self)
