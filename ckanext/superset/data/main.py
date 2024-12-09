@@ -131,9 +131,6 @@ class SupersetCKAN:
 
     def get_list_datasets(self, dataset_ids):
         """ Get a list of datasets """
-        log.info("DENTRO DE get_list_datasets")
-        log.info("Dataset IDs:", dataset_ids)
-
         list_datasets = []
 
         for dataset_id in dataset_ids:

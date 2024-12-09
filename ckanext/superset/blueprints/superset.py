@@ -182,33 +182,24 @@ def list_datasets():
     dataset_ids = [dataset.get('id') for dataset in sc.datasets if dataset.get('id')]
     raw_datasets = sc.get_list_datasets(dataset_ids)
 
-    # Procesa los datos para aplanarlos
-    datasets = [
-        {
-            'dataset_id': dataset.get('id'),
-            'table_name': dataset.get('table_name', 'Sin nombre'),
-            'description': dataset.get('description', 'Sin descripción'),
-            'database_name': dataset.get('database', {}).get('database_name', 'Sin organización'),
-            'changed_by_name': dataset.get('changed_by', {}).get('first_name', '') + ' ' + dataset.get('changed_by', {}).get('last_name', ''),
-            'sql': dataset.get('sql', 'No SQL query available'),
-        }
-        for dataset in sc.datasets
-    ]
-
-    # Procesa los datos para aplanarlos
-    datasets = [
-        {
-            'table_name': d['data'].get('table_name', 'Sin nombre') if d and 'data' in d else 'Sin nombre',
-            'description': d['data'].get('description', 'Sin descripción') if d and 'data' in d else 'Sin descripción',
-            'database_name': {d['data'].get('database', {}).get('database_name', 'Sin organización')
-                              if d and 'data' in d else 'Sin organización'},
-            'superset_chart_id': d['data'].get('id') if d and 'data' in d else None,
-            'private': False,  # Ajustar esta lógica si hay un indicador de privacidad
-        }
-        for d in raw_datasets if d is not None
-    ]
-
-    # Verifica los datos después de procesarlos
+    #  Procesar los datos para aplanarlos
+    datasets = []
+    for d in raw_datasets:
+        if d is not None and isinstance(d, dict):
+            log.debug(f"Procesando dataset: {d}")
+            if d.get('description') is None:
+                d['description'] = 'Sin descripción'
+            if d.get('database') is None:
+                d['database'] = {'database_name': 'Sin organización'}
+            datasets.append({
+                'table_name': d.get('table_name', 'Sin nombre'),
+                'description': d.get('description'),
+                'database_name': d.get('database').get('database_name'),
+                'superset_chart_id': d.get('id'),
+                'private': False,  # Ajustar lógica si hay un indicador real de privacidad
+            })
+        else:
+            log.warning(f"Elemento no procesado en raw_datasets: {d}")
 
     superset_url = tk.config.get('ckanext.superset.instance.url')
     extra_vars = {
