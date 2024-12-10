@@ -31,13 +31,18 @@
           <!-- Grup list -->
           {% set groups_available = h.groups_available('create_dataset') %}
           <div class="form-group">
-            <label for="ckan_group_id">Group</label>
-            <select class="form-control form-select" id="ckan_group_id" name="ckan_group_id">
-              <option value="">-----</option>
+            <label for="ckan_group_id">Groups</label>
+            <div class="checkbox-group">
               {% for group in groups_available %}
-                <option value="{{ group.id }}">{{ group.title }}</option>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="group_{{ group.id }}" name="ckan_group_id" value="{{ group.id }}" 
+                  {% if group.id in selected_groups %}checked{% endif %}>
+                  <label class="form-check-label" for="group_{{ group.id }}">
+                    {{ group.title }}
+                  </label>
+                </div>
               {% endfor %}
-            </select>
+            </div>
           </div>
 
           <!-- CKAN notes/description -->
