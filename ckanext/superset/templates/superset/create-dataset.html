@@ -28,6 +28,18 @@
             </select>
           </div>
 
+          <!-- Grup list -->
+          {% set groups_available = h.groups_available('create_dataset') %}
+          <div class="form-group">
+            <label for="ckan_group_id">Group</label>
+            <select class="form-control form-select" id="ckan_group_id" name="ckan_group_id">
+              <option value="">-----</option>
+              {% for group in groups_available %}
+                <option value="{{ group.id }}">{{ group.title }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
           <!-- CKAN notes/description -->
           <div class="form-group">
             <label for="ckan_dataset_notes">Dataset description</label>
