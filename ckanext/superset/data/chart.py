@@ -11,7 +11,8 @@ class SupersetChart:
 
     def __init__(self, superset_instance=None):
         self.id = None
-        self.data = {}
+        self.data = {}  # response from /chart/ID
+        self.chart_data = {}  # response from /chart/ID/data/
         self.superset_instance = superset_instance
         self._ckan_dataset = None
 
@@ -52,7 +53,20 @@ class SupersetChart:
 
     def get_chart_data(self):
         """ Get the dataset data """
-        return self.superset_instance.get(f"chart/{self.id}/data/")
+        self.chart_data = self.superset_instance.get(f"chart/{self.id}/data/")
+        return self.chart_data
+
+    def get_col_names(self):
+        """ Get the column names """
+        log.info(f"Getting column names for chart {self.id}")
+        if not self.chart_data:
+            self.chart_data = self.get_chart_data()
+        result = self.chart_data.get("result", [])
+        log.debug(f"Results: {len(result)} :: {result}")
+        if not result:
+            return []
+        # TODO check label_map and other potential valuable metadata fields
+        return result[0].get("colnames", [])
 
     def get_chart_file(self, format_):
         """ Download a file from the dataset """

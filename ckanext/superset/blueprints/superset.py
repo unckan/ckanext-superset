@@ -47,11 +47,14 @@ def create_dataset(chart_id):
 
     # Obtener los grupos disponibles
     groups_available = tk.get_action('group_list')({'user': current_user.name}, {'all_fields': True})
+    # Show column names
+    col_names = superset_chart.get_col_names()
 
     if request.method == 'GET':
         extra_vars = {
             'superset_chart': superset_chart,
             'groups_available': groups_available,
+            'col_names': col_names,
         }
         return tk.render('superset/create-dataset.html', extra_vars)
 
