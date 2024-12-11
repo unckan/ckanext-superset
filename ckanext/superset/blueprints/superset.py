@@ -46,8 +46,12 @@ def create_dataset(chart_id):
     superset_chart = sc.get_chart(chart_id)
     if request.method == 'GET':
 
+        # Show column names
+        col_names = superset_chart.get_col_names()
+
         extra_vars = {
             'superset_chart': superset_chart,
+            'col_names': col_names,
         }
         return tk.render('superset/create-dataset.html', extra_vars)
 
