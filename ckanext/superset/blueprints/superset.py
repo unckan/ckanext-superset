@@ -46,14 +46,13 @@ def create_dataset(chart_id):
     superset_chart = sc.get_chart(chart_id)
     # Obtener los grupos disponibles
     groups_available = tk.get_action('group_list')(data_dict={})
+    print("groups_available", groups_available)
 
     if request.method == 'GET':
 
-        selected_group = []
         extra_vars = {
             'superset_chart': superset_chart,
             'groups_available': groups_available,
-            'selected_group': selected_group,
         }
         return tk.render('superset/create-dataset.html', extra_vars)
 
@@ -70,7 +69,9 @@ def create_dataset(chart_id):
             c += 1
 
         # Obtener los grupos seleccionados del formulario
-        selected_groups = request.form.getlist('ckan_dataset_groups')
+        selected_group_ids = request.form.getlist('ckan_group_ids[]')
+        # Transformar en lista de diccionarios
+        selected_groups = [{"id": group_id} for group_id in selected_group_ids]
 
         # Create the dataset
         action = tk.get_action("package_create")
@@ -80,11 +81,11 @@ def create_dataset(chart_id):
             'title': ckan_dataset_title,
             'notes': request.form.get('ckan_dataset_notes'),
             'owner_org': request.form.get('ckan_organization_id'),
-            'groups': selected_groups,
             'private': request.form.get('ckan_dataset_private'),
             'extras': [
                 {'key': 'superset_chart_id', 'value': chart_id},
             ],
+            'groups': selected_groups
         }
         pkg = action(context, data)
         # Create the resource
