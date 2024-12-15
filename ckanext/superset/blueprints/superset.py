@@ -56,6 +56,12 @@ def create_dataset(chart_id):
         return tk.render('superset/create-dataset.html', extra_vars)
 
     if request.method == 'POST':
+
+        # Check if we need to split dataset or resources
+        ckan_dataset_split = request.form.get('ckan_dataset_split')
+        if ckan_dataset_split:
+            split_datasets = ckan_dataset_split.startswith('dataset_')
+            split_resources = ckan_dataset_split.startswith('resource_')
         # Create the dataset
         ckan_dataset_title = request.form.get('ckan_dataset_title')
         # generate a slug name
