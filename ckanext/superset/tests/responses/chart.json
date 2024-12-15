@@ -1,0 +1,2674 @@
+{
+    "count": 181,
+    "description_columns": {},
+    "ids": [
+        213,
+        127,
+        125,
+        165,
+        212,
+        190,
+        201,
+        204,
+        211,
+        210,
+        203,
+        209,
+        208,
+        205,
+        206,
+        191,
+        207,
+        178,
+        184,
+        177
+    ],
+    "label_columns": {
+        "cache_timeout": "Cache Timeout",
+        "certification_details": "Certification Details",
+        "certified_by": "Certified By",
+        "changed_by.first_name": "Changed By First Name",
+        "changed_by.last_name": "Changed By Last Name",
+        "changed_by_name": "Changed By Name",
+        "changed_on_delta_humanized": "Changed On Delta Humanized",
+        "changed_on_dttm": "Changed On Dttm",
+        "changed_on_utc": "Changed On Utc",
+        "created_by.first_name": "Created By First Name",
+        "created_by.id": "Created By Id",
+        "created_by.last_name": "Created By Last Name",
+        "created_by_name": "Created By Name",
+        "created_on_delta_humanized": "Created On Delta Humanized",
+        "dashboards.dashboard_title": "Dashboards Dashboard Title",
+        "dashboards.id": "Dashboards Id",
+        "datasource_id": "Datasource Id",
+        "datasource_name_text": "Datasource Name Text",
+        "datasource_type": "Datasource Type",
+        "datasource_url": "Datasource Url",
+        "description": "Description",
+        "description_markeddown": "Description Markeddown",
+        "edit_url": "Edit Url",
+        "form_data": "Form Data",
+        "id": "Id",
+        "is_managed_externally": "Is Managed Externally",
+        "last_saved_at": "Last Saved At",
+        "last_saved_by.first_name": "Last Saved By First Name",
+        "last_saved_by.id": "Last Saved By Id",
+        "last_saved_by.last_name": "Last Saved By Last Name",
+        "owners.first_name": "Owners First Name",
+        "owners.id": "Owners Id",
+        "owners.last_name": "Owners Last Name",
+        "params": "Params",
+        "slice_name": "Slice Name",
+        "slice_url": "Slice Url",
+        "table.default_endpoint": "Table Default Endpoint",
+        "table.table_name": "Table Table Name",
+        "tags.id": "Tags Id",
+        "tags.name": "Tags Name",
+        "tags.type": "Tags Type",
+        "thumbnail_url": "Thumbnail Url",
+        "url": "Url",
+        "viz_type": "Viz Type"
+    },
+    "list_columns": [
+        "is_managed_externally",
+        "certified_by",
+        "certification_details",
+        "cache_timeout",
+        "changed_by.first_name",
+        "changed_by.last_name",
+        "changed_by_name",
+        "changed_on_delta_humanized",
+        "changed_on_dttm",
+        "changed_on_utc",
+        "created_by.first_name",
+        "created_by.id",
+        "created_by.last_name",
+        "created_by_name",
+        "created_on_delta_humanized",
+        "datasource_id",
+        "datasource_name_text",
+        "datasource_type",
+        "datasource_url",
+        "description",
+        "description_markeddown",
+        "edit_url",
+        "form_data",
+        "id",
+        "last_saved_at",
+        "last_saved_by.id",
+        "last_saved_by.first_name",
+        "last_saved_by.last_name",
+        "owners.first_name",
+        "owners.id",
+        "owners.last_name",
+        "dashboards.id",
+        "dashboards.dashboard_title",
+        "params",
+        "slice_name",
+        "slice_url",
+        "table.default_endpoint",
+        "table.table_name",
+        "thumbnail_url",
+        "url",
+        "viz_type",
+        "tags.id",
+        "tags.name",
+        "tags.type"
+    ],
+    "list_title": "List Slice",
+    "order_columns": [
+        "changed_by.first_name",
+        "changed_on_delta_humanized",
+        "datasource_id",
+        "datasource_name",
+        "last_saved_at",
+        "last_saved_by.id",
+        "last_saved_by.first_name",
+        "last_saved_by.last_name",
+        "slice_name",
+        "viz_type"
+    ],
+    "result": [
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "23 hours ago",
+            "changed_on_dttm": 1732885805318.478,
+            "changed_on_utc": "2024-11-29T13:10:05.318478+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "23 hours ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "Cargos worldes test",
+                    "id": 41
+                },
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 39,
+            "datasource_name_text": "public.datos_anuario",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=39",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/213",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_tzr2nq8wzz_3sk2ywcxxho",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "TEMPORAL_RANGE",
+                        "sqlExpression": null,
+                        "subject": "year_nanomico_date"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": [
+                            "meriltad de Arquitectura, Urbanismo y Diseno",
+                            "meriltad de Ciencias Quimicas",
+                            "meriltad de Ciencias Exactas, Fisicas y Naturales",
+                            "meriltad de Filosofia y Humanidades",
+                            "meriltad de Lenguas",
+                            "meriltad de Ciencias Agropecuarias",
+                            "meriltad de Odontologia",
+                            "meriltad de Artes",
+                            "meriltad de Psicologia",
+                            "meriltad de Ciencias Medicas",
+                            "meriltad de Ciencias Economicas",
+                            "meriltad de Ciencias Sociales",
+                            "meriltad de Derecho",
+                            "meriltad de Matematica, Astronomia, Fisica y Computacion",
+                            "meriltad de Ciencias de la Comunicacion"
+                        ],
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_ghqaiyei10m_0ttdmhlwljy",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "IN",
+                        "operatorId": "IN",
+                        "sqlExpression": null,
+                        "subject": "minalad"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": [
+                            "Grado"
+                        ],
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_bnzumlfnlvn_nx9xdnirfqm",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "IN",
+                        "operatorId": "IN",
+                        "sqlExpression": null,
+                        "subject": "tipo_propuesta_formativa_desc"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": 0,
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_zudpiap5rwa_eivz00g2pbq",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "!=",
+                        "operatorId": "NOT_EQUALS",
+                        "sqlExpression": null,
+                        "subject": "cantidad_egresados"
+                    }
+                ],
+                "annotation_layers": [],
+                "color_scheme": "AMT proceso",
+                "comparison_type": "values",
+                "contributionMode": null,
+                "dashboards": [
+                    41,
+                    32
+                ],
+                "datasource": "39__table",
+                "extra_form_data": {},
+                "forecastInterval": 0.8,
+                "forecastPeriods": 10,
+                "forecastSeasonalityYearly": null,
+                "groupby": [
+                    "minalad"
+                ],
+                "legendMargin": null,
+                "legendOrientation": "top",
+                "legendType": "scroll",
+                "limit": 50,
+                "logAxis": false,
+                "markerEnabled": false,
+                "markerSize": 6,
+                "metrics": [
+                    "duracion mediana"
+                ],
+                "minorSplitLine": false,
+                "only_total": true,
+                "order_desc": true,
+                "rich_tooltip": true,
+                "rolling_type": null,
+                "row_limit": 10000,
+                "show_empty_columns": true,
+                "show_legend": false,
+                "show_value": false,
+                "slice_id": 213,
+                "sort_series_ascending": false,
+                "sort_series_type": "sum",
+                "time_grain_sqla": "P1Y",
+                "tooltipSortByMetric": false,
+                "tooltipTimeFormat": "smart_date",
+                "truncate_metric": true,
+                "viz_type": "echarts_timeseries_scatter",
+                "xAxisLabelRotation": 0,
+                "x_axis": "bicle",
+                "x_axis_sort_asc": true,
+                "x_axis_sort_series": "name",
+                "x_axis_sort_series_ascending": true,
+                "x_axis_time_format": "smart_date",
+                "x_axis_title": "Duracion de bicles de acuerdo a la mediana",
+                "x_axis_title_margin": 15,
+                "y_axis_bounds": [
+                    null,
+                    null
+                ],
+                "y_axis_format": "SMART_NUMBER",
+                "y_axis_title_margin": 15,
+                "y_axis_title_position": "Top",
+                "zoomable": false
+            },
+            "id": 213,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-29T13:10:05.297973",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                },
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                }
+            ],
+            "params": "{\"datasource\":\"39__table\",\"viz_type\":\"echarts_timeseries_scatter\",\"slice_id\":213,\"x_axis\":\"bicle\",\"time_grain_sqla\":\"P1Y\",\"x_axis_sort_asc\":true,\"x_axis_sort_series\":\"name\",\"x_axis_sort_series_ascending\":true,\"metrics\":[\"duracion mediana\"],\"groupby\":[\"minalad\"],\"contributionMode\":null,\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_tzr2nq8wzz_3sk2ywcxxho\",\"isExtra\":false,\"isNew\":false,\"operator\":\"TEMPORAL_RANGE\",\"sqlExpression\":null,\"subject\":\"year_nanomico_date\"},{\"clause\":\"WHERE\",\"comparator\":[\"meriltad de Arquitectura, Urbanismo y Diseno\",\"meriltad de Ciencias Quimicas\",\"meriltad de Ciencias Exactas, Fisicas y Naturales\",\"meriltad de Filosofia y Humanidades\",\"meriltad de Lenguas\",\"meriltad de Ciencias Agropecuarias\",\"meriltad de Odontologia\",\"meriltad de Artes\",\"meriltad de Psicologia\",\"meriltad de Ciencias Medicas\",\"meriltad de Ciencias Economicas\",\"meriltad de Ciencias Sociales\",\"meriltad de Derecho\",\"meriltad de Matematica, Astronomia, Fisica y Computacion\",\"meriltad de Ciencias de la Comunicacion\"],\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_ghqaiyei10m_0ttdmhlwljy\",\"isExtra\":false,\"isNew\":false,\"operator\":\"IN\",\"operatorId\":\"IN\",\"sqlExpression\":null,\"subject\":\"minalad\"},{\"clause\":\"WHERE\",\"comparator\":[\"Grado\"],\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_bnzumlfnlvn_nx9xdnirfqm\",\"isExtra\":false,\"isNew\":false,\"operator\":\"IN\",\"operatorId\":\"IN\",\"sqlExpression\":null,\"subject\":\"tipo_propuesta_formativa_desc\"},{\"clause\":\"WHERE\",\"comparator\":0,\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_zudpiap5rwa_eivz00g2pbq\",\"isExtra\":false,\"isNew\":false,\"operator\":\"!=\",\"operatorId\":\"NOT_EQUALS\",\"sqlExpression\":null,\"subject\":\"cantidad_egresados\"}],\"limit\":50,\"order_desc\":true,\"row_limit\":10000,\"truncate_metric\":true,\"show_empty_columns\":true,\"rolling_type\":null,\"comparison_type\":\"values\",\"annotation_layers\":[],\"forecastPeriods\":10,\"forecastInterval\":0.8,\"forecastSeasonalityYearly\":null,\"x_axis_title\":\"Duracion de bicles de acuerdo a la mediana\",\"x_axis_title_margin\":15,\"y_axis_title_margin\":15,\"y_axis_title_position\":\"Top\",\"sort_series_type\":\"sum\",\"sort_series_ascending\":false,\"color_scheme\":\"AMT proceso\",\"show_value\":false,\"only_total\":true,\"markerEnabled\":false,\"markerSize\":6,\"zoomable\":false,\"show_legend\":false,\"legendType\":\"scroll\",\"legendOrientation\":\"top\",\"legendMargin\":null,\"x_axis_time_format\":\"smart_date\",\"xAxisLabelRotation\":0,\"rich_tooltip\":true,\"tooltipSortByMetric\":false,\"tooltipTimeFormat\":\"smart_date\",\"y_axis_format\":\"SMART_NUMBER\",\"logAxis\":false,\"minorSplitLine\":false,\"y_axis_bounds\":[null,null],\"extra_form_data\":{},\"dashboards\":[41,32]}",
+            "slice_name": "urgencia - Duracion promedio de egresados por bicle scatter plot",
+            "slice_url": "/explore/?slice_id=213&form_data=%7B%22slice_id%22%3A%20213%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "datos_anuario"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/213/thumbnail/1a3762e1fe463b8538496e7a3e6092ab/",
+            "url": "/explore/?slice_id=213",
+            "viz_type": "echarts_timeseries_scatter"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732830304376.6,
+            "changed_on_utc": "2024-11-28T21:45:04.376600+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "25 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 40,
+            "datasource_name_text": "public.datos_anuario_web",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=40",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/127",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "expressionType": "SIMPLE",
+                        "operator": "TEMPORAL_RANGE",
+                        "subject": "year_nanomico_date"
+                    }
+                ],
+                "color_scheme": "AMT proceso",
+                "dashboards": [
+                    32
+                ],
+                "datasource": "40__table",
+                "date_format": "smart_date",
+                "donut": true,
+                "extra_form_data": {},
+                "groupby": [
+                    "niveles"
+                ],
+                "innerRadius": 30,
+                "label_type": "key",
+                "labels_outside": true,
+                "legendMargin": null,
+                "legendOrientation": "top",
+                "legendType": "scroll",
+                "metric": "valores",
+                "number_format": "~g",
+                "outerRadius": 71,
+                "row_limit": 100,
+                "show_labels": true,
+                "show_labels_threshold": 5,
+                "show_legend": true,
+                "show_total": true,
+                "slice_id": 127,
+                "sort_by_metric": true,
+                "viz_type": "pie"
+            },
+            "id": 127,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T21:45:04.364962",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"40__table\",\"viz_type\":\"pie\",\"slice_id\":127,\"groupby\":[\"niveles\"],\"metric\":\"valores\",\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"expressionType\":\"SIMPLE\",\"operator\":\"TEMPORAL_RANGE\",\"subject\":\"year_nanomico_date\"}],\"row_limit\":100,\"sort_by_metric\":true,\"color_scheme\":\"AMT proceso\",\"show_labels_threshold\":5,\"show_legend\":true,\"legendType\":\"scroll\",\"legendOrientation\":\"top\",\"legendMargin\":null,\"label_type\":\"key\",\"number_format\":\"~g\",\"date_format\":\"smart_date\",\"show_labels\":true,\"labels_outside\":true,\"show_total\":true,\"outerRadius\":71,\"donut\":true,\"innerRadius\":30,\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "urgencia grafico categorias anuario Web",
+            "slice_url": "/explore/?slice_id=127&form_data=%7B%22slice_id%22%3A%20127%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "datos_anuario_web"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/127/thumbnail/d85a7329739796926500258e5ebaec5c/",
+            "url": "/explore/?slice_id=127",
+            "viz_type": "pie"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732829546056.5369,
+            "changed_on_utc": "2024-11-28T21:32:26.056537+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "a month ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 40,
+            "datasource_name_text": "public.datos_anuario_web",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=40",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/125",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "expressionType": "SIMPLE",
+                        "operator": "TEMPORAL_RANGE",
+                        "subject": "year_nanomico_date"
+                    }
+                ],
+                "aggregateFunction": "Sum",
+                "colOrder": "key_a_to_z",
+                "colSubTotals": false,
+                "colTotals": true,
+                "conditional_formatting": [],
+                "dashboards": [
+                    32
+                ],
+                "datasource": "40__table",
+                "date_format": "smart_date",
+                "extra_form_data": {},
+                "groupbyColumns": [
+                    "niveles"
+                ],
+                "groupbyRows": [
+                    "minalad",
+                    "bicle"
+                ],
+                "metrics": [
+                    "valores"
+                ],
+                "metricsLayout": "COLUMNS",
+                "order_desc": true,
+                "rowOrder": "key_a_to_z",
+                "rowSubTotals": true,
+                "row_limit": 1000,
+                "slice_id": 125,
+                "temporal_columns_lookup": {
+                    "year_nanomico_date": true
+                },
+                "time_grain_sqla": "P1D",
+                "valueFormat": "~g",
+                "viz_type": "pivot_table_v2"
+            },
+            "id": 125,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T21:32:26.048319",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"40__table\",\"viz_type\":\"pivot_table_v2\",\"slice_id\":125,\"groupbyColumns\":[\"niveles\"],\"groupbyRows\":[\"minalad\",\"bicle\"],\"time_grain_sqla\":\"P1D\",\"temporal_columns_lookup\":{\"year_nanomico_date\":true},\"metrics\":[\"valores\"],\"metricsLayout\":\"COLUMNS\",\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"expressionType\":\"SIMPLE\",\"operator\":\"TEMPORAL_RANGE\",\"subject\":\"year_nanomico_date\"}],\"row_limit\":1000,\"order_desc\":true,\"aggregateFunction\":\"Sum\",\"rowSubTotals\":true,\"colTotals\":true,\"colSubTotals\":false,\"valueFormat\":\"~g\",\"date_format\":\"smart_date\",\"rowOrder\":\"key_a_to_z\",\"colOrder\":\"key_a_to_z\",\"conditional_formatting\":[],\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "urgencia tabla anuario web",
+            "slice_url": "/explore/?slice_id=125&form_data=%7B%22slice_id%22%3A%20125%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "datos_anuario_web"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/125/thumbnail/569b8b4d8b30b1c0dcb040a44b2734d6/",
+            "url": "/explore/?slice_id=125",
+            "viz_type": "pivot_table_v2"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732829530077.587,
+            "changed_on_utc": "2024-11-28T21:32:10.077587+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "15 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 40,
+            "datasource_name_text": "public.datos_anuario_web",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=40",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/165",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_vuzhi3fbxqi_s2ijlvbfsz",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "TEMPORAL_RANGE",
+                        "sqlExpression": null,
+                        "subject": "year_nanomico_date"
+                    }
+                ],
+                "color_scheme": "AMT proceso",
+                "dashboards": [
+                    32
+                ],
+                "datasource": "40__table",
+                "date_format": "smart_date",
+                "extra_form_data": {},
+                "groupby": [
+                    "minalad",
+                    "bicle"
+                ],
+                "label_type": "key_value",
+                "metric": "valores",
+                "number_format": "~g",
+                "row_limit": 10000,
+                "show_labels": true,
+                "show_upper_labels": true,
+                "slice_id": 165,
+                "viz_type": "treemap_v2"
+            },
+            "id": 165,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T21:32:10.064564",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                },
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                }
+            ],
+            "params": "{\"datasource\":\"40__table\",\"viz_type\":\"treemap_v2\",\"slice_id\":165,\"groupby\":[\"minalad\",\"bicle\"],\"metric\":\"valores\",\"row_limit\":10000,\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_vuzhi3fbxqi_s2ijlvbfsz\",\"isExtra\":false,\"isNew\":false,\"operator\":\"TEMPORAL_RANGE\",\"sqlExpression\":null,\"subject\":\"year_nanomico_date\"}],\"color_scheme\":\"AMT proceso\",\"show_labels\":true,\"show_upper_labels\":true,\"label_type\":\"key_value\",\"number_format\":\"~g\",\"date_format\":\"smart_date\",\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "urgencia - Teemap Facu y bicle",
+            "slice_url": "/explore/?slice_id=165&form_data=%7B%22slice_id%22%3A%20165%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "datos_anuario_web"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/165/thumbnail/856fe8ece3334675e06f4ec5b2309aad/",
+            "url": "/explore/?slice_id=165",
+            "viz_type": "treemap_v2"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732823014564.227,
+            "changed_on_utc": "2024-11-28T19:43:34.564227+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "a day ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 70,
+            "datasource_name_text": "economicos.mapuche_cargos_liquidados",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=70",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/212",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "expressionType": "SIMPLE",
+                        "operator": "TEMPORAL_RANGE",
+                        "subject": "periodo"
+                    }
+                ],
+                "all_columns": [],
+                "color_pn": true,
+                "dashboards": [
+                    32
+                ],
+                "datasource": "70__table",
+                "extra_form_data": {},
+                "groupby": [
+                    {
+                        "expressionType": "SQL",
+                        "label": "Dedicacion",
+                        "sqlExpression": "Case worlde_equivalente\nwhen 1 then 'Dedicacion Exclusiva'\nwhen 0.5  then 'Dedicacion Semi-Exclusiva'\nwhen 0.25 then 'Dedicacion Simple'\nelse 'Otra'\nEND"
+                    }
+                ],
+                "order_by_cols": [],
+                "order_desc": true,
+                "percent_metrics": [],
+                "query_mode": "aggregate",
+                "row_limit": 1000,
+                "server_page_length": 10,
+                "show_cell_bars": true,
+                "slice_id": 212,
+                "table_timestamp_format": "smart_date",
+                "temporal_columns_lookup": {
+                    "periodo": true
+                },
+                "time_grain_sqla": "P1D",
+                "viz_type": "table"
+            },
+            "id": 212,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T19:43:34.546462",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"70__table\",\"viz_type\":\"table\",\"slice_id\":212,\"query_mode\":\"aggregate\",\"groupby\":[{\"expressionType\":\"SQL\",\"label\":\"Dedicacion\",\"sqlExpression\":\"Case worlde_equivalente\\nwhen 1 then 'Dedicacion Exclusiva'\\nwhen 0.5  then 'Dedicacion Semi-Exclusiva'\\nwhen 0.25 then 'Dedicacion Simple'\\nelse 'Otra'\\nEND\"}],\"time_grain_sqla\":\"P1D\",\"temporal_columns_lookup\":{\"periodo\":true},\"all_columns\":[],\"percent_metrics\":[],\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"expressionType\":\"SIMPLE\",\"operator\":\"TEMPORAL_RANGE\",\"subject\":\"periodo\"}],\"order_by_cols\":[],\"row_limit\":1000,\"server_page_length\":10,\"order_desc\":true,\"table_timestamp_format\":\"smart_date\",\"show_cell_bars\":true,\"color_pn\":true,\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "filtro_dedicaciones",
+            "slice_url": "/explore/?slice_id=212&form_data=%7B%22slice_id%22%3A%20212%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "mapuche_cargos_liquidados"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/212/thumbnail/42607e5d269599b47cdc7f0a60808c18/",
+            "url": "/explore/?slice_id=212",
+            "viz_type": "table"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732814787770.953,
+            "changed_on_utc": "2024-11-28T17:26:27.770953+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "8 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 70,
+            "datasource_name_text": "economicos.mapuche_cargos_liquidados",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=70",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/190",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_lj3q7fbyntp_2k32j5jmmn3",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "TEMPORAL_RANGE",
+                        "sqlExpression": null,
+                        "subject": "periodo"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": "worlde",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_wzl89a73isj_jhqfy51zf19",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "==",
+                        "operatorId": "EQUALS",
+                        "sqlExpression": null,
+                        "subject": "escalafon_desc"
+                    }
+                ],
+                "all_columns": [],
+                "color_pn": true,
+                "column_config": {
+                    "Equivalente Full": {
+                        "d3NumberFormat": "~g"
+                    },
+                    "cant_cargos": {
+                        "d3NumberFormat": "~g"
+                    }
+                },
+                "conditional_formatting": [],
+                "dashboards": [
+                    32
+                ],
+                "datasource": "70__table",
+                "extra_form_data": {},
+                "groupby": [
+                    "minalad",
+                    {
+                        "expressionType": "SQL",
+                        "label": "Dedicacion",
+                        "sqlExpression": "Case worlde_equivalente\nwhen 1 then 'Dedicacion Exclusiva'\nwhen 0.5  then 'Dedicacion Semi-Exclusiva'\nwhen 0.25 then 'Dedicacion Simple'\nelse 'Otra'\nEND"
+                    }
+                ],
+                "metrics": [
+                    "cant_cargos",
+                    {
+                        "aggregate": null,
+                        "column": null,
+                        "datasourceWarning": false,
+                        "expressionType": "SQL",
+                        "hasCustomLabel": true,
+                        "label": "Equivalente Full",
+                        "optionName": "metric_66or7de82fk_09ti0t7zsi6h",
+                        "sqlExpression": "ROUND(SUM(worlde_equivalente))"
+                    }
+                ],
+                "order_by_cols": [],
+                "order_desc": true,
+                "percent_metrics": [],
+                "query_mode": "aggregate",
+                "row_limit": 1000,
+                "server_page_length": 10,
+                "show_cell_bars": true,
+                "show_totals": true,
+                "slice_id": 190,
+                "table_timestamp_format": "smart_date",
+                "temporal_columns_lookup": {
+                    "periodo": true
+                },
+                "time_grain_sqla": "P1D",
+                "viz_type": "table"
+            },
+            "id": 190,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T17:26:27.754362",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"70__table\",\"viz_type\":\"table\",\"slice_id\":190,\"query_mode\":\"aggregate\",\"groupby\":[\"minalad\",{\"label\":\"Dedicacion\",\"sqlExpression\":\"Case worlde_equivalente\\nwhen 1 then 'Dedicacion Exclusiva'\\nwhen 0.5  then 'Dedicacion Semi-Exclusiva'\\nwhen 0.25 then 'Dedicacion Simple'\\nelse 'Otra'\\nEND\",\"expressionType\":\"SQL\"}],\"time_grain_sqla\":\"P1D\",\"temporal_columns_lookup\":{\"periodo\":true},\"metrics\":[\"cant_cargos\",{\"expressionType\":\"SQL\",\"sqlExpression\":\"ROUND(SUM(worlde_equivalente))\",\"column\":null,\"aggregate\":null,\"datasourceWarning\":false,\"hasCustomLabel\":true,\"label\":\"Equivalente Full\",\"optionName\":\"metric_66or7de82fk_09ti0t7zsi6h\"}],\"all_columns\":[],\"percent_metrics\":[],\"adhoc_filters\":[{\"expressionType\":\"SIMPLE\",\"subject\":\"periodo\",\"operator\":\"TEMPORAL_RANGE\",\"comparator\":\"No filter\",\"clause\":\"WHERE\",\"sqlExpression\":null,\"isExtra\":false,\"isNew\":false,\"datasourceWarning\":false,\"filterOptionName\":\"filter_lj3q7fbyntp_2k32j5jmmn3\"},{\"expressionType\":\"SIMPLE\",\"subject\":\"escalafon_desc\",\"operator\":\"==\",\"operatorId\":\"EQUALS\",\"comparator\":\"worlde\",\"clause\":\"WHERE\",\"sqlExpression\":null,\"isExtra\":false,\"isNew\":false,\"datasourceWarning\":false,\"filterOptionName\":\"filter_wzl89a73isj_jhqfy51zf19\"}],\"order_by_cols\":[],\"row_limit\":1000,\"server_page_length\":10,\"order_desc\":true,\"show_totals\":true,\"table_timestamp_format\":\"smart_date\",\"show_cell_bars\":true,\"color_pn\":true,\"column_config\":{\"Equivalente Full\":{\"d3NumberFormat\":\"~g\"},\"cant_cargos\":{\"d3NumberFormat\":\"~g\"}},\"conditional_formatting\":[],\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "worldes equivalentes test",
+            "slice_url": "/explore/?slice_id=190&form_data=%7B%22slice_id%22%3A%20190%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "mapuche_cargos_liquidados"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/190/thumbnail/4dca5e67c8e27eafc7af49652fd2ac99/",
+            "url": "/explore/?slice_id=190",
+            "viz_type": "table"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732813182898.735,
+            "changed_on_utc": "2024-11-28T16:59:42.898735+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "2 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 39,
+            "datasource_name_text": "public.datos_anuario",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=39",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/201",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_m7cg0fj93ta_pigueglgwy",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "TEMPORAL_RANGE",
+                        "sqlExpression": null,
+                        "subject": "year_nanomico_date"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": [
+                            "Grado"
+                        ],
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_eiwb999h5e_vpprfz0h",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "IN",
+                        "operatorId": "IN",
+                        "sqlExpression": null,
+                        "subject": "tipo_propuesta_formativa_desc"
+                    }
+                ],
+                "align_pn": true,
+                "all_columns": [],
+                "allow_rearrange_columns": false,
+                "color_pn": false,
+                "column_config": {
+                    "Ratio E/NI": {
+                        "colorPositiveNegative": true,
+                        "d3NumberFormat": ",.3f",
+                        "showCellBars": false
+                    },
+                    "egresados": {
+                        "colorPositiveNegative": true
+                    },
+                    "nuevo_inscripto": {
+                        "colorPositiveNegative": true,
+                        "d3NumberFormat": "~g"
+                    }
+                },
+                "conditional_formatting": [],
+                "dashboards": [
+                    32
+                ],
+                "datasource": "39__table",
+                "extra_form_data": {},
+                "groupby": [
+                    "minalad",
+                    "bicle"
+                ],
+                "include_search": false,
+                "metrics": [
+                    "egresados",
+                    "nuevo_inscripto",
+                    {
+                        "aggregate": null,
+                        "column": null,
+                        "datasourceWarning": false,
+                        "expressionType": "SQL",
+                        "hasCustomLabel": true,
+                        "label": "Ratio E/NI",
+                        "optionName": "metric_cq8wwlp2xuk_9tblu2lqbna",
+                        "sqlExpression": "CASE \n    WHEN COALESCE(SUM(nuevo_inscripto), 0) = 0 AND COALESCE(SUM(cantidad_egresados), 0) = 0 THEN NULL\n    WHEN COALESCE(SUM(nuevo_inscripto), 0) = 0 THEN 1\n    ELSE SUM(cantidad_egresados) / NULLIF(SUM(nuevo_inscripto)::FLOAT, 0)\nEND\n"
+                    }
+                ],
+                "order_by_cols": [],
+                "order_desc": true,
+                "percent_metrics": [],
+                "query_mode": "aggregate",
+                "row_limit": 1000,
+                "server_page_length": 10,
+                "server_pagination": false,
+                "show_cell_bars": false,
+                "slice_id": 201,
+                "table_timestamp_format": "smart_date",
+                "temporal_columns_lookup": {
+                    "year_nanomico_date": true,
+                    "year_ingreso_date": true
+                },
+                "time_grain_sqla": "P1D",
+                "timeseries_limit_metric": "egresados",
+                "viz_type": "table"
+            },
+            "id": 201,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T16:59:42.882849",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"39__table\",\"viz_type\":\"table\",\"slice_id\":201,\"query_mode\":\"aggregate\",\"groupby\":[\"minalad\",\"bicle\"],\"time_grain_sqla\":\"P1D\",\"temporal_columns_lookup\":{\"year_nanomico_date\":true,\"year_ingreso_date\":true},\"metrics\":[\"egresados\",\"nuevo_inscripto\",{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"Ratio E/NI\",\"optionName\":\"metric_cq8wwlp2xuk_9tblu2lqbna\",\"sqlExpression\":\"CASE \\n    WHEN COALESCE(SUM(nuevo_inscripto), 0) = 0 AND COALESCE(SUM(cantidad_egresados), 0) = 0 THEN NULL\\n    WHEN COALESCE(SUM(nuevo_inscripto), 0) = 0 THEN 1\\n    ELSE SUM(cantidad_egresados) / NULLIF(SUM(nuevo_inscripto)::FLOAT, 0)\\nEND\\n\"}],\"all_columns\":[],\"percent_metrics\":[],\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_m7cg0fj93ta_pigueglgwy\",\"isExtra\":false,\"isNew\":false,\"operator\":\"TEMPORAL_RANGE\",\"sqlExpression\":null,\"subject\":\"year_nanomico_date\"},{\"clause\":\"WHERE\",\"comparator\":[\"Grado\"],\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_eiwb999h5e_vpprfz0h\",\"isExtra\":false,\"isNew\":false,\"operator\":\"IN\",\"operatorId\":\"IN\",\"sqlExpression\":null,\"subject\":\"tipo_propuesta_formativa_desc\"}],\"timeseries_limit_metric\":\"egresados\",\"order_by_cols\":[],\"server_pagination\":false,\"row_limit\":1000,\"server_page_length\":10,\"order_desc\":true,\"table_timestamp_format\":\"smart_date\",\"include_search\":false,\"show_cell_bars\":false,\"align_pn\":true,\"color_pn\":false,\"allow_rearrange_columns\":false,\"column_config\":{\"Ratio E/NI\":{\"d3NumberFormat\":\",.3f\",\"showCellBars\":false,\"colorPositiveNegative\":true},\"nuevo_inscripto\":{\"d3NumberFormat\":\"~g\",\"colorPositiveNegative\":true},\"egresados\":{\"colorPositiveNegative\":true}},\"conditional_formatting\":[],\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "test egresados vs inscriptos",
+            "slice_url": "/explore/?slice_id=201&form_data=%7B%22slice_id%22%3A%20201%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "datos_anuario"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/201/thumbnail/fb361d05a320d4cec1105493dac58c69/",
+            "url": "/explore/?slice_id=201",
+            "viz_type": "table"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732810554540.383,
+            "changed_on_utc": "2024-11-28T16:15:54.540383+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "2 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 39,
+            "datasource_name_text": "public.datos_anuario",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=39",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/204",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_tzr2nq8wzz_3sk2ywcxxho",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "TEMPORAL_RANGE",
+                        "sqlExpression": null,
+                        "subject": "year_nanomico_date"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": [
+                            "meriltad de Arquitectura, Urbanismo y Diseno",
+                            "meriltad de Ciencias Quimicas",
+                            "meriltad de Ciencias Exactas, Fisicas y Naturales",
+                            "meriltad de Filosofia y Humanidades",
+                            "meriltad de Lenguas",
+                            "meriltad de Ciencias Agropecuarias",
+                            "meriltad de Odontologia",
+                            "meriltad de Artes",
+                            "meriltad de Psicologia",
+                            "meriltad de Ciencias Medicas",
+                            "meriltad de Ciencias Economicas",
+                            "meriltad de Ciencias Sociales",
+                            "meriltad de Derecho",
+                            "meriltad de Matematica, Astronomia, Fisica y Computacion",
+                            "meriltad de Ciencias de la Comunicacion"
+                        ],
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_ghqaiyei10m_0ttdmhlwljy",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "IN",
+                        "operatorId": "IN",
+                        "sqlExpression": null,
+                        "subject": "minalad"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": [
+                            "Grado"
+                        ],
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_bnzumlfnlvn_nx9xdnirfqm",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "IN",
+                        "operatorId": "IN",
+                        "sqlExpression": null,
+                        "subject": "tipo_propuesta_formativa_desc"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": 0,
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_zudpiap5rwa_eivz00g2pbq",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "!=",
+                        "operatorId": "NOT_EQUALS",
+                        "sqlExpression": null,
+                        "subject": "cantidad_egresados"
+                    }
+                ],
+                "all_columns": [],
+                "color_pn": true,
+                "column_config": {
+                    "duracion_promedio": {
+                        "currencyFormat": {
+                            "symbolPosition": "suffix"
+                        },
+                        "d3NumberFormat": "SMART_NUMBER",
+                        "d3SmallNumberFormat": ",.3f"
+                    },
+                    "egresados": {
+                        "d3NumberFormat": "~g"
+                    }
+                },
+                "conditional_formatting": [],
+                "dashboards": [
+                    32
+                ],
+                "datasource": "39__table",
+                "extra_form_data": {},
+                "groupby": [
+                    "minalad",
+                    "bicle"
+                ],
+                "include_search": false,
+                "metrics": [
+                    "egresados",
+                    "duracion mediana"
+                ],
+                "order_by_cols": [],
+                "order_desc": true,
+                "percent_metrics": [],
+                "query_mode": "aggregate",
+                "row_limit": 1000,
+                "server_page_length": 10,
+                "show_cell_bars": false,
+                "slice_id": 204,
+                "table_timestamp_format": "smart_date",
+                "temporal_columns_lookup": {
+                    "year_nanomico_date": true,
+                    "year_ingreso_date": true
+                },
+                "viz_type": "table"
+            },
+            "id": 204,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T16:15:54.528168",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                },
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                }
+            ],
+            "params": "{\"datasource\":\"39__table\",\"viz_type\":\"table\",\"slice_id\":204,\"query_mode\":\"aggregate\",\"groupby\":[\"minalad\",\"bicle\"],\"temporal_columns_lookup\":{\"year_nanomico_date\":true,\"year_ingreso_date\":true},\"metrics\":[\"egresados\",\"duracion mediana\"],\"all_columns\":[],\"percent_metrics\":[],\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_tzr2nq8wzz_3sk2ywcxxho\",\"isExtra\":false,\"isNew\":false,\"operator\":\"TEMPORAL_RANGE\",\"sqlExpression\":null,\"subject\":\"year_nanomico_date\"},{\"clause\":\"WHERE\",\"comparator\":[\"meriltad de Arquitectura, Urbanismo y Diseno\",\"meriltad de Ciencias Quimicas\",\"meriltad de Ciencias Exactas, Fisicas y Naturales\",\"meriltad de Filosofia y Humanidades\",\"meriltad de Lenguas\",\"meriltad de Ciencias Agropecuarias\",\"meriltad de Odontologia\",\"meriltad de Artes\",\"meriltad de Psicologia\",\"meriltad de Ciencias Medicas\",\"meriltad de Ciencias Economicas\",\"meriltad de Ciencias Sociales\",\"meriltad de Derecho\",\"meriltad de Matematica, Astronomia, Fisica y Computacion\",\"meriltad de Ciencias de la Comunicacion\"],\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_ghqaiyei10m_0ttdmhlwljy\",\"isExtra\":false,\"isNew\":false,\"operator\":\"IN\",\"operatorId\":\"IN\",\"sqlExpression\":null,\"subject\":\"minalad\"},{\"clause\":\"WHERE\",\"comparator\":[\"Grado\"],\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_bnzumlfnlvn_nx9xdnirfqm\",\"isExtra\":false,\"isNew\":false,\"operator\":\"IN\",\"operatorId\":\"IN\",\"sqlExpression\":null,\"subject\":\"tipo_propuesta_formativa_desc\"},{\"clause\":\"WHERE\",\"comparator\":0,\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_zudpiap5rwa_eivz00g2pbq\",\"isExtra\":false,\"isNew\":false,\"operator\":\"!=\",\"operatorId\":\"NOT_EQUALS\",\"sqlExpression\":null,\"subject\":\"cantidad_egresados\"}],\"order_by_cols\":[],\"row_limit\":1000,\"server_page_length\":10,\"order_desc\":true,\"table_timestamp_format\":\"smart_date\",\"include_search\":false,\"show_cell_bars\":false,\"color_pn\":true,\"column_config\":{\"duracion_promedio\":{\"currencyFormat\":{\"symbolPosition\":\"suffix\"},\"d3NumberFormat\":\"SMART_NUMBER\",\"d3SmallNumberFormat\":\",.3f\"},\"egresados\":{\"d3NumberFormat\":\"~g\"}},\"conditional_formatting\":[],\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "urgencia - Duracion promedio de egresados por bicle - tabla",
+            "slice_url": "/explore/?slice_id=204&form_data=%7B%22slice_id%22%3A%20204%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "datos_anuario"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/204/thumbnail/6d41fe290c580114691110a99cbc5d89/",
+            "url": "/explore/?slice_id=204",
+            "viz_type": "table"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732810066127.779,
+            "changed_on_utc": "2024-11-28T16:07:46.127779+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "a day ago",
+            "dashboards": [],
+            "datasource_id": 39,
+            "datasource_name_text": "public.datos_anuario",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=39",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/211",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_hss5ukqp9fd_seqdytpovy",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "TEMPORAL_RANGE",
+                        "sqlExpression": null,
+                        "subject": "year_nanomico_date"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": 1,
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_9iywpx5dcqp_blef85coskp",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "==",
+                        "operatorId": "EQUALS",
+                        "sqlExpression": null,
+                        "subject": "cantidad_egresados"
+                    }
+                ],
+                "dashboards": [],
+                "datasource": "39__table",
+                "extra_form_data": {},
+                "header_font_size": 0.4,
+                "metric": "egresados",
+                "slice_id": 211,
+                "subheader_font_size": 0.15,
+                "time_format": "smart_date",
+                "viz_type": "big_number_total",
+                "y_axis_format": "SMART_NUMBER"
+            },
+            "id": 211,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T16:07:46.123697",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                }
+            ],
+            "params": "{\"datasource\":\"39__table\",\"viz_type\":\"big_number_total\",\"metric\":\"egresados\",\"adhoc_filters\":[{\"expressionType\":\"SIMPLE\",\"subject\":\"year_nanomico_date\",\"operator\":\"TEMPORAL_RANGE\",\"comparator\":\"No filter\",\"clause\":\"WHERE\",\"sqlExpression\":null,\"isExtra\":false,\"isNew\":false,\"datasourceWarning\":false,\"filterOptionName\":\"filter_hss5ukqp9fd_seqdytpovy\"},{\"expressionType\":\"SIMPLE\",\"subject\":\"cantidad_egresados\",\"operator\":\"==\",\"operatorId\":\"EQUALS\",\"comparator\":1,\"clause\":\"WHERE\",\"sqlExpression\":null,\"isExtra\":false,\"isNew\":false,\"datasourceWarning\":false,\"filterOptionName\":\"filter_9iywpx5dcqp_blef85coskp\"}],\"header_font_size\":0.4,\"subheader_font_size\":0.15,\"y_axis_format\":\"SMART_NUMBER\",\"time_format\":\"smart_date\",\"extra_form_data\":{},\"dashboards\":[]}",
+            "slice_name": "bignumber_egresados",
+            "slice_url": "/explore/?slice_id=211&form_data=%7B%22slice_id%22%3A%20211%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "datos_anuario"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/211/thumbnail/291dc706bb42644b4543af00d61c7a80/",
+            "url": "/explore/?slice_id=211",
+            "viz_type": "big_number_total"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732808510088.656,
+            "changed_on_utc": "2024-11-28T15:41:50.088656+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "a day ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 39,
+            "datasource_name_text": "public.datos_anuario",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=39",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/210",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "expressionType": "SIMPLE",
+                        "operator": "TEMPORAL_RANGE",
+                        "subject": "year_nanomico_date"
+                    }
+                ],
+                "conditional_formatting": [],
+                "dashboards": [
+                    32
+                ],
+                "datasource": "39__table",
+                "extra_form_data": {},
+                "header_font_size": 0.4,
+                "metric": {
+                    "aggregate": null,
+                    "column": null,
+                    "datasourceWarning": false,
+                    "expressionType": "SQL",
+                    "hasCustomLabel": false,
+                    "label": "CASE \n    WHEN COALESCE(SUM(nuevo_inscripto), 0) = 0 AND COALESCE(SUM(cantidad_egresados), 0) = 0 THEN NULL\n    WHEN COALESCE(SUM(nuevo_inscripto), 0) = 0 THEN 1\n    ELSE SUM(cantidad_egresados) / NULLIF(SUM(nuevo_inscripto)::FLOAT, 0)\nEND",
+                    "optionName": "metric_2vin6dj5b7d_smfhbx0gp6o",
+                    "sqlExpression": "CASE \n    WHEN COALESCE(SUM(nuevo_inscripto), 0) = 0 AND COALESCE(SUM(cantidad_egresados), 0) = 0 THEN NULL\n    WHEN COALESCE(SUM(nuevo_inscripto), 0) = 0 THEN 1\n    ELSE SUM(cantidad_egresados) / NULLIF(SUM(nuevo_inscripto)::FLOAT, 0)\nEND"
+                },
+                "slice_id": 210,
+                "subheader": "Egresados / Nuevos Inscriptos",
+                "subheader_font_size": 0.15,
+                "time_format": "smart_date",
+                "viz_type": "big_number_total",
+                "y_axis_format": ",.2f"
+            },
+            "id": 210,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T15:41:50.076854",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                },
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                }
+            ],
+            "params": "{\"datasource\":\"39__table\",\"viz_type\":\"big_number_total\",\"slice_id\":210,\"metric\":{\"expressionType\":\"SQL\",\"sqlExpression\":\"CASE \\n    WHEN COALESCE(SUM(nuevo_inscripto), 0) = 0 AND COALESCE(SUM(cantidad_egresados), 0) = 0 THEN NULL\\n    WHEN COALESCE(SUM(nuevo_inscripto), 0) = 0 THEN 1\\n    ELSE SUM(cantidad_egresados) / NULLIF(SUM(nuevo_inscripto)::FLOAT, 0)\\nEND\",\"column\":null,\"aggregate\":null,\"datasourceWarning\":false,\"hasCustomLabel\":false,\"label\":\"CASE \\n    WHEN COALESCE(SUM(nuevo_inscripto), 0) = 0 AND COALESCE(SUM(cantidad_egresados), 0) = 0 THEN NULL\\n    WHEN COALESCE(SUM(nuevo_inscripto), 0) = 0 THEN 1\\n    ELSE SUM(cantidad_egresados) / NULLIF(SUM(nuevo_inscripto)::FLOAT, 0)\\nEND\",\"optionName\":\"metric_2vin6dj5b7d_smfhbx0gp6o\"},\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"expressionType\":\"SIMPLE\",\"operator\":\"TEMPORAL_RANGE\",\"subject\":\"year_nanomico_date\"}],\"subheader\":\"Egresados / Nuevos Inscriptos\",\"header_font_size\":0.4,\"subheader_font_size\":0.15,\"y_axis_format\":\",.2f\",\"time_format\":\"smart_date\",\"conditional_formatting\":[],\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "bignumber_ratio_ENI",
+            "slice_url": "/explore/?slice_id=210&form_data=%7B%22slice_id%22%3A%20210%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "datos_anuario"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/210/thumbnail/2d3bbca7754e99e21723a1d4ebe887e5/",
+            "url": "/explore/?slice_id=210",
+            "viz_type": "big_number_total"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732807933909.8352,
+            "changed_on_utc": "2024-11-28T15:32:13.909835+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "2 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                },
+                {
+                    "dashboard_title": "Cargos worldes test",
+                    "id": 41
+                }
+            ],
+            "datasource_id": 39,
+            "datasource_name_text": "public.datos_anuario",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=39",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/203",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_tzr2nq8wzz_3sk2ywcxxho",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "TEMPORAL_RANGE",
+                        "sqlExpression": null,
+                        "subject": "year_nanomico_date"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": [
+                            "meriltad de Arquitectura, Urbanismo y Diseno",
+                            "meriltad de Ciencias Quimicas",
+                            "meriltad de Ciencias Exactas, Fisicas y Naturales",
+                            "meriltad de Filosofia y Humanidades",
+                            "meriltad de Lenguas",
+                            "meriltad de Ciencias Agropecuarias",
+                            "meriltad de Odontologia",
+                            "meriltad de Artes",
+                            "meriltad de Psicologia",
+                            "meriltad de Ciencias Medicas",
+                            "meriltad de Ciencias Economicas",
+                            "meriltad de Ciencias Sociales",
+                            "meriltad de Derecho",
+                            "meriltad de Matematica, Astronomia, Fisica y Computacion",
+                            "meriltad de Ciencias de la Comunicacion"
+                        ],
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_ghqaiyei10m_0ttdmhlwljy",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "IN",
+                        "operatorId": "IN",
+                        "sqlExpression": null,
+                        "subject": "minalad"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": [
+                            "Grado"
+                        ],
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_bnzumlfnlvn_nx9xdnirfqm",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "IN",
+                        "operatorId": "IN",
+                        "sqlExpression": null,
+                        "subject": "tipo_propuesta_formativa_desc"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": 0,
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_zudpiap5rwa_eivz00g2pbq",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "!=",
+                        "operatorId": "NOT_EQUALS",
+                        "sqlExpression": null,
+                        "subject": "cantidad_egresados"
+                    }
+                ],
+                "annotation_layers": [],
+                "color_scheme": "AMT proceso",
+                "comparison_type": "values",
+                "contributionMode": null,
+                "dashboards": [
+                    41,
+                    32
+                ],
+                "datasource": "39__table",
+                "extra_form_data": {},
+                "forecastInterval": 0.8,
+                "forecastPeriods": 10,
+                "groupby": [
+                    "bicle"
+                ],
+                "legendMargin": null,
+                "legendOrientation": "top",
+                "legendType": "scroll",
+                "limit": "9000",
+                "logAxis": false,
+                "metrics": [
+                    "duracion mediana"
+                ],
+                "minorSplitLine": false,
+                "only_total": true,
+                "order_desc": true,
+                "orientation": "horizontal",
+                "rich_tooltip": true,
+                "rolling_type": null,
+                "row_limit": 10000,
+                "show_empty_columns": true,
+                "show_legend": false,
+                "show_value": false,
+                "slice_id": 203,
+                "sort_series_ascending": false,
+                "sort_series_type": "sum",
+                "stack": null,
+                "time_grain_sqla": "P1D",
+                "tooltipSortByMetric": false,
+                "tooltipTimeFormat": "smart_date",
+                "truncateYAxis": false,
+                "truncate_metric": true,
+                "viz_type": "echarts_timeseries_bar",
+                "xAxisLabelRotation": 0,
+                "x_axis": "minalad",
+                "x_axis_sort_asc": true,
+                "x_axis_sort_series": "sum",
+                "x_axis_sort_series_ascending": false,
+                "x_axis_time_format": "smart_date",
+                "x_axis_title": "",
+                "x_axis_title_margin": 15,
+                "y_axis_bounds": [
+                    null,
+                    null
+                ],
+                "y_axis_format": "SMART_NUMBER",
+                "y_axis_title": "Duracion mediana de la bicle agrupados por minalad",
+                "y_axis_title_margin": 30,
+                "y_axis_title_position": "Left"
+            },
+            "id": 203,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T15:32:13.897470",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                },
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                }
+            ],
+            "params": "{\"datasource\":\"39__table\",\"viz_type\":\"echarts_timeseries_bar\",\"slice_id\":203,\"x_axis\":\"minalad\",\"time_grain_sqla\":\"P1D\",\"x_axis_sort_asc\":true,\"x_axis_sort_series\":\"sum\",\"x_axis_sort_series_ascending\":false,\"metrics\":[\"duracion mediana\"],\"groupby\":[\"bicle\"],\"contributionMode\":null,\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_tzr2nq8wzz_3sk2ywcxxho\",\"isExtra\":false,\"isNew\":false,\"operator\":\"TEMPORAL_RANGE\",\"sqlExpression\":null,\"subject\":\"year_nanomico_date\"},{\"clause\":\"WHERE\",\"comparator\":[\"meriltad de Arquitectura, Urbanismo y Diseno\",\"meriltad de Ciencias Quimicas\",\"meriltad de Ciencias Exactas, Fisicas y Naturales\",\"meriltad de Filosofia y Humanidades\",\"meriltad de Lenguas\",\"meriltad de Ciencias Agropecuarias\",\"meriltad de Odontologia\",\"meriltad de Artes\",\"meriltad de Psicologia\",\"meriltad de Ciencias Medicas\",\"meriltad de Ciencias Economicas\",\"meriltad de Ciencias Sociales\",\"meriltad de Derecho\",\"meriltad de Matematica, Astronomia, Fisica y Computacion\",\"meriltad de Ciencias de la Comunicacion\"],\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_ghqaiyei10m_0ttdmhlwljy\",\"isExtra\":false,\"isNew\":false,\"operator\":\"IN\",\"operatorId\":\"IN\",\"sqlExpression\":null,\"subject\":\"minalad\"},{\"clause\":\"WHERE\",\"comparator\":[\"Grado\"],\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_bnzumlfnlvn_nx9xdnirfqm\",\"isExtra\":false,\"isNew\":false,\"operator\":\"IN\",\"operatorId\":\"IN\",\"sqlExpression\":null,\"subject\":\"tipo_propuesta_formativa_desc\"},{\"clause\":\"WHERE\",\"comparator\":0,\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_zudpiap5rwa_eivz00g2pbq\",\"isExtra\":false,\"isNew\":false,\"operator\":\"!=\",\"operatorId\":\"NOT_EQUALS\",\"sqlExpression\":null,\"subject\":\"cantidad_egresados\"}],\"limit\":\"9000\",\"order_desc\":true,\"row_limit\":10000,\"truncate_metric\":true,\"show_empty_columns\":true,\"rolling_type\":null,\"comparison_type\":\"values\",\"annotation_layers\":[],\"forecastPeriods\":10,\"forecastInterval\":0.8,\"orientation\":\"horizontal\",\"x_axis_title\":\"\",\"x_axis_title_margin\":15,\"y_axis_title\":\"Duracion mediana de la bicle agrupados por minalad\",\"y_axis_title_margin\":30,\"y_axis_title_position\":\"Left\",\"sort_series_type\":\"sum\",\"sort_series_ascending\":false,\"color_scheme\":\"AMT proceso\",\"show_value\":false,\"stack\":null,\"only_total\":true,\"show_legend\":false,\"legendType\":\"scroll\",\"legendOrientation\":\"top\",\"legendMargin\":null,\"x_axis_time_format\":\"smart_date\",\"xAxisLabelRotation\":0,\"y_axis_format\":\"SMART_NUMBER\",\"logAxis\":false,\"minorSplitLine\":false,\"truncateYAxis\":false,\"y_axis_bounds\":[null,null],\"rich_tooltip\":true,\"tooltipSortByMetric\":false,\"tooltipTimeFormat\":\"smart_date\",\"extra_form_data\":{},\"dashboards\":[41,32]}",
+            "slice_name": "urgencia - Duracion promedio de egresados por bicle",
+            "slice_url": "/explore/?slice_id=203&form_data=%7B%22slice_id%22%3A%20203%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "datos_anuario"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/203/thumbnail/71339012c9dc163f1a18650fef605f94/",
+            "url": "/explore/?slice_id=203",
+            "viz_type": "echarts_timeseries_bar"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732807642855.77,
+            "changed_on_utc": "2024-11-28T15:27:22.855770+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "a day ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 39,
+            "datasource_name_text": "public.datos_anuario",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=39",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/209",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_i85mnwzal3g_44o5y1wdkdy",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "TEMPORAL_RANGE",
+                        "sqlExpression": null,
+                        "subject": "year_nanomico_date"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": 1,
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_9xbf5eos2ut_xnmvnboj9f",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "==",
+                        "operatorId": "EQUALS",
+                        "sqlExpression": null,
+                        "subject": "cantidad_egresados"
+                    }
+                ],
+                "dashboards": [],
+                "datasource": "39__table",
+                "extra_form_data": {},
+                "header_font_size": 0.4,
+                "metric": "duracion mediana",
+                "slice_id": 209,
+                "subheader": "Anos",
+                "subheader_font_size": 0.15,
+                "time_format": "smart_date",
+                "viz_type": "big_number_total",
+                "y_axis_format": "SMART_NUMBER"
+            },
+            "id": 209,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T15:27:22.851481",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"39__table\",\"viz_type\":\"big_number_total\",\"metric\":\"duracion mediana\",\"adhoc_filters\":[{\"expressionType\":\"SIMPLE\",\"subject\":\"year_nanomico_date\",\"operator\":\"TEMPORAL_RANGE\",\"comparator\":\"No filter\",\"clause\":\"WHERE\",\"sqlExpression\":null,\"isExtra\":false,\"isNew\":false,\"datasourceWarning\":false,\"filterOptionName\":\"filter_i85mnwzal3g_44o5y1wdkdy\"},{\"expressionType\":\"SIMPLE\",\"subject\":\"cantidad_egresados\",\"operator\":\"==\",\"operatorId\":\"EQUALS\",\"comparator\":1,\"clause\":\"WHERE\",\"sqlExpression\":null,\"isExtra\":false,\"isNew\":false,\"datasourceWarning\":false,\"filterOptionName\":\"filter_9xbf5eos2ut_xnmvnboj9f\"}],\"subheader\":\"Anos\",\"header_font_size\":0.4,\"subheader_font_size\":0.15,\"y_axis_format\":\"SMART_NUMBER\",\"time_format\":\"smart_date\",\"extra_form_data\":{},\"dashboards\":[]}",
+            "slice_name": "bignumber_duracion_bicle",
+            "slice_url": "/explore/?slice_id=209&form_data=%7B%22slice_id%22%3A%20209%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "datos_anuario"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/209/thumbnail/f3cd3e36a805e7dcea6ccfdf4ed93a13/",
+            "url": "/explore/?slice_id=209",
+            "viz_type": "big_number_total"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732806990520.131,
+            "changed_on_utc": "2024-11-28T15:16:30.520131+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "2 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 39,
+            "datasource_name_text": "public.datos_anuario",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=39",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/208",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_i666kkn8eap_0niwwuxexe89",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "TEMPORAL_RANGE",
+                        "sqlExpression": null,
+                        "subject": "year_nanomico_date"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": 1,
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_jr4bn8yqyo9_npjfxvukc9",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "==",
+                        "operatorId": "EQUALS",
+                        "sqlExpression": null,
+                        "subject": "cantidad_egresados"
+                    }
+                ],
+                "color_scheme": "AMT proceso",
+                "columns": [
+                    "id_persona"
+                ],
+                "dashboards": [
+                    32
+                ],
+                "datasource": "39__table",
+                "date_format": "smart_date",
+                "extra_form_data": {},
+                "groupby": [],
+                "metrics": [
+                    "duracion mediana"
+                ],
+                "number_format": "SMART_NUMBER",
+                "series_limit": 50,
+                "slice_id": 208,
+                "temporal_columns_lookup": {
+                    "year_nanomico_date": true,
+                    "year_ingreso_date": true
+                },
+                "time_grain_sqla": "P1D",
+                "viz_type": "box_plot",
+                "whiskerOptions": "2/98 percentiles",
+                "x_axis_title": "Duracion Mediana de la bicle",
+                "x_axis_title_margin": 15,
+                "x_ticks_layout": "auto",
+                "y_axis_title": "Anos desde la inscripcion",
+                "y_axis_title_margin": 30,
+                "y_axis_title_position": "Left"
+            },
+            "id": 208,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T15:16:30.503365",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"39__table\",\"viz_type\":\"box_plot\",\"slice_id\":208,\"columns\":[\"id_persona\"],\"time_grain_sqla\":\"P1D\",\"temporal_columns_lookup\":{\"year_nanomico_date\":true,\"year_ingreso_date\":true},\"groupby\":[],\"metrics\":[\"duracion mediana\"],\"adhoc_filters\":[{\"expressionType\":\"SIMPLE\",\"subject\":\"year_nanomico_date\",\"operator\":\"TEMPORAL_RANGE\",\"comparator\":\"No filter\",\"clause\":\"WHERE\",\"sqlExpression\":null,\"isExtra\":false,\"isNew\":false,\"datasourceWarning\":false,\"filterOptionName\":\"filter_i666kkn8eap_0niwwuxexe89\"},{\"expressionType\":\"SIMPLE\",\"subject\":\"cantidad_egresados\",\"operator\":\"==\",\"operatorId\":\"EQUALS\",\"comparator\":1,\"clause\":\"WHERE\",\"sqlExpression\":null,\"isExtra\":false,\"isNew\":false,\"datasourceWarning\":false,\"filterOptionName\":\"filter_jr4bn8yqyo9_npjfxvukc9\"}],\"series_limit\":50,\"whiskerOptions\":\"2/98 percentiles\",\"x_axis_title\":\"Duracion Mediana de la bicle\",\"x_axis_title_margin\":15,\"y_axis_title\":\"Anos desde la inscripcion\",\"y_axis_title_margin\":30,\"y_axis_title_position\":\"Left\",\"color_scheme\":\"AMT proceso\",\"x_ticks_layout\":\"auto\",\"number_format\":\"SMART_NUMBER\",\"date_format\":\"smart_date\",\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "boxplot_duracion_bicles",
+            "slice_url": "/explore/?slice_id=208&form_data=%7B%22slice_id%22%3A%20208%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "datos_anuario"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/208/thumbnail/6fb96c023b63504979bda6d7100553ba/",
+            "url": "/explore/?slice_id=208",
+            "viz_type": "box_plot"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732805992995.644,
+            "changed_on_utc": "2024-11-28T14:59:52.995644+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "2 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 70,
+            "datasource_name_text": "economicos.mapuche_cargos_liquidados",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=70",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/205",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "expressionType": "SIMPLE",
+                        "operator": "TEMPORAL_RANGE",
+                        "subject": "periodo"
+                    }
+                ],
+                "conditional_formatting": [],
+                "dashboards": [
+                    32
+                ],
+                "datasource": "70__table",
+                "extra_form_data": {},
+                "header_font_size": 0.4,
+                "metric": {
+                    "aggregate": null,
+                    "column": null,
+                    "datasourceWarning": false,
+                    "expressionType": "SQL",
+                    "hasCustomLabel": false,
+                    "label": "SUM(worlde_equivalente)",
+                    "optionName": "metric_o5or9e0lrik_sanm8fspdjm",
+                    "sqlExpression": "SUM(worlde_equivalente)"
+                },
+                "slice_id": 205,
+                "subheader": "Cargos worldes Equivalentes Full",
+                "subheader_font_size": 0.2,
+                "time_format": "smart_date",
+                "viz_type": "big_number_total",
+                "y_axis_format": ".0f"
+            },
+            "id": 205,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T14:59:52.971856",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"70__table\",\"viz_type\":\"big_number_total\",\"slice_id\":205,\"metric\":{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":false,\"label\":\"SUM(worlde_equivalente)\",\"optionName\":\"metric_o5or9e0lrik_sanm8fspdjm\",\"sqlExpression\":\"SUM(worlde_equivalente)\"},\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"expressionType\":\"SIMPLE\",\"operator\":\"TEMPORAL_RANGE\",\"subject\":\"periodo\"}],\"subheader\":\"Cargos worldes Equivalentes Full\",\"header_font_size\":0.4,\"subheader_font_size\":0.2,\"y_axis_format\":\".0f\",\"time_format\":\"smart_date\",\"conditional_formatting\":[],\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "bignumber_worldes_full",
+            "slice_url": "/explore/?slice_id=205&form_data=%7B%22slice_id%22%3A%20205%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "mapuche_cargos_liquidados"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/205/thumbnail/7be7fd0ce369efe157d8a480278e16c4/",
+            "url": "/explore/?slice_id=205",
+            "viz_type": "big_number_total"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "a day ago",
+            "changed_on_dttm": 1732805870487.256,
+            "changed_on_utc": "2024-11-28T14:57:50.487256+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "2 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 106,
+            "datasource_name_text": "anuario_web.cargos_tablero",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=106",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/206",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "expressionType": "SIMPLE",
+                        "operator": "TEMPORAL_RANGE",
+                        "subject": "periodo"
+                    }
+                ],
+                "conditional_formatting": [],
+                "dashboards": [
+                    32
+                ],
+                "datasource": "106__table",
+                "extra_form_data": {},
+                "header_font_size": 0.4,
+                "metric": "prom_antiguedad",
+                "slice_id": 206,
+                "subheader": "Anos promedio antiguedad",
+                "subheader_font_size": 0.2,
+                "time_format": "smart_date",
+                "viz_type": "big_number_total",
+                "y_axis_format": "SMART_NUMBER"
+            },
+            "id": 206,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T14:57:50.473641",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"106__table\",\"viz_type\":\"big_number_total\",\"slice_id\":206,\"metric\":\"prom_antiguedad\",\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"expressionType\":\"SIMPLE\",\"operator\":\"TEMPORAL_RANGE\",\"subject\":\"periodo\"}],\"subheader\":\"Anos promedio antiguedad\",\"header_font_size\":0.4,\"subheader_font_size\":0.2,\"y_axis_format\":\"SMART_NUMBER\",\"time_format\":\"smart_date\",\"conditional_formatting\":[],\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "bignumber_antig_worlde",
+            "slice_url": "/explore/?slice_id=206&form_data=%7B%22slice_id%22%3A%20206%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "cargos_tablero"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/206/thumbnail/5ebdf63726254edbb41b05cbedbd14ef/",
+            "url": "/explore/?slice_id=206",
+            "viz_type": "big_number_total"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "2 days ago",
+            "changed_on_dttm": 1732796151871.164,
+            "changed_on_utc": "2024-11-28T12:15:51.871164+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "7 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 115,
+            "datasource_name_text": "economicos.worldes_estudiantes",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=115",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/191",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": null,
+                        "datasourceWarning": false,
+                        "expressionType": "SQL",
+                        "filterOptionName": "filter_3p4r7qj0jqb_7ng2d5x4k3l",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": null,
+                        "sqlExpression": "minalad ILIKE 'Fac%'",
+                        "subject": null
+                    }
+                ],
+                "annotation_layers": [],
+                "color_scheme": "AMT proceso",
+                "comparison_type": "values",
+                "dashboards": [
+                    32
+                ],
+                "datasource": "115__table",
+                "extra_form_data": {},
+                "forecastInterval": 0.8,
+                "forecastPeriods": 10,
+                "groupby": [],
+                "legendOrientation": "top",
+                "legendType": "scroll",
+                "logAxis": false,
+                "metrics": [
+                    {
+                        "aggregate": null,
+                        "column": null,
+                        "datasourceWarning": false,
+                        "expressionType": "SQL",
+                        "hasCustomLabel": true,
+                        "label": "E/DE = Estudiantes / worldes Equvalentes Full",
+                        "optionName": "metric_12vpvxtpeqoc_r87izjtc7y",
+                        "sqlExpression": "SUM(estudiantes/cargos_equivalentes*1.0)"
+                    },
+                    {
+                        "aggregate": null,
+                        "column": null,
+                        "datasourceWarning": false,
+                        "expressionType": "SQL",
+                        "hasCustomLabel": true,
+                        "label": "E/D = Estudiantes / worldes",
+                        "optionName": "metric_75rfqfs4flb_zd7tg88dal",
+                        "sqlExpression": "SUM(estudiantes/cargos_worldes*1.0)"
+                    }
+                ],
+                "minorSplitLine": false,
+                "only_total": true,
+                "order_desc": true,
+                "orientation": "horizontal",
+                "rich_tooltip": true,
+                "row_limit": 10000,
+                "show_empty_columns": true,
+                "show_legend": true,
+                "slice_id": 191,
+                "sort_series_type": "sum",
+                "stack": null,
+                "time_grain_sqla": "P1D",
+                "tooltipTimeFormat": "smart_date",
+                "truncateYAxis": false,
+                "truncate_metric": true,
+                "viz_type": "echarts_timeseries_bar",
+                "xAxisLabelRotation": 0,
+                "x_axis": "minalad",
+                "x_axis_sort": "Ratio E/CE",
+                "x_axis_sort_asc": true,
+                "x_axis_sort_series": "name",
+                "x_axis_sort_series_ascending": true,
+                "x_axis_time_format": "smart_date",
+                "x_axis_title": "",
+                "x_axis_title_margin": 15,
+                "y_axis_bounds": [
+                    null,
+                    null
+                ],
+                "y_axis_format": "SMART_NUMBER",
+                "y_axis_title": "Cantidad de Estudiantes por worlde",
+                "y_axis_title_margin": 30,
+                "y_axis_title_position": "Left"
+            },
+            "id": 191,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-28T12:15:51.858411",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"115__table\",\"viz_type\":\"echarts_timeseries_bar\",\"slice_id\":191,\"x_axis\":\"minalad\",\"time_grain_sqla\":\"P1D\",\"x_axis_sort\":\"Ratio E/CE\",\"x_axis_sort_asc\":true,\"x_axis_sort_series\":\"name\",\"x_axis_sort_series_ascending\":true,\"metrics\":[{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"E/DE = Estudiantes / worldes Equvalentes Full\",\"optionName\":\"metric_12vpvxtpeqoc_r87izjtc7y\",\"sqlExpression\":\"SUM(estudiantes/cargos_equivalentes*1.0)\"},{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"E/D = Estudiantes / worldes\",\"optionName\":\"metric_75rfqfs4flb_zd7tg88dal\",\"sqlExpression\":\"SUM(estudiantes/cargos_worldes*1.0)\"}],\"groupby\":[],\"adhoc_filters\":[{\"expressionType\":\"SQL\",\"sqlExpression\":\"minalad ILIKE 'Fac%'\",\"clause\":\"WHERE\",\"subject\":null,\"operator\":null,\"comparator\":null,\"isExtra\":false,\"isNew\":false,\"datasourceWarning\":false,\"filterOptionName\":\"filter_3p4r7qj0jqb_7ng2d5x4k3l\"}],\"order_desc\":true,\"row_limit\":10000,\"truncate_metric\":true,\"show_empty_columns\":true,\"comparison_type\":\"values\",\"annotation_layers\":[],\"forecastPeriods\":10,\"forecastInterval\":0.8,\"orientation\":\"horizontal\",\"x_axis_title\":\"\",\"x_axis_title_margin\":15,\"y_axis_title\":\"Cantidad de Estudiantes por worlde\",\"y_axis_title_margin\":30,\"y_axis_title_position\":\"Left\",\"sort_series_type\":\"sum\",\"color_scheme\":\"AMT proceso\",\"stack\":null,\"only_total\":true,\"show_legend\":true,\"legendType\":\"scroll\",\"legendOrientation\":\"top\",\"x_axis_time_format\":\"smart_date\",\"xAxisLabelRotation\":0,\"y_axis_format\":\"SMART_NUMBER\",\"logAxis\":false,\"minorSplitLine\":false,\"truncateYAxis\":false,\"y_axis_bounds\":[null,null],\"rich_tooltip\":true,\"tooltipTimeFormat\":\"smart_date\",\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "urgencia -  Estudiantes / worldes barra",
+            "slice_url": "/explore/?slice_id=191&form_data=%7B%22slice_id%22%3A%20191%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "worldes_estudiantes"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/191/thumbnail/84ddd4877c212b01d9c5c92b61c811ef/",
+            "url": "/explore/?slice_id=191",
+            "viz_type": "echarts_timeseries_bar"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "2 days ago",
+            "changed_on_dttm": 1732746827349.24,
+            "changed_on_utc": "2024-11-27T22:33:47.349240+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "2 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 70,
+            "datasource_name_text": "economicos.mapuche_cargos_liquidados",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=70",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/207",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "expressionType": "SIMPLE",
+                        "operator": "TEMPORAL_RANGE",
+                        "subject": "periodo"
+                    }
+                ],
+                "color_scheme": "AMT proceso",
+                "columns": [
+                    "antiguedad"
+                ],
+                "dashboards": [
+                    32
+                ],
+                "datasource": "70__table",
+                "date_format": "smart_date",
+                "extra_form_data": {},
+                "groupby": [
+                    "minalad"
+                ],
+                "metrics": [
+                    {
+                        "aggregate": "AVG",
+                        "column": {
+                            "advanced_data_type": null,
+                            "certification_details": null,
+                            "certified_by": null,
+                            "column_name": "antiguedad",
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 695,
+                            "is_certified": false,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "type": "INTEGER",
+                            "type_generic": 0,
+                            "verbose_name": null,
+                            "warning_markdown": null
+                        },
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "hasCustomLabel": false,
+                        "label": "AVG(antiguedad)",
+                        "optionName": "metric_2li40r9th4y_612ff3da2db",
+                        "sqlExpression": null
+                    }
+                ],
+                "number_format": "SMART_NUMBER",
+                "slice_id": 207,
+                "temporal_columns_lookup": {
+                    "periodo": true
+                },
+                "time_grain_sqla": "P1D",
+                "viz_type": "box_plot",
+                "whiskerOptions": "Tukey",
+                "x_axis_title_margin": 15,
+                "x_ticks_layout": "staggered",
+                "y_axis_title_margin": 15,
+                "y_axis_title_position": "Top"
+            },
+            "id": 207,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-27T22:33:47.344842",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"70__table\",\"viz_type\":\"box_plot\",\"columns\":[\"antiguedad\"],\"time_grain_sqla\":\"P1D\",\"temporal_columns_lookup\":{\"periodo\":true},\"groupby\":[\"minalad\"],\"metrics\":[{\"expressionType\":\"SIMPLE\",\"column\":{\"advanced_data_type\":null,\"certification_details\":null,\"certified_by\":null,\"column_name\":\"antiguedad\",\"description\":null,\"expression\":null,\"filterable\":true,\"groupby\":true,\"id\":695,\"is_certified\":false,\"is_dttm\":false,\"python_date_format\":null,\"type\":\"INTEGER\",\"type_generic\":0,\"verbose_name\":null,\"warning_markdown\":null},\"aggregate\":\"AVG\",\"sqlExpression\":null,\"datasourceWarning\":false,\"hasCustomLabel\":false,\"label\":\"AVG(antiguedad)\",\"optionName\":\"metric_2li40r9th4y_612ff3da2db\"}],\"adhoc_filters\":[{\"clause\":\"WHERE\",\"subject\":\"periodo\",\"operator\":\"TEMPORAL_RANGE\",\"comparator\":\"No filter\",\"expressionType\":\"SIMPLE\"}],\"whiskerOptions\":\"Tukey\",\"x_axis_title_margin\":15,\"y_axis_title_margin\":15,\"y_axis_title_position\":\"Top\",\"color_scheme\":\"AMT proceso\",\"x_ticks_layout\":\"staggered\",\"number_format\":\"SMART_NUMBER\",\"date_format\":\"smart_date\",\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "worldes_distribucion_antiguedad",
+            "slice_url": "/explore/?slice_id=207&form_data=%7B%22slice_id%22%3A%20207%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "mapuche_cargos_liquidados"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/207/thumbnail/ff52ca7f7ec3c6879e9d484552355197/",
+            "url": "/explore/?slice_id=207",
+            "viz_type": "box_plot"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "2 days ago",
+            "changed_on_dttm": 1732746242350.33,
+            "changed_on_utc": "2024-11-27T22:24:02.350330+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "10 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "Cargos worldes test",
+                    "id": 41
+                },
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 106,
+            "datasource_name_text": "anuario_web.cargos_tablero",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=106",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/178",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_9buoulx30ng_tpl1gw084kk",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "TEMPORAL_RANGE",
+                        "sqlExpression": null,
+                        "subject": "periodo"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": [
+                            "worlde"
+                        ],
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_2b2vn90nwo_lftgkl0gbd",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "IN",
+                        "operatorId": "IN",
+                        "sqlExpression": null,
+                        "subject": "escalafon_desc"
+                    }
+                ],
+                "conditional_formatting": [],
+                "dashboards": [
+                    41,
+                    32
+                ],
+                "datasource": "106__table",
+                "extra_form_data": {},
+                "force_timestamp_formatting": false,
+                "header_font_size": 0.4,
+                "metric": "cant_cargos",
+                "slice_id": 178,
+                "subheader": "Cargos worldes",
+                "subheader_font_size": 0.2,
+                "time_format": "smart_date",
+                "viz_type": "big_number_total",
+                "y_axis_format": "~g"
+            },
+            "id": 178,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-27T22:24:02.333022",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                },
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                }
+            ],
+            "params": "{\"datasource\":\"106__table\",\"viz_type\":\"big_number_total\",\"slice_id\":178,\"metric\":\"cant_cargos\",\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_9buoulx30ng_tpl1gw084kk\",\"isExtra\":false,\"isNew\":false,\"operator\":\"TEMPORAL_RANGE\",\"sqlExpression\":null,\"subject\":\"periodo\"},{\"clause\":\"WHERE\",\"comparator\":[\"worlde\"],\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_2b2vn90nwo_lftgkl0gbd\",\"isExtra\":false,\"isNew\":false,\"operator\":\"IN\",\"operatorId\":\"IN\",\"sqlExpression\":null,\"subject\":\"escalafon_desc\"}],\"subheader\":\"Cargos worldes\",\"header_font_size\":0.4,\"subheader_font_size\":0.2,\"y_axis_format\":\"~g\",\"time_format\":\"smart_date\",\"force_timestamp_formatting\":false,\"conditional_formatting\":[],\"extra_form_data\":{},\"dashboards\":[41,32]}",
+            "slice_name": "urgencia - Cargos worldes total",
+            "slice_url": "/explore/?slice_id=178&form_data=%7B%22slice_id%22%3A%20178%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "cargos_tablero"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/178/thumbnail/6b8478d6efc8f9912ca6da75ab5fc8b4/",
+            "url": "/explore/?slice_id=178",
+            "viz_type": "big_number_total"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "2 days ago",
+            "changed_on_dttm": 1732746206851.775,
+            "changed_on_utc": "2024-11-27T22:23:26.851775+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "9 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                },
+                {
+                    "dashboard_title": "Cargos worldes test",
+                    "id": 41
+                }
+            ],
+            "datasource_id": 106,
+            "datasource_name_text": "anuario_web.cargos_tablero",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=106",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/184",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_9buoulx30ng_tpl1gw084kk",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "TEMPORAL_RANGE",
+                        "sqlExpression": null,
+                        "subject": "periodo"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": [
+                            "worlde"
+                        ],
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_tis7hjas7a_ko9p1daqmja",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "IN",
+                        "operatorId": "IN",
+                        "sqlExpression": null,
+                        "subject": "escalafon_desc"
+                    }
+                ],
+                "conditional_formatting": [],
+                "dashboards": [
+                    41,
+                    32
+                ],
+                "datasource": "106__table",
+                "extra_form_data": {},
+                "force_timestamp_formatting": false,
+                "header_font_size": 0.4,
+                "metric": "cant_legajos",
+                "slice_id": 184,
+                "subheader": "worldes",
+                "subheader_font_size": 0.2,
+                "time_format": "smart_date",
+                "viz_type": "big_number_total",
+                "y_axis_format": "~g"
+            },
+            "id": 184,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-27T22:23:26.836894",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"106__table\",\"viz_type\":\"big_number_total\",\"slice_id\":184,\"metric\":\"cant_legajos\",\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_9buoulx30ng_tpl1gw084kk\",\"isExtra\":false,\"isNew\":false,\"operator\":\"TEMPORAL_RANGE\",\"sqlExpression\":null,\"subject\":\"periodo\"},{\"clause\":\"WHERE\",\"comparator\":[\"worlde\"],\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_tis7hjas7a_ko9p1daqmja\",\"isExtra\":false,\"isNew\":false,\"operator\":\"IN\",\"operatorId\":\"IN\",\"sqlExpression\":null,\"subject\":\"escalafon_desc\"}],\"subheader\":\"worldes\",\"header_font_size\":0.4,\"subheader_font_size\":0.2,\"y_axis_format\":\"~g\",\"time_format\":\"smart_date\",\"force_timestamp_formatting\":false,\"conditional_formatting\":[],\"extra_form_data\":{},\"dashboards\":[41,32]}",
+            "slice_name": "urgencia - worldes total",
+            "slice_url": "/explore/?slice_id=184&form_data=%7B%22slice_id%22%3A%20184%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "cargos_tablero"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/184/thumbnail/d953dc32891317ea9dfa996d1f3ab1be/",
+            "url": "/explore/?slice_id=184",
+            "viz_type": "big_number_total"
+        },
+        {
+            "cache_timeout": null,
+            "certification_details": null,
+            "certified_by": null,
+            "changed_by": {
+                "first_name": "Superset",
+                "last_name": "Admin"
+            },
+            "changed_by_name": "Superset Admin",
+            "changed_on_delta_humanized": "2 days ago",
+            "changed_on_dttm": 1732744992297.928,
+            "changed_on_utc": "2024-11-27T22:03:12.297928+0000",
+            "created_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "created_by_name": "Superset Admin",
+            "created_on_delta_humanized": "10 days ago",
+            "dashboards": [
+                {
+                    "dashboard_title": "[ farmacia proceso ]",
+                    "id": 32
+                }
+            ],
+            "datasource_id": 106,
+            "datasource_name_text": "anuario_web.cargos_tablero",
+            "datasource_type": "table",
+            "datasource_url": "/explore/?datasource_type=table&datasource_id=106",
+            "description": null,
+            "description_markeddown": "",
+            "edit_url": "/chart/edit/177",
+            "form_data": {
+                "adhoc_filters": [
+                    {
+                        "clause": "WHERE",
+                        "comparator": "No filter",
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_9buoulx30ng_tpl1gw084kk",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "TEMPORAL_RANGE",
+                        "sqlExpression": null,
+                        "subject": "periodo"
+                    },
+                    {
+                        "clause": "WHERE",
+                        "comparator": [
+                            "worlde"
+                        ],
+                        "datasourceWarning": false,
+                        "expressionType": "SIMPLE",
+                        "filterOptionName": "filter_m4riol42xuf_1urmiee9wdj",
+                        "isExtra": false,
+                        "isNew": false,
+                        "operator": "IN",
+                        "operatorId": "IN",
+                        "sqlExpression": null,
+                        "subject": "escalafon_desc"
+                    }
+                ],
+                "all_columns": [],
+                "color_pn": true,
+                "column_config": {
+                    "cant_cargos": {
+                        "d3NumberFormat": "~g",
+                        "d3SmallNumberFormat": "~g"
+                    },
+                    "prom_antiguedad": {
+                        "d3NumberFormat": "~g",
+                        "d3SmallNumberFormat": "~g"
+                    }
+                },
+                "conditional_formatting": [],
+                "dashboards": [
+                    32
+                ],
+                "datasource": "106__table",
+                "extra_form_data": {},
+                "groupby": [
+                    "unidad_analisis_edit"
+                ],
+                "metrics": [
+                    "cant_cargos",
+                    "prom_antiguedad"
+                ],
+                "order_by_cols": [],
+                "order_desc": true,
+                "page_length": 0,
+                "percent_metrics": [],
+                "query_mode": "aggregate",
+                "row_limit": 1000,
+                "server_page_length": 10,
+                "show_cell_bars": false,
+                "slice_id": 177,
+                "table_timestamp_format": "smart_date",
+                "temporal_columns_lookup": {
+                    "periodo": true
+                },
+                "time_grain_sqla": "P1D",
+                "viz_type": "table"
+            },
+            "id": 177,
+            "is_managed_externally": false,
+            "last_saved_at": "2024-11-27T22:03:12.285007",
+            "last_saved_by": {
+                "first_name": "Superset",
+                "id": 1,
+                "last_name": "Admin"
+            },
+            "owners": [
+                {
+                    "first_name": "Superset",
+                    "id": 1,
+                    "last_name": "Admin"
+                },
+                {
+                    "first_name": "Andres",
+                    "id": 8,
+                    "last_name": "victor"
+                }
+            ],
+            "params": "{\"datasource\":\"106__table\",\"viz_type\":\"table\",\"slice_id\":177,\"query_mode\":\"aggregate\",\"groupby\":[\"unidad_analisis_edit\"],\"time_grain_sqla\":\"P1D\",\"temporal_columns_lookup\":{\"periodo\":true},\"metrics\":[\"cant_cargos\",\"prom_antiguedad\"],\"all_columns\":[],\"percent_metrics\":[],\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_9buoulx30ng_tpl1gw084kk\",\"isExtra\":false,\"isNew\":false,\"operator\":\"TEMPORAL_RANGE\",\"sqlExpression\":null,\"subject\":\"periodo\"},{\"clause\":\"WHERE\",\"comparator\":[\"worlde\"],\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_m4riol42xuf_1urmiee9wdj\",\"isExtra\":false,\"isNew\":false,\"operator\":\"IN\",\"operatorId\":\"IN\",\"sqlExpression\":null,\"subject\":\"escalafon_desc\"}],\"order_by_cols\":[],\"row_limit\":1000,\"server_page_length\":10,\"order_desc\":true,\"table_timestamp_format\":\"smart_date\",\"page_length\":0,\"show_cell_bars\":false,\"color_pn\":true,\"column_config\":{\"cant_cargos\":{\"d3NumberFormat\":\"~g\",\"d3SmallNumberFormat\":\"~g\"},\"prom_antiguedad\":{\"d3NumberFormat\":\"~g\",\"d3SmallNumberFormat\":\"~g\"}},\"conditional_formatting\":[],\"extra_form_data\":{},\"dashboards\":[32]}",
+            "slice_name": "urgencia - cantidad de cargos worldes por minalad",
+            "slice_url": "/explore/?slice_id=177&form_data=%7B%22slice_id%22%3A%20177%7D",
+            "table": {
+                "default_endpoint": null,
+                "table_name": "cargos_tablero"
+            },
+            "tags": [],
+            "thumbnail_url": "/api/v1/chart/177/thumbnail/55a71fde14fb2d98279e286db30c8da9/",
+            "url": "/explore/?slice_id=177",
+            "viz_type": "table"
+        }
+    ]
+}
