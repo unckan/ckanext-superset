@@ -74,3 +74,25 @@ def _get_from_samples(path):
         return json_file.read_text()
 
     raise FileNotFoundError(f"File not found: {json_file}")
+
+
+def get_api__v1__chart__test_chart(request: httpx.Request, params=None) -> httpx.Response:
+    """Mock del endpoint chart/{chart_id} cargando un JSON desde un archivo."""
+    file_path = Path(__file__).parent / 'responses' / 'test_chart.json'
+    if not file_path.exists():
+        return httpx.Response(404, json={"error": "Mock file not found"})
+
+    with open(file_path, 'r') as f:
+        data = json.load(f)
+
+    return httpx.Response(200, json=data)
+
+
+def get_api__v1__chart__32__data(request: httpx.Request, params=None) -> httpx.Response:
+    """Mock para el endpoint de descarga de datos CSV."""
+    csv_content = "year,cantidad_mundos\n2021,50\n2022,70\n2023,90"
+    headers = {
+        "Content-Type": "text/csv",
+        "Content-Disposition": "attachment; filename=test_chart.csv"
+    }
+    return httpx.Response(200, content=csv_content, headers=headers)
