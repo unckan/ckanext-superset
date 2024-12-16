@@ -2,6 +2,8 @@ from types import SimpleNamespace
 import pytest
 from ckan.lib.helpers import url_for
 from ckan.tests import factories
+from io import BytesIO
+from werkzeug.datastructures import FileStorage
 
 
 @pytest.fixture
@@ -31,24 +33,42 @@ class TestSupersetViews:
         response = app_httpx_mocked.get(url, extra_environ=auth, expect_errors=True)
         assert response.status_code == 403
 
-    # def test_create_dataset_sysadmin_can_create(self, app_httpx_mocked, setup_data):
-    #     auth = {"Authorization": setup_data.sysadmin['token']}
-    #     chart_id = 'test_chart'
-    #     url = url_for('superset_blueprint.create_dataset', chart_id=chart_id)
-    #     response = app_httpx_mocked.get(url, extra_environ=auth)
-    #     assert response.status_code == 200
-    #     assert 'Create Dataset' in response.body
+    def test_create_dataset_sysadmin_can_create(self, app_httpx_mocked, setup_data):
+        # Configuración de autenticación
+        auth = {"Authorization": setup_data.sysadmin['token']}
+        assert auth["Authorization"], "El token de autenticación está vacío o no válido"
 
-    #     # Simular el envío del formulario
-    #     data = {
-    #         'ckan_dataset_title': 'Test Dataset',
-    #         'ckan_dataset_notes': 'Some notes',
-    #         'ckan_organization_id': setup_data.organization['id'],
-    #         'ckan_dataset_private': True,
-    #         'ckan_dataset_resource_name': 'Test Resource',
-    #     }
-    #     response = app_httpx_mocked.post(url, extra_environ=auth, data=data)
-    #     assert response.status_code == 302  # Redirección al dataset creado
+        # Verificar acceso inicial al endpoint
+        chart_id = 'test_chart'
+        url = url_for('superset_blueprint.create_dataset', chart_id=chart_id)
+        response = app_httpx_mocked.get(url, extra_environ=auth)
+        assert response.status_code == 200, "El endpoint no respondió correctamente"
+        assert 'Create CKAN dataset from Superset dataset' in response.body, "El texto esperado no se encontró en la respuesta"
+
+        # Simular el envío del formulario para crear un dataset
+        data = {
+            'ckan_dataset_title': 'Test Dataset',
+            'ckan_dataset_notes': 'Some notes',
+            'ckan_organization_id': setup_data.organization['id'],
+            'ckan_dataset_private': False,
+            'ckan_dataset_resource_name': FileStorage(
+                stream=BytesIO(b"dummy data"),
+                filename="test_resource.csv",
+                content_type="text/csv"
+            ),
+        }
+        # Realizar la solicitud POST
+        response = app_httpx_mocked.post(url, extra_environ=auth, data=data)
+
+        # Validar que la respuesta sea un código 200 (indica éxito sin redirección)
+        assert response.status_code == 200, f"Se esperaba un 200, pero se recibió {response.status_code}"
+        assert 'Dataset created successfully.' in response.body, "El mensaje de éxito no está presente en la respuesta."
+
+        # Validar que el dataset creado se puede consultar en la lista de datasets
+        dataset_url = url_for('dataset.read', id='test-dataset')
+        dataset_response = app_httpx_mocked.get(dataset_url, extra_environ=auth)
+        assert dataset_response.status_code == 200, "El dataset creado no está disponible."
+        assert 'Test Dataset' in dataset_response.body, "El título del dataset no está presente en la respuesta."
 
     def test_create_dataset_non_sysadmin_cannot_create(self, app_httpx_mocked, setup_data):
         auth = {"Authorization": setup_data.user_regular['token']}
