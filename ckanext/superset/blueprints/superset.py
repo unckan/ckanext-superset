@@ -132,6 +132,9 @@ def create_dataset(chart_id):
         tk.h.flash_success("Dataset created successfully and added to the selected groups.")
 
         # Redirigir al nuevo dataset
+        log.info(f"Dataset {pkg['id']} creado con chart_id {chart_id}")
+
+        # redirect to the new CKAN dataset
         url = tk.h.url_for('dataset.read', id=pkg['name'])
         return tk.redirect_to(url)
 
@@ -144,10 +147,14 @@ def update_dataset(chart_id):
     cfg = get_config()
     sc = SupersetCKAN(**cfg)
     superset_chart = sc.get_chart(chart_id)
+    if not superset_chart:
+        log.error(f"Superset chart not found for chart_id {chart_id}")
+        tk.abort(404, f"Superset chart not found for chart {chart_id}")
 
     # Get/check the dataset previously imported
     ckan_dataset = superset_chart.ckan_dataset
     if not ckan_dataset:
+        log.error(f"No dataset found for chart_id {chart_id}. Superset chart: {superset_chart}")
         tk.abort(404, f"CKAN Dataset not found for chart {chart_id}")
 
     resources = ckan_dataset.get('resources', [])
