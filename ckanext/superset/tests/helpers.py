@@ -28,7 +28,7 @@ def mock_transport(request: httpx.Request) -> httpx.Response:
     # check if fn exist here in this module
     fno = getattr(importlib.import_module(__name__), fn, None)
     if fno is None:
-        return httpx.Response(404, json={"error": f"Function {fn} not found in {__name__}"})
+        return httpx.Response(424, json={"error": f"Function {fn} not found in {__name__}"})
 
     # The function must return a httpx.Response object
     return fno(request, params=query_params)
@@ -76,9 +76,9 @@ def _get_from_samples(path):
     raise FileNotFoundError(f"File not found: {json_file}")
 
 
-def get_api__v1__chart__test_chart(request: httpx.Request, params=None) -> httpx.Response:
+def get_api__v1__chart__32(request: httpx.Request, params=None) -> httpx.Response:
     """Mock del endpoint chart/{chart_id} cargando un JSON desde un archivo."""
-    file_path = Path(__file__).parent / 'responses' / 'test_chart.json'
+    file_path = Path(__file__).parent / 'responses' / 'chart_32.json'
     if not file_path.exists():
         return httpx.Response(404, json={"error": "Mock file not found"})
 
@@ -96,3 +96,25 @@ def get_api__v1__chart__32__data(request: httpx.Request, params=None) -> httpx.R
         "Content-Disposition": "attachment; filename=test_chart.csv"
     }
     return httpx.Response(200, content=csv_content, headers=headers)
+
+
+def get_api__v1__database(request: httpx.Request, params=None) -> httpx.Response:
+    """Mock del endpoint de listado de bases de datos."""
+    file_path = Path(__file__).parent / 'responses' / 'chart.json'
+
+    if not file_path.exists():
+        return httpx.Response(404, json={"error": "Mock file not found"})
+    with open(file_path, 'r') as f:
+        data = json.load(f)
+
+    return httpx.Response(200, json=data)
+
+
+def get_api__v1__chart__test_chart(request: httpx.Request, params=None) -> httpx.Response:
+    """Mock para el endpoint chart/test_chart."""
+    chart_data = {
+        "id": "32",
+        "name": "Test Chart",
+        "description": "Mock chart data"
+    }
+    return httpx.Response(200, json=chart_data)
