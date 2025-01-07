@@ -48,10 +48,17 @@ def create_dataset(chart_id):
     # Obtener los grupos disponibles
     groups_available = tk.get_action('group_list')({'user': current_user.name}, {'all_fields': True})
 
+    # Obtener Tags disponibles de cada chart
+    tags_available = tk.get_action('tag_list')({'user': current_user.name}, {'all_fields': True})
+
+    if not tags_available:
+        log.warning(f"No tags found for chart {superset_chart.data.get('slice_name', 'unknown')}")
+
     if request.method == 'GET':
         extra_vars = {
             'superset_chart': superset_chart,
             'groups_available': groups_available,
+            'tags_available': tags_available,
         }
         return tk.render('superset/create-dataset.html', extra_vars)
 
@@ -78,6 +85,15 @@ def create_dataset(chart_id):
         if invalid_groups:
             raise tk.ValidationError(f"Invalid group IDs: {', '.join(invalid_groups)}")
 
+        # Obtener los Tags seleccionados del formulario
+        selected_tags = request.form.getlist('ckan_tags[]')
+        # Convertir los tags seleccionados a una lista de diccionarios
+        tags = [{"name": tag} for tag in selected_tags]
+
+        # Validar si hay tags
+        if not tags:
+            log.warning(f"No valid tags provided for the dataset {ckan_dataset_name}. Tags will be empty.")
+
         # Crear el dataset
         action = tk.get_action("package_create")
         context = {'user': current_user.name}
@@ -89,6 +105,7 @@ def create_dataset(chart_id):
             'private': request.form.get('ckan_dataset_private') == 'on',
             'extras': [{'key': 'superset_chart_id', 'value': chart_id}],
             'groups': [{"id": group_id} for group_id in selected_group_ids],
+            'tags': tags,
         }
         pkg = action(context, data)
 
