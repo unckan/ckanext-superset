@@ -50,15 +50,21 @@ def create_dataset(chart_id):
 
     # Obtener Tags disponibles de cada chart
     tags_available = tk.get_action('tag_list')({'user': current_user.name}, {'all_fields': True})
+    # Formatear los tags para mostrar nombres legibles
+    formatted_tags = [{"id": tag["id"], "name": tag["name"]} for tag in tags_available]
 
     if not tags_available:
         log.warning(f"No tags found for chart {superset_chart.data.get('slice_name', 'unknown')}")
+
+    # Ordenar los grupos y tags por nombre
+    groups_available = sorted(groups_available, key=lambda g: g['name'])
+    formatted_tags = sorted(formatted_tags, key=lambda t: t['name'])
 
     if request.method == 'GET':
         extra_vars = {
             'superset_chart': superset_chart,
             'groups_available': groups_available,
-            'tags_available': tags_available,
+            'tags_available': formatted_tags,
         }
         return tk.render('superset/create-dataset.html', extra_vars)
 
