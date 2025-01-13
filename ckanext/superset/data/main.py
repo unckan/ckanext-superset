@@ -55,12 +55,11 @@ class SupersetCKAN:
 
     def load_datasets(self, force=False):
         """ Get and load all datasets """
+        log.info("Loading datasets")
         if self.datasets and not force:
             return
 
         q_data = {"page_size": 50, "page": 0}
-        log.debug("DENTRO DE load_datasets")
-        log.debug("Q_DATA:", q_data)
         self.datasets = []
         while True:
             params = {'q': json.dumps(q_data)}
@@ -73,10 +72,6 @@ class SupersetCKAN:
             self.datasets.extend(datasets)
 
             q_data["page"] += 1
-            print("Q_DATA['page']:", q_data["page"])
-            if q_data["page"] > 5:
-                log.error("Too many pages of datasets")
-                break
 
         return self.datasets
 
@@ -101,9 +96,7 @@ class SupersetCKAN:
                 ds.load(chart)
                 self.charts.append(ds)
             q_data["page"] += 1
-            if q_data["page"] > 20:
-                log.error("Too many pages of charts")
-                break
+
         return self.charts
 
     def load_databases(self, force=False):
@@ -129,21 +122,6 @@ class SupersetCKAN:
         self.datasets.append(dataset)
         return dataset
 
-    def get_list_datasets(self, dataset_ids):
-        """ Get a list of datasets """
-        list_datasets = []
-
-        for dataset_id in dataset_ids:
-            # Verificar si ya está en self.datasets
-            dataset = next((d for d in self.datasets if d.get('id') == dataset_id), None)
-            if not dataset:
-                # Si no está, obtenerlo desde la API
-                dataset = SupersetDataset(superset_instance=self)
-                dataset.get_from_superset(dataset_id)
-                self.datasets.append(dataset)
-            list_datasets.append(dataset)
-        return list_datasets
-
     def get_chart(self, chart_id):
         """ Get a chart by ID """
         for chart in self.charts:
@@ -160,6 +138,12 @@ class SupersetCKAN:
         # Get from the API
         self.load_databases(self)
         return self.databases
+
+    def get_datasets(self):
+        """ Get a list_dataset """
+        # Get from the API
+        self.load_datasets(self)
+        return self.datasets
 
     def prepare_connection(self):
         """ Define the client and login if required """

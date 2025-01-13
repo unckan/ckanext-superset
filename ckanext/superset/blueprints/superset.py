@@ -176,34 +176,11 @@ def list_datasets():
     """ List all datasets created from Superset charts """
     cfg = get_config()
     sc = SupersetCKAN(**cfg)
-    sc.load_datasets()
-
-    # Extraer los IDs de datasets directamente desde sc.datasets
-    dataset_ids = [dataset.get('id') for dataset in sc.datasets if dataset.get('id')]
-    raw_datasets = sc.get_list_datasets(dataset_ids)
-
-    #  Procesar los datos para aplanarlos
-    datasets = []
-    for d in raw_datasets:
-        if d is not None and isinstance(d, dict):
-            log.debug(f"Procesando dataset: {d}")
-            if d.get('description') is None:
-                d['description'] = 'Sin descripción'
-            if d.get('database') is None:
-                d['database'] = {'database_name': 'Sin organización'}
-            datasets.append({
-                'table_name': d.get('table_name', 'Sin nombre'),
-                'description': d.get('description'),
-                'database_name': d.get('database').get('database_name'),
-                'superset_chart_id': d.get('id'),
-                'private': False,  # Ajustar lógica si hay un indicador real de privacidad
-            })
-        else:
-            log.warning(f"Elemento no procesado en raw_datasets: {d}")
+    superset_datasets = sc.get_datasets()
 
     superset_url = tk.config.get('ckanext.superset.instance.url')
     extra_vars = {
-        'datasets': datasets,
+        'datasets': superset_datasets,
         'superset_url': superset_url,
     }
     return tk.render('superset/list-datasets.html', extra_vars)
