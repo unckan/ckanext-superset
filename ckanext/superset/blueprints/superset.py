@@ -176,11 +176,26 @@ def list_datasets():
     """ List all datasets created from Superset charts """
     cfg = get_config()
     sc = SupersetCKAN(**cfg)
-    superset_datasets = sc.get_datasets()
+    # Obtener los datasets de Superset
+    datasets = sc.get_datasets()
 
+    # Procesar los datos de los datasets
+    super_datasets = []
+    for d in datasets:
+        if d is not None and isinstance(d, dict):
+            super_datasets.append({
+                'table_name': d.get('table_name', 'Sin nombre'),
+                'description': d.get('description') or '- - -',
+                'database_name': d.get('database', {}).get('database_name', 'Sin organización'),
+                'superset_chart_id': d.get('id'),
+                'private': d.get('private', False),
+                'resources': d.get('ckan_dataset', {}).get('name', '-'),
+            })
+        else:
+            log.warning(f"Elemento no procesado en superset_datasets: {d}")
     superset_url = tk.config.get('ckanext.superset.instance.url')
     extra_vars = {
-        'datasets': superset_datasets,
+        'datasets': super_datasets,
         'superset_url': superset_url,
     }
     return tk.render('superset/list-datasets.html', extra_vars)

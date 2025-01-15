@@ -59,7 +59,7 @@ class SupersetCKAN:
         if self.datasets and not force:
             return
 
-        q_data = {"page_size": 50, "page": 0}
+        q_data = {"page_size": 20, "page": 0}
         self.datasets = []
         while True:
             params = {'q': json.dumps(q_data)}
