@@ -148,8 +148,9 @@ def update_dataset(chart_id):
     sc = SupersetCKAN(**cfg)
     superset_chart = sc.get_chart(chart_id)
     if not superset_chart:
-        log.error(f"Superset chart not found for chart_id {chart_id}")
-        tk.abort(404, f"Superset chart not found for chart {chart_id}")
+        error = f"Superset chart not found for chart_id {chart_id}"
+        log.error(error)
+        tk.abort(404, error)
 
     # Get/check the dataset previously imported
     ckan_dataset = superset_chart.ckan_dataset
