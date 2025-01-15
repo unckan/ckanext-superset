@@ -100,7 +100,7 @@ def get_api__v1__chart__32__data(request: httpx.Request, params=None) -> httpx.R
 
 def get_api__v1__database(request: httpx.Request, params=None) -> httpx.Response:
     """Mock del endpoint de listado de bases de datos."""
-    file_path = Path(__file__).parent / 'responses' / 'chart.json'
+    file_path = Path(__file__).parent / 'responses' / 'databases.json'
 
     if not file_path.exists():
         return httpx.Response(404, json={"error": "Mock file not found"})
