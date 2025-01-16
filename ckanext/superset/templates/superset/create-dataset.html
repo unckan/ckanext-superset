@@ -28,6 +28,22 @@
             </select>
           </div>
 
+          <!-- Grup list -->
+          <div class="form-group">
+            <label for="ckan_group_id">Groups</label>
+            <i class="fa fa-info-circle" data-toggle="tooltip" title="Selecciona los grupos que deseas asociar con este dataset."></i>
+            <div class="checkbox-group">
+                {% for group in groups_available %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="group_{{ group.id }}" name="ckan_group_ids[]" value="{{ group.id }}"> 
+                        <label class="form-check-label" for="group_{{ group.id }}">
+                            {{ group.name }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+          </div>
+
           <!-- CKAN notes/description -->
           <div class="form-group">
             <label for="ckan_dataset_notes">Dataset description</label>
