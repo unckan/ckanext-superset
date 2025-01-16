@@ -7,27 +7,23 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Título</th>
-                    <th>Descripción</th>
-                    <th>Organización</th>
-                    <th>Gráfico Superset</th>
-                    <th>Privacidad</th>
-                    <th>Recursos</th>
+                    <th>{{ _('Title') }}</th>
+                    <th>{{ _('Description') }}</th>
+                    <th>{{ _('Database') }}</th>
+                    <th>{{ _('Chart') }}</th>
+                    <th>{{ _('Visibility') }}</th>
                 </tr>
             </thead>
             <tbody>
                 {% for dataset in datasets %}
                 <tr>
                     <td>{{ dataset.table_name }}</td>
-                    <td>{{ dataset.description }}</td>
-                    <td>{{ dataset.database_name }}</td>
+                    <td>{% if dataset.description %}{{ dataset.description }}{% endif %}</td>
+                    <td>{% if dataset.database %}{{ dataset.database.database_name }}{% endif %}</td>
                     <td>
                         <a href="{{ superset_url }}/chart/{{ dataset.superset_chart_id }}" target="_blank">View</a>
                     </td>
-                    <td>{{ 'Privado' if dataset.private else 'Público' }}</td>
-                    <td>
-                       {{ dataset.resources }}
-                    </td>
+                    <td>{{ _('Private' if dataset.private else 'Public') }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
