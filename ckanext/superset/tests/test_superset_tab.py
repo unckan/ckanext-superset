@@ -12,6 +12,7 @@ def setup_data():
     obj = SimpleNamespace()
     obj.sysadmin = factories.SysadminWithToken()
     obj.user_regular = factories.UserWithToken()
+    obj.user_member_admin = factories.UserWithToken()
     obj.organization = factories.Organization()
     return obj
 
@@ -143,3 +144,27 @@ class TestSupersetViews:
         url = url_for('superset_blueprint.list_databases')
         response = app_httpx_mocked.get(url, extra_environ=auth, expect_errors=True)
         assert response.status_code == 403
+
+    def test_member_admin_cant_see(self, app, setup_data):
+        """Test para verificar que un usuario miembro de una organización no puede acceder a la vista de Superset"""
+        auth = {"Authorization": setup_data.user_member_admin['token']}
+        url = url_for('superset_blueprint.index')
+        response = app.get(url, headers=auth)
+        assert response.status_code == 403
+        assert 'Superset' not in response.body
+
+    def test_sysadmin_can_see(self, app, setup_data):
+        """Test para verificar que un sysadmin puede ver la vista de Superset"""
+        auth = {"Authorization": setup_data.sysadmin['token']}
+        url = url_for('admin.index')
+        response = app.get(url, headers=auth)
+        assert response.status_code == 200
+        assert 'Superset' in response.body
+
+    def test_member_admin_cant_see_superset(self, app, setup_data):
+        """Test para verificar que un usuario miembro de una organización no puede ver la vista de Superset"""
+        auth = {"Authorization": setup_data.user_member_admin['token']}
+        url = url_for('admin.index')
+        response = app.get(url, headers=auth)
+        assert response.status_code == 403
+        assert 'Superset' not in response.body
