@@ -20,7 +20,7 @@ superset_bp = Blueprint('superset_blueprint', __name__, url_prefix='/apache-supe
 @superset_bp.route('/', methods=['GET'])
 @require_sysadmin_user
 def index():
-    # Datos informativos
+    # Date the Superset URL from the config
     superset_url = tk.config.get('ckanext.superset.instance.url')
     cfg = get_config()
     sc = SupersetCKAN(**cfg)
@@ -45,18 +45,19 @@ def create_dataset(chart_id):
     sc = SupersetCKAN(**cfg)
     superset_chart = sc.get_chart(chart_id)
 
-    # Obtener los grupos disponibles
+    # get the available groups
+
     groups_available = tk.get_action('group_list')({'user': current_user.name}, {'all_fields': True})
 
-    # Obtener Tags disponibles de cada chart
+    # Get available Tags for each chart
     tags_available = tk.get_action('tag_list')({'user': current_user.name}, {'all_fields': True})
-    # Formatear los tags para mostrar nombres legibles
+    # Format tags to display readable names
     formatted_tags = [{"id": tag["id"], "name": tag["name"]} for tag in tags_available]
 
     if not tags_available:
         log.warning(f"No tags found for chart {superset_chart.data.get('slice_name', 'unknown')}")
 
-    # Ordenar los grupos y tags por nombre
+    # Sort groups and tags by name
     groups_available = sorted(groups_available, key=lambda g: g['name'])
     formatted_tags = sorted(formatted_tags, key=lambda t: t['name'])
 
@@ -69,38 +70,38 @@ def create_dataset(chart_id):
         return tk.render('superset/create-dataset.html', extra_vars)
 
     if request.method == 'POST':
-        # Crear el dataset
+        # Create the dataset
         ckan_dataset_title = request.form.get('ckan_dataset_title')
-        # Generar un slug para el nombre
+        # Generate a slug for the name
         ckan_dataset_name = slug(ckan_dataset_title)
 
-        # Asegurar que el nombre sea único
+        # Ensure the name is unique
         c = 2
         while pkg := model.Session.query(model.Package).filter(model.Package.name == ckan_dataset_name).first():
             log.warning(f'Package name {ckan_dataset_name} already exists for package {pkg.id}')
             ckan_dataset_name = f'{slug(ckan_dataset_title)}-{chart_id}-{c}'
             c += 1
 
-        # Obtener los grupos seleccionados del formulario
+        # Get the selected groups from the form
         selected_group_ids = request.form.getlist('ckan_group_ids[]')
 
-        # Validar los IDs seleccionados
+        # Validate the selected IDs
         valid_group_ids = [group['id'] for group in groups_available]
         invalid_groups = [group_id for group_id in selected_group_ids if group_id not in valid_group_ids]
 
         if invalid_groups:
             raise tk.ValidationError(f"Invalid group IDs: {', '.join(invalid_groups)}")
 
-        # Obtener los Tags seleccionados del formulario
+        # Get the selected Tags from the form
         selected_tags = request.form.getlist('ckan_tags[]')
-        # Convertir los tags seleccionados a una lista de diccionarios
+        # Convert the selected tags to a list of dictionaries
         tags = [{"name": tag} for tag in selected_tags]
 
-        # Validar si hay tags
+        # Validate the tags selected
         if not tags:
             log.warning(f"No valid tags provided for the dataset {ckan_dataset_name}. Tags will be empty.")
 
-        # Crear el dataset
+        # Create the dataset
         action = tk.get_action("package_create")
         context = {'user': current_user.name}
         data = {
@@ -115,7 +116,7 @@ def create_dataset(chart_id):
         }
         pkg = action(context, data)
 
-        # Crear el recurso asociado
+        # Create the associated resource
         try:
             csv_data = superset_chart.get_chart_csv()
         except SupersetRequestException as e:
@@ -139,22 +140,22 @@ def create_dataset(chart_id):
         }
         action(context, data)
 
-        # Asociar el dataset a los grupos seleccionados
+        # Associate the dataset with the selected groups
         for group_id in selected_group_ids:
             tk.get_action('member_create')(
                 {'user': current_user.name},
                 {
-                    'id': group_id,  # ID del grupo
-                    'object': pkg['id'],  # ID del dataset
-                    'object_type': 'package',  # Siempre 'package' para datasets
-                    'capacity': 'member'  # Rol estándar
+                    'id': group_id,  # ID from the group
+                    'object': pkg['id'],  # ID from the dataset
+                    'object_type': 'package',  # Always 'package' for datasets
+                    'capacity': 'member'  # Standard role
                 }
             )
 
-        # Mensaje de éxito
+        # Add a flask message exiting
         tk.h.flash_success("Dataset created successfully and added to the selected groups.")
 
-        # Redirigir al nuevo dataset
+        # redirect to the new CKAN dataset
         url = tk.h.url_for('dataset.read', id=pkg['name'])
         return tk.redirect_to(url)
 
