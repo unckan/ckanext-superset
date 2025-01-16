@@ -195,3 +195,19 @@ def list_databases():
         'superset_url': superset_url,
     }
     return tk.render('superset/databases_list.html', extra_vars)
+
+
+@superset_bp.route('/datasets', methods=['GET'])
+@require_sysadmin_user
+def list_datasets():
+    """ List all datasets created from Superset charts """
+    cfg = get_config()
+    sc = SupersetCKAN(**cfg)
+    # Obtener los datasets de Superset
+    datasets = sc.get_datasets()
+    superset_url = tk.config.get('ckanext.superset.instance.url')
+    extra_vars = {
+        'datasets': datasets,
+        'superset_url': superset_url,
+    }
+    return tk.render('superset/list-datasets.html', extra_vars)
