@@ -5,6 +5,7 @@ import json
 import logging
 import urllib.parse
 import httpx
+import traceback
 from ckanext.superset.data.chart import SupersetChart
 from httpx import Proxy
 from ckanext.superset.data.dataset import SupersetDataset
@@ -213,6 +214,44 @@ class SupersetCKAN:
             return api_response.json()
         elif format_ == 'image':  # Thumbnail images
             return api_response.content
+
+    def safe_request(self, method, url, **kwargs):
+        """ Perform an HTTP request safely with detailed error handling """
+        try:
+            if method == "GET":
+                response = self.client.get(url, **kwargs)
+            elif method == "POST":
+                response = self.client.post(url, **kwargs)
+            else:
+                raise ValueError(f"Unsupported HTTP method: {method}")
+            response.raise_for_status()
+            return response
+        except httpx.HTTPStatusError as e:
+            self.handle_error("HTTPStatusError", url, e, f"HTTP error {e.response.status_code} while accessing Superset.")
+        except httpx.ConnectError as e:
+            self.handle_error("ConnectError", url, e, "Failed to connect to Superset.")
+        except httpx.TimeoutException as e:
+            self.handle_error("TimeoutException", url, e, "Request to Superset timed out.")
+        except httpx.RequestError as e:
+            self.handle_error("RequestError", url, e, "Error while sending request to Superset.")
+        except Exception as e:
+            self.handle_error("GeneralError", url, e, "An unexpected error occurred while communicating with Superset.")
+        except httpx.ProxyError as e:
+            self.handle_error("ProxyError", url, e, "Error while connecting to the proxy.")
+        except httpx.ReadTimeout as e:
+            self.handle_error("ReadTimeout", url, e, "Timeout while reading response from Superset.")
+        except httpx.WriteTimeout as e:
+            self.handle_error("WriteTimeout", url, e, "Timeout while sending request to Superset.")
+
+    def handle_error(self, error_type, url, exception, public_message):
+        """ Log detailed error information and raise an exception """
+        error_details = (
+            f"{error_type} occurred during request to {url}.\n"
+            f"Exception: {exception}\n"
+            f"Traceback: {traceback.format_exc(limit=10)}"
+        )
+        log.critical(error_details)  # Log interno para push-errors
+        raise SupersetRequestException(public_message) from exception
 
     def get_headers(self, format_='json'):
         """ Get the headers for the httpx client """
