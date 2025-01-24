@@ -43,7 +43,15 @@ jobs:
 
       - name: Install OS dependencies
         run: |
-          apk add --no-cache coreutils libffi-dev gcc libc-dev postgresql-client tar proj-util proj-dev
+          apt-get update && apt-get install -y --no-install-recommends \
+            coreutils \
+            libffi-dev \
+            gcc \
+            libc-dev \
+            postgresql-client \
+            tar \
+            libproj-dev \
+            proj-bin
 
       - name: Install Python dependencies
         run: |
