@@ -8,6 +8,7 @@ jobs:
 
     container:
       image: ckan/ckan-dev:2.11
+      options: --user root
 
     services:
       solr:
