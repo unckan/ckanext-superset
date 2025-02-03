@@ -4,6 +4,7 @@ from ckan.lib.helpers import url_for
 from ckan.tests import factories
 from io import BytesIO
 from werkzeug.datastructures import FileStorage
+from ckan.plugins import toolkit
 
 
 @pytest.fixture
@@ -23,11 +24,26 @@ class TestSupersetViews:
 
     def test_index_sysadmin_can_access(self, app_httpx_mocked, setup_data):
         """Test para verificar que un sysadmin puede acceder a la vista de Superset"""
-        auth = {"Authorization": setup_data.sysadmin['token']}
+
+        auth_headers = {"Authorization": setup_data.sysadmin['token']}
+        user_env = {"REMOTE_USER": setup_data.sysadmin['name']}
         url = url_for('superset_blueprint.index')
-        response = app_httpx_mocked.get(url, extra_environ=auth)
-        assert response.status_code == 200
-        assert 'Superset charts' in response.body
+
+        # Obtener los datos del usuario a través de user_show
+        try:
+            user_data = toolkit.get_action('user_show')({}, {'id': setup_data.sysadmin['name']})
+            print(f"🔍 Usuario detectado antes de la solicitud: {user_data}")
+        except Exception as e:
+            print(f"❌ Error al obtener datos del usuario en la prueba: {e}")
+            user_data = None
+
+        assert user_data, "No se encontró el usuario en CKAN"
+        assert user_data.get('sysadmin', False), "El usuario no tiene permisos de sysadmin"
+
+        response = app_httpx_mocked.get(url, headers=auth_headers, extra_environ=user_env)
+
+        assert response.status_code == 200, f"Esperado 200, pero recibió {response.status_code}"
+        assert 'Superset charts' in response.body, "No se encontró el texto esperado en la respuesta"
 
     def test_index_non_sysadmin_cannot_access(self, app_httpx_mocked, setup_data):
         """Test para verificar que un usuario no sysadmin no puede acceder a la vista de Superset"""
