@@ -182,7 +182,7 @@ class TestSupersetViews:
 
         # Verificar código de estado
         assert response.status_code == 403, f"Se esperaba 403 Forbidden, pero se recibió {response.status_code}"
-        
+
         # Verificar el mensaje correcto en la respuesta
         expected_message = "Sysadmin user required"
         f_message = f"No se encontró el mensaje esperado en la respuesta. Respuesta recibida: {response.text}"
