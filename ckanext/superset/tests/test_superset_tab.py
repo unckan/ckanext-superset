@@ -112,8 +112,8 @@ class TestSupersetViews:
 
         # Validar que la respuesta sea un código 200 (indica éxito sin redirección)
         assert response.status_code == 200, f"Se esperaba un 200, pero se recibió {response.status_code}"
-        assert 'Dataset created successfully and added to the selected groups.' in response.text, "El mensaje de éxito no está presente"
-
+        expected_message = 'Dataset created successfully and added to the selected groups.'
+        assert expected_message in response.text, "El mensaje de éxito no está presente"
 
         # Validar que el dataset creado se puede consultar en la lista de datasets
         dataset_url = url_for('dataset.read', id='test-dataset')
