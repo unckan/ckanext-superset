@@ -40,7 +40,8 @@ class TestSupersetViews:
         assert toolkit.config.get("ckanext.superset.instance.user") is not None, "Usuario de Superset no encontrado"
         assert toolkit.config.get("ckanext.superset.instance.pass") is not None, "Contraseña de Superset no encontrada"
         assert toolkit.config.get("ckanext.superset.instance.provider") is not None, "Proveedor de Superset no encontrado"
-        assert toolkit.config.get("ckanext.superset.instance.refresh") is not None, "Configuración de actualización de Superset no encontrada"
+        text = "Configuración de actualización de Superset no encontrada"
+        assert toolkit.config.get("ckanext.superset.instance.refresh") is not None, text
 
     def test_index_sysadmin_can_access(self, app_httpx_mocked, setup_data):
         """Test para verificar que un sysadmin puede acceder a la vista de Superset"""
@@ -152,7 +153,8 @@ class TestSupersetViews:
         }
         create_response = app_httpx_mocked.post(create_url, headers=auth_headers, data=create_data)
         assert create_response.status_code == 200, f"Error al crear dataset: {create_response.status_code}"
-        assert 'Dataset created successfully' in create_response.text, "El mensaje de éxito no está presente en la respuesta."
+        expected_message = 'Dataset created successfully'
+        assert expected_message in create_response.text, "El mensaje de éxito no está presente en la respuesta."
 
         # **Confirmar que el dataset ahora existe**
         dataset_url = url_for('dataset.read', id='test-dataset')
@@ -183,8 +185,8 @@ class TestSupersetViews:
         
         # Verificar el mensaje correcto en la respuesta
         expected_message = "Sysadmin user required"
-        assert expected_message in response.text, f"No se encontró el mensaje esperado en la respuesta. Respuesta recibida: {response.text}"
-
+        f_message = f"No se encontró el mensaje esperado en la respuesta. Respuesta recibida: {response.text}"
+        assert expected_message in response.text, f_message
 
     def test_list_databases_sysadmin_can_access(self, app_httpx_mocked, setup_data):
         """Test para verificar que un sysadmin puede acceder a la lista de bases de datos"""
