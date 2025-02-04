@@ -93,7 +93,7 @@ class TestSupersetViews:
 
         response = app_httpx_mocked.get(url, headers=auth_headers)
         assert response.status_code == 200, "El endpoint no respondió correctamente"
-        assert 'Create CKAN dataset from Superset dataset' in response.text, "No se encontró el texto esperado"
+        assert 'Create CKAN dataset from Superset dataset' in response.body, "No se encontró el texto esperado"
 
         # Simular el envío del formulario para crear un dataset
         data = {
@@ -113,7 +113,7 @@ class TestSupersetViews:
         # Validar que la respuesta sea un código 200 (indica éxito sin redirección)
         assert response.status_code == 200, f"Se esperaba un 200, pero se recibió {response.status_code}"
         expected_message = 'Dataset created successfully and added to the selected groups.'
-        assert expected_message in response.text, "El mensaje de éxito no está presente"
+        assert expected_message in response.body, "El mensaje de éxito no está presente"
 
         # Validar que el dataset creado se puede consultar en la lista de datasets
         dataset_url = url_for('dataset.read', id='test-dataset')
@@ -128,7 +128,7 @@ class TestSupersetViews:
         url = url_for('superset_blueprint.create_dataset', chart_id=chart_id)
         response = app_httpx_mocked.get(url, extra_environ=auth, expect_errors=True)
         assert response.status_code == 403
-        assert 'Forbidden' in response.text
+        assert 'Forbidden' in response.body
 
     def test_update_dataset_sysadmin_can_update(self, app_httpx_mocked, setup_data):
         """Test para verificar que un sysadmin puede actualizar un dataset"""
@@ -154,7 +154,7 @@ class TestSupersetViews:
         create_response = app_httpx_mocked.post(create_url, headers=auth_headers, data=create_data)
         assert create_response.status_code == 200, f"Error al crear dataset: {create_response.status_code}"
         expected_message = 'Dataset created successfully'
-        assert expected_message in create_response.text, "El mensaje de éxito no está presente en la respuesta."
+        assert expected_message in create_response.body, "El mensaje de éxito no está presente en la respuesta."
 
         # **Confirmar que el dataset ahora existe**
         dataset_url = url_for('dataset.read', id='test-dataset')
@@ -167,7 +167,7 @@ class TestSupersetViews:
 
         # **Validar la actualización**
         assert update_response.status_code == 200, f"Se esperaba un 200, pero se recibió {update_response.status_code}"
-        assert 'updated successfully' in update_response.text, "El mensaje de éxito no está presente en la respuesta."
+        assert 'updated successfully' in update_response.body, "El mensaje de éxito no está presente en la respuesta."
 
     def test_update_dataset_non_sysadmin_cannot_update(self, app_httpx_mocked, setup_data):
         """Test para verificar que un usuario no sysadmin no puede actualizar un dataset"""
@@ -185,8 +185,8 @@ class TestSupersetViews:
 
         # Verificar el mensaje correcto en la respuesta
         expected_message = "Sysadmin user required"
-        f_message = f"No se encontró el mensaje esperado en la respuesta. Respuesta recibida: {response.text}"
-        assert expected_message in response.text, f_message
+        f_message = f"No se encontró el mensaje esperado en la respuesta. Respuesta recibida: {response.body}"
+        assert expected_message in response.body, f_message
 
     def test_list_databases_sysadmin_can_access(self, app_httpx_mocked, setup_data):
         """Test para verificar que un sysadmin puede acceder a la lista de bases de datos"""
@@ -201,7 +201,7 @@ class TestSupersetViews:
 
         response = app_httpx_mocked.get(url, headers=auth_headers)
         assert response.status_code == 200, f"Se esperaba un 200, pero se recibió {response.status_code}"
-        assert 'databases' in response.text, "No se encontró la clave 'databases' en la respuesta"
+        assert 'databases' in response.body, "No se encontró la clave 'databases' en la respuesta"
 
     def test_list_databases_non_sysadmin_cannot_access(self, app_httpx_mocked, setup_data):
         """Test para verificar que un usuario no sysadmin no puede acceder a la lista de bases de datos"""
