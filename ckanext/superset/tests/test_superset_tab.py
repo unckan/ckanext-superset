@@ -33,18 +33,6 @@ class TestSupersetViews:
 
     def test_superset_settings(self):
         """Verifica si la configuración de Superset se está cargando correctamente"""
-        config_keys = [
-            "ckanext.superset.instance.url",
-            "ckanext.superset.instance.user",
-            "ckanext.superset.instance.pass",
-            "ckanext.superset.instance.provider",
-            "ckanext.superset.instance.refresh",
-        ]
-
-        for key in config_keys:
-            value = toolkit.config.get(key, "NO ENCONTRADO")
-            print(f"{key}: {value}")
-
         assert toolkit.config.get("ckanext.superset.instance.url") is not None, "URL de Superset no encontrada"
         assert toolkit.config.get("ckanext.superset.instance.user") is not None, "Usuario de Superset no encontrado"
         assert toolkit.config.get("ckanext.superset.instance.pass") is not None, "Contraseña de Superset no encontrada"
