@@ -1,5 +1,7 @@
 # Next release
 
+ - Add Test ckan-2.11   
+
 # 0.1.9
 
 Bug fix:

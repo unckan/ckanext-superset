@@ -1,4 +1,4 @@
-name: Tests Superset extension
+name: Tests Superset extension 2.11
 on:
   - push
 
@@ -7,14 +7,15 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: ckan/ckan-dev:2.10.5
+      image: ckan/ckan-dev:2.11
+      options: --user root
 
     services:
       solr:
-        image: ckan/ckan-solr:2.10-spatial
+        image: ckan/ckan-solr:2.11-solr9
 
       postgres:
-        image: ckan/ckan-postgres-dev:2.10
+        image: ckan/ckan-postgres-dev:2.11
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -42,7 +43,15 @@ jobs:
 
       - name: Install OS dependencies
         run: |
-          apk add --no-cache coreutils libffi-dev gcc libc-dev postgresql-client tar proj-util proj-dev
+          apt-get update && apt-get install -y --no-install-recommends \
+            coreutils \
+            libffi-dev \
+            gcc \
+            libc-dev \
+            postgresql-client \
+            tar \
+            libproj-dev \
+            proj-bin
 
       - name: Install Python dependencies
         run: |

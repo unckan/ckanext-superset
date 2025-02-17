@@ -15,7 +15,7 @@ Compatibility with core CKAN versions:
 | CKAN version    | Compatible?   |
 | --------------- | ------------- |
 | 2.10            | Yes           |
-| 2.11            | not tested    |
+| 2.11            | Yes           |
 
 
 ## Config settings
