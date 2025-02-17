@@ -9,6 +9,7 @@ from ckan.plugins import toolkit
 
 log = logging.getLogger(__name__)
 
+
 @pytest.fixture
 def setup_data():
     """Fixture para crear datos de prueba"""
@@ -18,6 +19,7 @@ def setup_data():
     obj.user_member_admin = factories.UserWithToken()
     obj.organization = factories.Organization()
     return obj
+
 
 # Added ckan_config decorators to inject Superset values
 @pytest.mark.ckan_config("ckanext.superset.instance.url", "https://mock.superset.com")
