@@ -1,5 +1,8 @@
+import logging
 from functools import wraps
 from ckan.plugins import toolkit
+
+log = logging.getLogger(__name__)
 
 
 def require_sysadmin_user(func):
@@ -17,6 +20,7 @@ def require_sysadmin_user(func):
         try:
             user_data = toolkit.get_action('user_show')({}, {'id': user_name})
         except Exception as e:
+            log.error('Error getting user data: %s', str(e))
             return toolkit.abort(403, "Forbidden: User not found")
 
         if not user_data.get('sysadmin', False):
