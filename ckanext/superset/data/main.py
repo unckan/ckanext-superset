@@ -232,26 +232,19 @@ class SupersetCKAN:
             self.handle_error("ConnectError", url, e, "Failed to connect to Superset.")
         except httpx.TimeoutException as e:
             self.handle_error("TimeoutException", url, e, "Request to Superset timed out.")
-        except httpx.RequestError as e:
-            self.handle_error("RequestError", url, e, "Error while sending request to Superset.")
         except Exception as e:
             self.handle_error("GeneralError", url, e, "An unexpected error occurred while communicating with Superset.")
-        except httpx.ProxyError as e:
-            self.handle_error("ProxyError", url, e, "Error while connecting to the proxy.")
-        except httpx.ReadTimeout as e:
-            self.handle_error("ReadTimeout", url, e, "Timeout while reading response from Superset.")
-        except httpx.WriteTimeout as e:
-            self.handle_error("WriteTimeout", url, e, "Timeout while sending request to Superset.")
 
     def handle_error(self, error_type, url, exception, public_message):
         """ Log detailed error information and raise an exception """
         error_details = (
-            f"{error_type} occurred during request to {url}.\n"
+            f"Superset request error: {error_type} occurred during request to {url}.\n"
             f"Exception: {exception}\n"
             f"Traceback: {traceback.format_exc(limit=10)}"
         )
         log.critical(error_details)  # Log interno para push-errors
         raise SupersetRequestException(public_message) from exception
+
 
     def get_headers(self, format_='json'):
         """ Get the headers for the httpx client """
