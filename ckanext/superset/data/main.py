@@ -167,7 +167,7 @@ class SupersetCKAN:
             login_url = f"{self.superset_url}/login/"
             # Get the CSRF token from the login page
             # <input id="csrf_token" name="csrf_token" type="hidden" value="IjI1----">
-            login_response = self.request("GET", login_url)
+            login_response, error = self.request("GET", login_url)
             if not login_response:
                 raise SupersetRequestException(error)
 
@@ -177,7 +177,7 @@ class SupersetCKAN:
                 "password": self.superset_pass,
                 "csrf_token": csrf_token
             }
-            login_response = self.request("POST", login_url, data=data)
+            login_response, error = self.request("POST", login_url, data=data)
             if not login_response:
                 raise SupersetRequestException(error)
             # Get expect a 302 redirect to /
@@ -201,7 +201,7 @@ class SupersetCKAN:
 
         url = f'{self.superset_url}/api/v1/{endpoint}'
         log.info(f"Superset GET {url} :: {params}")
-        api_response, error = self.safe_request("GET", url, headers=headers, params=params, timeout=timeout)
+        api_response, error = self.request("GET", url, headers=headers, params=params, timeout=timeout)
         if not api_response:
             raise SupersetRequestException(error)
 
@@ -223,6 +223,10 @@ class SupersetCKAN:
                 response = self.client.post(url, **kwargs)
             else:
                 raise ValueError(f"Unsupported HTTP method: {method}")
+            # Si la respuesta es una redirección (302), la consideramos válida para el login
+            if response.status_code == 302:
+                return response, None
+
             response.raise_for_status()
             return response, None
         except httpx.HTTPStatusError as e:
