@@ -56,16 +56,24 @@ class SupersetCKAN:
 
     def load_datasets(self, force=False):
         """ Get and load all datasets """
+        log.info("Loading datasets")
         if self.datasets and not force:
             return
 
-        # Ver ckanext/superset/data/samples/datasets.json
-        self.datasets_response = self.get("dataset/")
-        datasets = self.datasets_response.get("result", {})
-        for dataset in datasets:
-            ds = SupersetDataset(superset_instance=self)
-            ds.load(dataset)
-            self.datasets.append(ds)
+        q_data = {"page_size": 20, "page": 0}
+        self.datasets = []
+        while True:
+            params = {'q': json.dumps(q_data)}
+            self.datasets_response = self.get("dataset/", params=params)
+
+            if not self.datasets_response or not self.datasets_response.get("result", {}):
+                break
+
+            datasets = self.datasets_response.get("result", [])
+            self.datasets.extend(datasets)
+
+            q_data["page"] += 1
+
         return self.datasets
 
     def load_charts(self, force=False):
@@ -89,9 +97,7 @@ class SupersetCKAN:
                 ds.load(chart)
                 self.charts.append(ds)
             q_data["page"] += 1
-            if q_data["page"] > 20:
-                log.error("Too many pages of charts")
-                break
+
         return self.charts
 
     def load_databases(self, force=False):
@@ -133,6 +139,12 @@ class SupersetCKAN:
         # Get from the API
         self.load_databases(self)
         return self.databases
+
+    def get_datasets(self):
+        """ Get a list_dataset """
+        # Get from the API
+        self.load_datasets(self)
+        return self.datasets
 
     def prepare_connection(self):
         """ Define the client and login if required """
