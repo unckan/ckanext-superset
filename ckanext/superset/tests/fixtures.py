@@ -5,13 +5,6 @@ from ckanext.superset.tests.helpers import mock_transport
 
 
 @pytest.fixture
-def superset_migrate(migrate_db_for):
-    # Migrar la base de datos de Superset
-    # migrate_db_for('superset')
-    pass
-
-
-@pytest.fixture
 def app_httpx_mocked(app, monkeypatch):
     """
     Devuelve una instancia de `app` con httpx configurado para usar un MockTransport.

@@ -27,7 +27,7 @@ def setup_data():
 @pytest.mark.ckan_config("ckanext.superset.instance.pass", "superset_pass")
 @pytest.mark.ckan_config("ckanext.superset.instance.provider", "mock_provider")
 @pytest.mark.ckan_config("ckanext.superset.instance.refresh", "3600")
-@pytest.mark.usefixtures('clean_db', 'clean_index', 'superset_migrate')
+@pytest.mark.usefixtures('clean_db', 'clean_index')
 class TestSupersetViews:
     """Tests para las vistas de Superset"""
 
