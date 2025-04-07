@@ -12,18 +12,12 @@ def require_sysadmin_user(func):
 
     @wraps(func)
     def view_wrapper(*args, **kwargs):
-        user_name = getattr(toolkit.c, "user", None)
+        user = toolkit.current_user
 
-        if not user_name:
+        if not user:
             return toolkit.abort(403, "Forbidden: No user detected")
 
-        try:
-            user_data = toolkit.get_action('user_show')({}, {'id': user_name})
-        except Exception as e:
-            log.error('Error getting user data: %s', str(e))
-            return toolkit.abort(403, "Forbidden: User not found")
-
-        if not user_data.get('sysadmin', False):
+        if not user.sysadmin:
             return toolkit.abort(403, "Sysadmin user required")
 
         return func(*args, **kwargs)
