@@ -1,5 +1,8 @@
+import logging
 from functools import wraps
 from ckan.plugins import toolkit
+
+log = logging.getLogger(__name__)
 
 
 def require_sysadmin_user(func):
@@ -9,10 +12,14 @@ def require_sysadmin_user(func):
 
     @wraps(func)
     def view_wrapper(*args, **kwargs):
-        if not hasattr(toolkit.c, "user") or not toolkit.c.user:
-            return toolkit.abort(403, "Forbidden")
-        if not toolkit.c.userobj.sysadmin:
+        user = toolkit.current_user
+
+        if not user:
+            return toolkit.abort(403, "Forbidden: No user detected")
+
+        if not user.sysadmin:
             return toolkit.abort(403, "Sysadmin user required")
+
         return func(*args, **kwargs)
 
     return view_wrapper
