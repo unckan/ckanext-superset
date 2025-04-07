@@ -132,7 +132,7 @@ def create_dataset(chart_id):
         tk.h.flash_success("Dataset created successfully and added to the selected groups.")
 
         # Redirigir al nuevo dataset
-        log.info(f"Dataset {pkg['id']} creado con chart_id {chart_id}")
+        log.info(f"Dataset {pkg['id']} created with chart_id {chart_id}")
 
         # redirect to the new CKAN dataset
         url = tk.h.url_for('dataset.read', id=pkg['name'])
