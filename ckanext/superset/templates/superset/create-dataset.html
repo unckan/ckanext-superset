@@ -67,6 +67,32 @@
             >
           </div>
 
+            <div class="form-group">
+              <label>Resource column names</label>
+              <ul>
+              {% for col_name in col_names %}
+                <li>{{ col_name }}</li>  
+              {% endfor %}
+              </ul>
+              <p>
+                You can select a field to split this resource into multiple resources or datasets.
+                If this resource, for example, contains data for multiple years, you can select
+                the year field to split the data into multiple resources or datasets.
+              </p>
+              <p>
+                You can create a single dataset with multiple resources or multiple datasets with a single resource.
+                You can also define not to split the dataset.
+              </p>
+              <label for="ckan_dataset_split">Define split</label>
+              <select class="form-control form-select" id="ckan_dataset_split" name="ckan_dataset_split">
+                <option value="">No split</option>
+                {% for col_name in col_names %}
+                  <option value="dataset_{{ col_name }}">Multiple datasets by "{{ col_name }}"</option>
+                  <option value="resource_{{ col_name }}">Multiple resources by "{{ col_name }}"</option>
+                {% endfor %}
+              </select>
+            </div>
+
           <button type="submit" class="btn btn-primary">Create CKAN dataset</button>
 
         </form>
