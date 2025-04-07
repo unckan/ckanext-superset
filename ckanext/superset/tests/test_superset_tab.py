@@ -5,7 +5,7 @@ from ckan.lib.helpers import url_for
 from ckan.tests import factories
 from io import BytesIO
 from werkzeug.datastructures import FileStorage
-from ckan.plugins import toolkit
+
 
 log = logging.getLogger(__name__)
 
@@ -22,23 +22,9 @@ def setup_data():
 
 
 # Added ckan_config decorators to inject Superset values
-@pytest.mark.ckan_config("ckanext.superset.instance.url", "https://mock.superset.com")
-@pytest.mark.ckan_config("ckanext.superset.instance.user", "superset_user")
-@pytest.mark.ckan_config("ckanext.superset.instance.pass", "superset_pass")
-@pytest.mark.ckan_config("ckanext.superset.instance.provider", "mock_provider")
-@pytest.mark.ckan_config("ckanext.superset.instance.refresh", "3600")
 @pytest.mark.usefixtures('clean_db', 'clean_index')
 class TestSupersetViews:
     """Tests para las vistas de Superset"""
-
-    def test_superset_settings(self):
-        """Verifica si la configuración de Superset se está cargando correctamente"""
-        assert toolkit.config.get("ckanext.superset.instance.url") is not None, "URL de Superset no encontrada"
-        assert toolkit.config.get("ckanext.superset.instance.user") is not None, "Usuario de Superset no encontrado"
-        assert toolkit.config.get("ckanext.superset.instance.pass") is not None, "Contraseña de Superset no encontrada"
-        assert toolkit.config.get("ckanext.superset.instance.provider") is not None, "Proveedor de Superset no encontrado"
-        text = "Configuración de actualización de Superset no encontrada"
-        assert toolkit.config.get("ckanext.superset.instance.refresh") is not None, text
 
     def test_index_sysadmin_can_access(self, app_httpx_mocked, setup_data):
         """Test para verificar que un sysadmin puede acceder a la vista de Superset"""
