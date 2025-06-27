@@ -44,6 +44,22 @@
             </div>
           </div>
 
+          <!-- Tags -->
+          <div class="form-group">
+            <label for="ckan_dataset_tags">Tags</label>
+            <i class="fa fa-info-circle" data-toggle="tooltip" title="Selecciona los Tags que deseas asociar con este dataset."></i>
+            <div class="checkbox-group">
+              {% for tag in formatted_tags %}
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="tag_{{ tag.id }}" name="ckan_tags[]" value="{{ tag.name }}">
+                  <label class="form-check-label" for="tag_{{ tag.id }}">
+                    {{ tag.name }}
+                  </label>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
           <!-- CKAN notes/description -->
           <div class="form-group">
             <label for="ckan_dataset_notes">Dataset description</label>

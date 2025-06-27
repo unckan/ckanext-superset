@@ -48,10 +48,23 @@ def create_dataset(chart_id):
     # Obtener los grupos disponibles
     groups_available = tk.get_action('group_list')({'user': current_user.name}, {'all_fields': True})
 
+    # Get available Tags for each chart
+    tags_available = tk.get_action('tag_list')({'user': current_user.name}, {'all_fields': True})
+    # Format tags to display readable names
+    formatted_tags = [{"id": tag["id"], "name": tag["name"]} for tag in tags_available]
+
+    if not tags_available:
+        log.warning(f"No tags found for chart {superset_chart.data.get('slice_name', 'unknown')}")
+
+    # Sort groups and tags by name
+    groups_available = sorted(groups_available, key=lambda g: g['name'])
+    formatted_tags = sorted(formatted_tags, key=lambda t: t['name'])
+
     if request.method == 'GET':
         extra_vars = {
             'superset_chart': superset_chart,
             'groups_available': groups_available,
+            'formatted_tags': formatted_tags,
         }
         return tk.render('superset/create-dataset.html', extra_vars)
 
@@ -78,7 +91,16 @@ def create_dataset(chart_id):
         if invalid_groups:
             raise tk.ValidationError(f"Invalid group IDs: {', '.join(invalid_groups)}")
 
-        # Crear el dataset
+        # Get the selected Tags from the form
+        selected_tags = request.form.getlist('ckan_tags[]')
+        # Convert the selected tags to a list of dictionaries
+        tags = [{"name": tag} for tag in selected_tags]
+
+        # Validate the tags selected
+        if not tags:
+            log.warning(f"No valid tags provided for the dataset {ckan_dataset_name}. Tags will be empty.")
+
+        # Create the dataset
         action = tk.get_action("package_create")
         context = {'user': current_user.name}
         data = {
@@ -89,6 +111,7 @@ def create_dataset(chart_id):
             'private': request.form.get('ckan_dataset_private') == 'on',
             'extras': [{'key': 'superset_chart_id', 'value': chart_id}],
             'groups': [{"id": group_id} for group_id in selected_group_ids],
+            'tags': tags,
         }
         pkg = action(context, data)
 
