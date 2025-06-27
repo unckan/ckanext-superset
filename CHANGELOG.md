@@ -1,6 +1,10 @@
 # Next release
 
- - Add Test ckan-2.11   
+# 0.2.0
+
+- Add tests for CKAN 2.11 [#35](https://github.com/unckan/ckanext-superset/pull/35)
+- Add groups to new datasets [#31](https://github.com/unckan/ckanext-superset/pull/31)
+- Add error logging to Superset [#34](https://github.com/unckan/ckanext-superset/pull/34)
 
 # 0.1.9
 
