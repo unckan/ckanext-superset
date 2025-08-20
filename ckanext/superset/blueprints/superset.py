@@ -10,7 +10,7 @@ from ckanext.superset.config import get_config
 from ckanext.superset.decorators import require_sysadmin_user
 from ckanext.superset.data.main import SupersetCKAN
 from ckanext.superset.exceptions import SupersetRequestException
-from ckanext.superset.utils import slug
+from ckanext.superset.utils.dataset import import_datasets, prepare_data_import
 
 
 log = logging.getLogger(__name__)
@@ -47,52 +47,30 @@ def create_dataset(chart_id):
 
     # Obtener los grupos disponibles
     groups_available = tk.get_action('group_list')({'user': current_user.name}, {'all_fields': True})
+    # Show column names
+    col_names = superset_chart.get_col_names()
 
     if request.method == 'GET':
         extra_vars = {
             'superset_chart': superset_chart,
             'groups_available': groups_available,
+            'col_names': col_names,
         }
         return tk.render('superset/create-dataset.html', extra_vars)
 
     if request.method == 'POST':
-        # Crear el dataset
-        ckan_dataset_title = request.form.get('ckan_dataset_title')
-        # Generar un slug para el nombre
-        ckan_dataset_name = slug(ckan_dataset_title)
 
-        # Asegurar que el nombre sea único
-        c = 2
-        while pkg := model.Session.query(model.Package).filter(model.Package.name == ckan_dataset_name).first():
-            log.warning(f'Package name {ckan_dataset_name} already exists for package {pkg.id}')
-            ckan_dataset_name = f'{slug(ckan_dataset_title)}-{chart_id}-{c}'
-            c += 1
+        data, error = prepare_data_import(chart_id, request, groups_available)
+        if error:
+            code, txt = error
+            if code == 200:
+                # This is a validation error
+                raise tk.ValidationError(txt)
+            elif code in (400, 500):
+                # This is a server error
+                tk.abort(500, txt)
 
-        # Obtener los grupos seleccionados del formulario
-        selected_group_ids = request.form.getlist('ckan_group_ids[]')
-
-        # Validar los IDs seleccionados
-        valid_group_ids = [group['id'] for group in groups_available]
-        invalid_groups = [group_id for group_id in selected_group_ids if group_id not in valid_group_ids]
-
-        if invalid_groups:
-            raise tk.ValidationError(f"Invalid group IDs: {', '.join(invalid_groups)}")
-
-        # Crear el dataset
-        action = tk.get_action("package_create")
-        context = {'user': current_user.name}
-        data = {
-            'name': ckan_dataset_name,
-            'title': ckan_dataset_title,
-            'notes': request.form.get('ckan_dataset_notes'),
-            'owner_org': request.form.get('ckan_organization_id'),
-            'private': request.form.get('ckan_dataset_private') == 'on',
-            'extras': [{'key': 'superset_chart_id', 'value': chart_id}],
-            'groups': [{"id": group_id} for group_id in selected_group_ids],
-        }
-        pkg = action(context, data)
-
-        # Crear el recurso asociado
+        # Revisar el recurso asociado
         try:
             csv_data = superset_chart.get_chart_csv()
         except SupersetRequestException as e:
@@ -100,36 +78,15 @@ def create_dataset(chart_id):
         except Exception as e:
             tk.abort(500, f"Unknown Error getting CSV data {e}")
 
-        resource_name = request.form.get('ckan_dataset_resource_name')
-        f = tempfile.NamedTemporaryFile(mode='w+b', delete=False)
-        f.write(csv_data)
-        f.close()
-        upload_file = FileStorage(filename=resource_name, stream=open(f.name, 'rb'))
-        action = tk.get_action("resource_create")
+        data['csv_data'] = csv_data
         context = {'user': current_user.name}
-        data = {
-            'package_id': pkg['id'],
-            'upload': upload_file,
-            'url_type': 'upload',
-            'format': 'csv',
-            'name': resource_name,
-        }
-        action(context, data)
-
-        # Asociar el dataset a los grupos seleccionados
-        for group_id in selected_group_ids:
-            tk.get_action('member_create')(
-                {'user': current_user.name},
-                {
-                    'id': group_id,  # ID del grupo
-                    'object': pkg['id'],  # ID del dataset
-                    'object_type': 'package',  # Siempre 'package' para datasets
-                    'capacity': 'member'  # Rol estándar
-                }
-            )
+        datasets = import_datasets(context, data)
 
         # Mensaje de éxito
-        tk.h.flash_success("Dataset created successfully and added to the selected groups.")
+        if len(datasets) > 1:
+            tk.h.flash_success(f"{len(datasets)} datasets created successfully.")
+        else:
+            tk.h.flash_success("Dataset created successfully and added to the selected groups.")
 
         # Redirigir al nuevo dataset
         log.info(f"Dataset {pkg['id']} created with chart_id {chart_id}")
