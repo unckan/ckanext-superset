@@ -2,6 +2,7 @@ import logging
 import tempfile
 from flask import Blueprint
 from werkzeug.datastructures import FileStorage
+from werkzeug.utils import secure_filename
 from ckan import model
 from ckan.common import current_user, request
 from ckan.plugins import toolkit as tk
@@ -175,10 +176,18 @@ def update_dataset(chart_id):
         tk.abort(500, f"Unknown Error getting CSV data {e}")
 
     resource_name = request.form.get('ckan_dataset_resource_name')
+    if not resource_name:
+        resource_name = resource.get('name')
+    if not resource_name:
+        resource_name = f"{ckan_dataset.get('name') or chart_id}.csv"
+    if not resource_name.lower().endswith('.csv'):
+        resource_name = f"{resource_name}.csv"
+    safe_filename = secure_filename(resource_name)
+
     f = tempfile.NamedTemporaryFile(mode='w+b', delete=False)
     f.write(csv_data)
     f.close()
-    upload_file = FileStorage(filename=resource_name, stream=open(f.name, 'rb'))
+    upload_file = FileStorage(filename=safe_filename, stream=open(f.name, 'rb'))
     action = tk.get_action("resource_patch")
     context = {'user': current_user.name}
     data = {'id': resource['id'], 'upload': upload_file}
