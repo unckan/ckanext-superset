@@ -2,6 +2,7 @@ from types import SimpleNamespace
 import pytest
 import logging
 from ckan.lib.helpers import url_for
+from ckan.plugins import toolkit
 from ckan.tests import factories
 from io import BytesIO
 from werkzeug.datastructures import FileStorage
@@ -114,11 +115,14 @@ class TestSupersetViews:
         assert expected_message in create_response.body, "El mensaje de éxito no está presente en la respuesta."
 
         # Verify that the created dataset can be queried
-        dataset_url = url_for('dataset.read', id='test-dataset')
-        dataset_response = app_httpx_mocked.get(dataset_url, headers=auth_headers)
-        assert dataset_response.status_code == 200, "El dataset creado no está disponible."
-        original_resource_name = 'test_resource.csv'
-        assert original_resource_name in dataset_response.body, "El nombre del recurso no coincide."
+        pkg = toolkit.get_action('package_show')(
+            {'user': setup_data.sysadmin['name']},
+            {'id': 'test-dataset'}
+        )
+        resources = pkg.get('resources')
+        resource = resources[0]
+        original_resource_name = resource['name']
+        assert original_resource_name == 'test_resource.csv', "El nombre del recurso no coincide con el esperado."
 
         # Update the dataset
         update_url = url_for('superset_blueprint.update_dataset', chart_id=chart_id)
@@ -127,9 +131,14 @@ class TestSupersetViews:
         assert 'updated successfully' in update_response.body, "El mensaje de éxito no está presente en la respuesta."
 
         # Resource name must remain the same after update
-        updated_dataset_response = app_httpx_mocked.get(dataset_url, headers=auth_headers)
-        assert updated_dataset_response.status_code == 200, "El dataset actualizado no está disponible."
-        assert original_resource_name in updated_dataset_response.body, "El nombre del recurso ha cambiado tras la actualización."
+        pkg = toolkit.get_action('package_show')(
+            {'user': setup_data.sysadmin['name']},
+            {'id': 'test-dataset'}
+        )
+        resources = pkg.get('resources')
+        resource = resources[0]
+        updated_resource_name = resource['name']
+        assert updated_resource_name == original_resource_name, "El nombre del recurso cambió después de la actualización."
 
     def test_update_dataset_non_sysadmin_cannot_update(self, app_httpx_mocked, setup_data):
         """Test para verificar que un usuario no sysadmin no puede actualizar un dataset"""
