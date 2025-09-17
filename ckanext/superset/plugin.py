@@ -35,13 +35,15 @@ class SupersetPlugin(plugins.SingletonPlugin):
         group = key.ckanext.superset
         declaration.declare(group.instance.url, "https://test.superset.com")
         declaration.declare(group.instance.user, "test_user")
-        declaration.declare(group.instance["pass"], "test_pass")
+        # pass is a reserved word in python, so we use with _descend
+        declaration.declare(group.instance._descend("pass"), "test_pass")
         declaration.declare(group.instance.provider, "db")
         declaration.declare_bool(group.instance.refresh, True)
         declaration.declare(group.proxy.url, "")
         declaration.declare_int(group.proxy.port, 3128)
         declaration.declare(group.proxy.user, "")
-        declaration.declare(group.proxy["pass"], "")
+        # pass is a reserved word in python, so we use with _descend
+        declaration.declare(group.proxy._descend("pass"), "")
 
     # IActions
 
