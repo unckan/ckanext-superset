@@ -1,5 +1,6 @@
 import logging
 from ckan import plugins
+from ckan.config.declaration import Declaration, Key
 from ckan.plugins import toolkit
 from ckanext.superset.blueprints.superset import superset_bp
 from ckanext.superset.blueprints.images import superset_images_bp
@@ -16,6 +17,7 @@ class SupersetPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IBlueprint)
+    plugins.implements(plugins.IConfigDeclaration)
     plugins.implements(plugins.IConfigurer)
 
     # IConfigurer
@@ -24,6 +26,24 @@ class SupersetPlugin(plugins.SingletonPlugin):
         toolkit.add_template_directory(config_, "templates")
         toolkit.add_public_directory(config_, "public")
         toolkit.add_resource("assets", "superset")
+
+    # IConfigDeclaration
+
+    def declare_config_options(self, declaration: Declaration, key: Key):
+
+        declaration.annotate("superset")
+        group = key.ckanext.superset
+        declaration.declare(group.instance.url, "https://test.superset.com")
+        declaration.declare(group.instance.user, "test_user")
+        # pass is a reserved word in python, so we use with _descend
+        declaration.declare(group.instance._descend("pass"), "test_pass")
+        declaration.declare(group.instance.provider, "db")
+        declaration.declare_bool(group.instance.refresh, True)
+        declaration.declare(group.proxy.url, "")
+        declaration.declare_int(group.proxy.port, 3128)
+        declaration.declare(group.proxy.user, "")
+        # pass is a reserved word in python, so we use with _descend
+        declaration.declare(group.proxy._descend("pass"), "")
 
     # IActions
 

@@ -2,9 +2,8 @@ from types import SimpleNamespace
 import pytest
 import logging
 from ckan.lib.helpers import url_for
+from ckan.plugins import toolkit
 from ckan.tests import factories
-from io import BytesIO
-from werkzeug.datastructures import FileStorage
 
 
 log = logging.getLogger(__name__)
@@ -62,11 +61,7 @@ class TestSupersetViews:
             'ckan_dataset_notes': 'Some notes',
             'ckan_organization_id': setup_data.organization['id'],
             'ckan_dataset_private': False,
-            'ckan_dataset_resource_name': FileStorage(
-                stream=BytesIO(b"dummy data"),
-                filename="test_resource.csv",
-                content_type="text/csv"
-            ),
+            'ckan_dataset_resource_name': "test_resource.csv",
         }
         response = app_httpx_mocked.post(url, headers=auth_headers, data=data)
         assert response.status_code == 200, f"Se esperaba un 200, pero se recibió {response.status_code}"
@@ -102,11 +97,7 @@ class TestSupersetViews:
             'ckan_dataset_notes': 'Some notes',
             'ckan_organization_id': setup_data.organization['id'],
             'ckan_dataset_private': False,
-            'ckan_dataset_resource_name': FileStorage(
-                stream=BytesIO(b"dummy data"),
-                filename="test_resource.csv",
-                content_type="text/csv"
-            ),
+            'ckan_dataset_resource_name': "test_resource.csv",
         }
         create_response = app_httpx_mocked.post(create_url, headers=auth_headers, data=create_data)
         assert create_response.status_code == 200, f"Error al crear dataset: {create_response.status_code}"
@@ -114,15 +105,30 @@ class TestSupersetViews:
         assert expected_message in create_response.body, "El mensaje de éxito no está presente en la respuesta."
 
         # Verify that the created dataset can be queried
-        dataset_url = url_for('dataset.read', id='test-dataset')
-        dataset_response = app_httpx_mocked.get(dataset_url, headers=auth_headers)
-        assert dataset_response.status_code == 200, "El dataset creado no está disponible."
+        pkg = toolkit.get_action('package_show')(
+            {'user': setup_data.sysadmin['name']},
+            {'id': 'test-dataset'}
+        )
+        resources = pkg.get('resources')
+        resource = resources[0]
+        original_resource_name = resource['name']
+        assert original_resource_name == 'test_resource.csv', "El nombre del recurso no coincide con el esperado."
 
         # Update the dataset
         update_url = url_for('superset_blueprint.update_dataset', chart_id=chart_id)
         update_response = app_httpx_mocked.post(update_url, headers=auth_headers)
         assert update_response.status_code == 200, f"Se esperaba un 200, pero se recibió {update_response.status_code}"
         assert 'updated successfully' in update_response.body, "El mensaje de éxito no está presente en la respuesta."
+
+        # Resource name must remain the same after update
+        pkg = toolkit.get_action('package_show')(
+            {'user': setup_data.sysadmin['name']},
+            {'id': 'test-dataset'}
+        )
+        resources = pkg.get('resources')
+        resource = resources[0]
+        updated_resource_name = resource['name']
+        assert updated_resource_name == original_resource_name, "El nombre del recurso cambió después de la actualización."
 
     def test_update_dataset_non_sysadmin_cannot_update(self, app_httpx_mocked, setup_data):
         """Test para verificar que un usuario no sysadmin no puede actualizar un dataset"""

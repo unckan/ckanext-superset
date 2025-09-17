@@ -174,7 +174,7 @@ def update_dataset(chart_id):
     except Exception as e:
         tk.abort(500, f"Unknown Error getting CSV data {e}")
 
-    resource_name = request.form.get('ckan_dataset_resource_name')
+    resource_name = resource.get('name')
     f = tempfile.NamedTemporaryFile(mode='w+b', delete=False)
     f.write(csv_data)
     f.close()

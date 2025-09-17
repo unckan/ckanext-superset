@@ -72,6 +72,9 @@ class SupersetCKAN:
             datasets = self.datasets_response.get("result", [])
             self.datasets.extend(datasets)
 
+            # if we have less than page_size, we are done
+            if len(datasets) < q_data["page_size"]:
+                break
             q_data["page"] += 1
 
         return self.datasets
@@ -96,6 +99,9 @@ class SupersetCKAN:
                 ds = SupersetChart(superset_instance=self)
                 ds.load(chart)
                 self.charts.append(ds)
+            # if we have less than page_size, we are done
+            if len(charts) < q_data["page_size"]:
+                break
             q_data["page"] += 1
 
         return self.charts
