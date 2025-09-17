@@ -4,8 +4,6 @@ import logging
 from ckan.lib.helpers import url_for
 from ckan.plugins import toolkit
 from ckan.tests import factories
-from io import BytesIO
-from werkzeug.datastructures import FileStorage
 
 
 log = logging.getLogger(__name__)
