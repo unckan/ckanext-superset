@@ -17,6 +17,10 @@ def require_sysadmin_user(func):
         if not user:
             return toolkit.abort(403, "Forbidden: No user detected")
 
+        # AttributeError: 'AnonymousUser' object has no attribute 'sysadmin'
+        if not user.is_authenticated:
+            return toolkit.abort(403, "Forbidden: No logged in user detected")
+
         if not user.sysadmin:
             return toolkit.abort(403, "Sysadmin user required")
 
