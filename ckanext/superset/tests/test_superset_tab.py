@@ -117,12 +117,19 @@ class TestSupersetViews:
         dataset_url = url_for('dataset.read', id='test-dataset')
         dataset_response = app_httpx_mocked.get(dataset_url, headers=auth_headers)
         assert dataset_response.status_code == 200, "El dataset creado no está disponible."
+        original_resource_name = 'test_resource.csv'
+        assert original_resource_name in dataset_response.body, "El nombre del recurso no coincide."
 
         # Update the dataset
         update_url = url_for('superset_blueprint.update_dataset', chart_id=chart_id)
         update_response = app_httpx_mocked.post(update_url, headers=auth_headers)
         assert update_response.status_code == 200, f"Se esperaba un 200, pero se recibió {update_response.status_code}"
         assert 'updated successfully' in update_response.body, "El mensaje de éxito no está presente en la respuesta."
+
+        # Resource name must remain the same after update
+        updated_dataset_response = app_httpx_mocked.get(dataset_url, headers=auth_headers)
+        assert updated_dataset_response.status_code == 200, "El dataset actualizado no está disponible."
+        assert original_resource_name in updated_dataset_response.body, "El nombre del recurso ha cambiado tras la actualización."
 
     def test_update_dataset_non_sysadmin_cannot_update(self, app_httpx_mocked, setup_data):
         """Test para verificar que un usuario no sysadmin no puede actualizar un dataset"""
