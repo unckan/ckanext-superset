@@ -63,11 +63,7 @@ class TestSupersetViews:
             'ckan_dataset_notes': 'Some notes',
             'ckan_organization_id': setup_data.organization['id'],
             'ckan_dataset_private': False,
-            'ckan_dataset_resource_name': FileStorage(
-                stream=BytesIO(b"dummy data"),
-                filename="test_resource.csv",
-                content_type="text/csv"
-            ),
+            'ckan_dataset_resource_name': "test_resource.csv",
         }
         response = app_httpx_mocked.post(url, headers=auth_headers, data=data)
         assert response.status_code == 200, f"Se esperaba un 200, pero se recibió {response.status_code}"
@@ -103,11 +99,7 @@ class TestSupersetViews:
             'ckan_dataset_notes': 'Some notes',
             'ckan_organization_id': setup_data.organization['id'],
             'ckan_dataset_private': False,
-            'ckan_dataset_resource_name': FileStorage(
-                stream=BytesIO(b"dummy data"),
-                filename="test_resource.csv",
-                content_type="text/csv"
-            ),
+            'ckan_dataset_resource_name': "test_resource.csv",
         }
         create_response = app_httpx_mocked.post(create_url, headers=auth_headers, data=create_data)
         assert create_response.status_code == 200, f"Error al crear dataset: {create_response.status_code}"
