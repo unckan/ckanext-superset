@@ -76,4 +76,4 @@ jobs:
       - name: Run tests
         shell: bash
         run: |
-          pytest --ckan-ini=test.ini -v --disable-warnings ckanext/superset
+          pytest --ckan-ini=test.ini -vvv -s --disable-warnings ckanext/superset
