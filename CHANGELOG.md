@@ -1,5 +1,9 @@
 # Next release
 
+# 0.2.1 2025-09-17
+
+- Fix missing name when updating Superset resource [#42](https://github.com/unckan/ckanext-superset/pull/42)
+
 # 0.2.0
 
 - Add tests for CKAN 2.11 [#35](https://github.com/unckan/ckanext-superset/pull/35)
