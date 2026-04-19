@@ -92,13 +92,27 @@ def create_dataset(chart_id):
         }
         pkg = action(context, data)
 
+        # Asociar el dataset a los grupos seleccionados
+        for group_id in selected_group_ids:
+            tk.get_action('member_create')(
+                {'user': current_user.name},
+                {
+                    'id': group_id,  # ID del grupo
+                    'object': pkg['id'],  # ID del dataset
+                    'object_type': 'package',  # Siempre 'package' para datasets
+                    'capacity': 'member'  # Rol estándar
+                }
+            )
+
         # Crear el recurso asociado
         try:
             csv_data = superset_chart.get_chart_csv()
-        except SupersetRequestException as e:
-            tk.abort(500, f"Superset Error getting CSV data {e}")
-        except Exception as e:
-            tk.abort(500, f"Unknown Error getting CSV data {e}")
+        except (SupersetRequestException, Exception) as e:
+            log.error(f"Failed to download CSV for chart {chart_id}: {e}")
+            tk.h.flash_success("Dataset created successfully, but the CSV file could not be downloaded from Superset. "
+                               "You can try to re-sync later.")
+            url = tk.h.url_for('dataset.read', id=pkg['name'])
+            return tk.redirect_to(url)
 
         resource_name = request.form.get('ckan_dataset_resource_name')
         f = tempfile.NamedTemporaryFile(mode='w+b', delete=False)
@@ -115,18 +129,6 @@ def create_dataset(chart_id):
             'name': resource_name,
         }
         action(context, data)
-
-        # Asociar el dataset a los grupos seleccionados
-        for group_id in selected_group_ids:
-            tk.get_action('member_create')(
-                {'user': current_user.name},
-                {
-                    'id': group_id,  # ID del grupo
-                    'object': pkg['id'],  # ID del dataset
-                    'object_type': 'package',  # Siempre 'package' para datasets
-                    'capacity': 'member'  # Rol estándar
-                }
-            )
 
         # Mensaje de éxito
         tk.h.flash_success("Dataset created successfully and added to the selected groups.")
@@ -169,10 +171,11 @@ def update_dataset(chart_id):
     # Update the resource
     try:
         csv_data = superset_chart.get_chart_csv()
-    except SupersetRequestException as e:
-        tk.abort(500, f"Superset Error getting CSV data {e}")
-    except Exception as e:
-        tk.abort(500, f"Unknown Error getting CSV data {e}")
+    except (SupersetRequestException, Exception) as e:
+        log.error(f"Failed to download CSV for chart {chart_id}: {e}")
+        tk.h.flash_error("Could not download the CSV file from Superset. The dataset was not updated.")
+        url = tk.h.url_for('dataset.read', id=ckan_dataset['name'])
+        return tk.redirect_to(url)
 
     resource_name = resource.get('name')
     f = tempfile.NamedTemporaryFile(mode='w+b', delete=False)

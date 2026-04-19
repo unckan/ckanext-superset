@@ -86,7 +86,7 @@ class SupersetCKAN:
         if self.charts and not force:
             return
 
-        q_data = {"page_size": 50, "page": 0}
+        q_data = {"page_size": 350, "page": 0}
         while True:
             params = {'q': json.dumps(q_data)}
             self.charts_response = self.get("chart/", params=params)
