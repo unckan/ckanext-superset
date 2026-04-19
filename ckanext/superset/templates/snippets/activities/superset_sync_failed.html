@@ -1,0 +1,23 @@
+{#
+  Activity stream snippet for periodic Superset sync failures.
+
+  Params (from snippets/stream.html):
+    activity - the activity dict
+    ah - macros: actor, dataset, organization, user, group
+#}
+<li class="item superset-sync-failed">
+  <span class="fa-stack fa-lg">
+    <i class="fa fa-circle fa-stack-2x icon"></i>
+    <i class="fa fa-exclamation-triangle fa-stack-1x fa-inverse"></i>
+  </span>
+  {{ _('Periodic Superset sync failed for {dataset}').format(
+       dataset=ah.dataset(activity)
+  )|safe }}
+  {% if activity.data and activity.data.error %}
+    <div class="text-muted"><small>{{ activity.data.error }}</small></div>
+  {% endif %}
+  <br />
+  <span class="date" title="{{ h.render_datetime(activity.timestamp, with_hours=True) }}">
+    {{ h.time_ago_from_timestamp(activity.timestamp) }}
+  </span>
+</li>

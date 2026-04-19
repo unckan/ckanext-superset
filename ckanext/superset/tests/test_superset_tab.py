@@ -21,7 +21,7 @@ def setup_data():
 
 
 # Added ckan_config decorators to inject Superset values
-@pytest.mark.usefixtures('clean_db', 'clean_index')
+@pytest.mark.usefixtures('with_plugins', 'clean_db', 'clean_index')
 class TestSupersetViews:
     """Tests para las vistas de Superset"""
 
@@ -131,18 +131,31 @@ class TestSupersetViews:
         assert updated_resource_name == original_resource_name, "El nombre del recurso cambió después de la actualización."
 
     def test_update_dataset_non_sysadmin_cannot_update(self, app_httpx_mocked, setup_data):
-        """Test para verificar que un usuario no sysadmin no puede actualizar un dataset"""
+        """A non-sysadmin without package_update rights gets 403 even after the auth refactor."""
+        # First create the dataset as sysadmin so the chart_id resolves to a real package.
+        sysadmin_headers = {
+            "Authorization": setup_data.sysadmin["token"],
+            "X-CSRF-Token": "test_csrf_token"
+        }
+        chart_id = '32'
+        create_url = url_for('superset_blueprint.create_dataset', chart_id=chart_id)
+        create_data = {
+            'ckan_dataset_title': 'Test Dataset',
+            'ckan_dataset_notes': 'Some notes',
+            'ckan_organization_id': setup_data.organization['id'],
+            'ckan_dataset_private': False,
+            'ckan_dataset_resource_name': "test_resource.csv",
+        }
+        app_httpx_mocked.post(create_url, headers=sysadmin_headers, data=create_data)
+
+        # Now try as a regular user with no relation to the dataset's org
         auth_headers = {
             "Authorization": setup_data.user_regular["token"],
             "X-CSRF-Token": "test_csrf_token"
         }
-        chart_id = 'test_chart'
         url = url_for('superset_blueprint.update_dataset', chart_id=chart_id)
         response = app_httpx_mocked.post(url, headers=auth_headers, expect_errors=True)
-        assert response.status_code == 403, f"Se esperaba 403 Forbidden, pero se recibió {response.status_code}"
-        expected_message = "Sysadmin user required"
-        f_message = f"No se encontró el mensaje esperado en la respuesta. Respuesta recibida: {response.body}"
-        assert expected_message in response.body, f_message
+        assert response.status_code == 403, f"Expected 403, got {response.status_code}"
 
     def test_list_databases_sysadmin_can_access(self, app_httpx_mocked, setup_data):
         """Test para verificar que un sysadmin puede acceder a la lista de bases de datos"""

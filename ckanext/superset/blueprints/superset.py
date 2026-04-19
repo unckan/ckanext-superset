@@ -9,6 +9,7 @@ from ckan.plugins import toolkit as tk
 from ckanext.superset.config import get_config
 from ckanext.superset.decorators import require_sysadmin_user
 from ckanext.superset.data.main import SupersetCKAN
+from ckanext.superset.data import sync as sync_module
 from ckanext.superset.exceptions import SupersetRequestException
 from ckanext.superset.utils import slug
 
@@ -142,56 +143,93 @@ def create_dataset(chart_id):
 
 
 @superset_bp.route('/update-dataset/<string:chart_id>', methods=['POST'])
-@require_sysadmin_user
 def update_dataset(chart_id):
-    """ Update the CKAN dataset just with the CSV data from the Superset chart """
+    """ Re-sync the CKAN dataset's CSV resource from its Superset chart.
 
-    cfg = get_config()
-    sc = SupersetCKAN(**cfg)
-    superset_chart = sc.get_chart(chart_id)
-    if not superset_chart:
-        error = f"Superset chart not found for chart_id {chart_id}"
-        log.error(error)
-        tk.abort(404, error)
+    Open to anyone with `package_update` rights on the linked dataset
+    (creator and org editors), not only sysadmins.
+    """
+    if not current_user or not current_user.is_authenticated:
+        tk.abort(403, "Login required")
 
-    # Get/check the dataset previously imported
-    ckan_dataset = superset_chart.ckan_dataset
-    if not ckan_dataset:
-        log.error(f"No dataset found for chart_id {chart_id}. Superset chart: {superset_chart}")
+    pkgs = tk.get_action('package_search')(
+        {'ignore_auth': True},
+        {
+            'fq': f'{sync_module.EXTRA_CHART_ID}:{chart_id}',
+            'include_private': True,
+            'include_drafts': True,
+        },
+    )
+    if pkgs.get('count', 0) == 0:
         tk.abort(404, f"CKAN Dataset not found for chart {chart_id}")
+    ckan_dataset = pkgs['results'][0]
 
-    resources = ckan_dataset.get('resources', [])
-    if not resources:
-        tk.abort(400, f"CKAN Dataset from chart {chart_id} do not have resources")
-    elif len(resources) > 1:
-        tk.abort(400, f"CKAN Dataset from chart {chart_id} have more than one resource")
-
-    resource = resources[0]
-
-    # Update the resource
-    try:
-        csv_data = superset_chart.get_chart_csv()
-    except (SupersetRequestException, Exception) as e:
-        log.error(f"Failed to download CSV for chart {chart_id}: {e}")
-        tk.h.flash_error("Could not download the CSV file from Superset. The dataset was not updated.")
-        url = tk.h.url_for('dataset.read', id=ckan_dataset['name'])
-        return tk.redirect_to(url)
-
-    resource_name = resource.get('name')
-    f = tempfile.NamedTemporaryFile(mode='w+b', delete=False)
-    f.write(csv_data)
-    f.close()
-    upload_file = FileStorage(filename=resource_name, stream=open(f.name, 'rb'))
-    action = tk.get_action("resource_patch")
     context = {'user': current_user.name}
-    data = {'id': resource['id'], 'upload': upload_file}
-    action(context, data)
+    try:
+        tk.check_access('package_update', context, {'id': ckan_dataset['id']})
+    except tk.NotAuthorized:
+        tk.abort(403, "Not authorized to update this dataset")
 
-    # Add a flask message
-    tk.h.flash_success("CSV resource updated successfully.")
-    # redirect to the updated CKAN dataset
+    result = sync_module.sync_dataset(ckan_dataset['id'], context=context)
+    if result['status'] == 'ok':
+        tk.h.flash_success("CSV resource updated successfully.")
+    else:
+        tk.h.flash_error(f"Sync failed: {result['error']}")
+
     url = tk.h.url_for('dataset.read', id=ckan_dataset['name'])
     return tk.redirect_to(url)
+
+
+@superset_bp.route('/sync-settings/<string:package_id>', methods=['GET', 'POST'])
+def sync_settings(package_id):
+    """ Manage periodic sync settings for a Superset-linked dataset. """
+    if not current_user or not current_user.is_authenticated:
+        tk.abort(403, "Login required")
+
+    context = {'user': current_user.name}
+    try:
+        package = tk.get_action('package_show')(context, {'id': package_id})
+    except tk.ObjectNotFound:
+        tk.abort(404, "Dataset not found")
+
+    if not sync_module.get_extra(package, sync_module.EXTRA_CHART_ID):
+        tk.abort(400, "This dataset is not linked to a Superset chart")
+
+    try:
+        tk.check_access('package_update', context, {'id': package_id})
+    except tk.NotAuthorized:
+        tk.abort(403, "Not authorized to update this dataset")
+
+    if request.method == 'POST':
+        frequency = request.form.get('frequency', sync_module.FREQUENCY_NONE)
+        enabled = request.form.get('enabled') == 'on'
+        try:
+            sync_module.update_sync_settings(package_id, frequency, enabled, context)
+        except tk.ValidationError as e:
+            tk.h.flash_error(f"Invalid settings: {e.error_dict}")
+            return tk.redirect_to(
+                tk.h.url_for('superset_blueprint.sync_settings', package_id=package_id)
+            )
+        tk.h.flash_success("Sync settings updated.")
+        return tk.redirect_to(tk.h.url_for('dataset.read', id=package['name']))
+
+    extra_vars = {
+        'pkg_dict': package,
+        'dataset_type': package.get('type') or 'dataset',
+        'frequency': sync_module.get_extra(package, sync_module.EXTRA_FREQUENCY) or sync_module.FREQUENCY_NONE,
+        'enabled': sync_module.get_extra(package, sync_module.EXTRA_ENABLED) == 'true',
+        'last_sync': sync_module.get_extra(package, sync_module.EXTRA_LAST_SYNC),
+        'last_status': sync_module.get_extra(package, sync_module.EXTRA_LAST_STATUS),
+        'last_error': sync_module.get_extra(package, sync_module.EXTRA_LAST_ERROR),
+        'next_sync': sync_module.get_extra(package, sync_module.EXTRA_NEXT_SYNC),
+        'frequency_choices': [
+            (sync_module.FREQUENCY_NONE, tk._('No sync')),
+            (sync_module.FREQUENCY_DAILY, tk._('Daily')),
+            (sync_module.FREQUENCY_WEEKLY, tk._('Weekly')),
+            (sync_module.FREQUENCY_MONTHLY, tk._('Monthly')),
+        ],
+    }
+    return tk.render('superset/sync-settings.html', extra_vars)
 
 
 @superset_bp.route('/list_databases', methods=['GET'])
