@@ -19,6 +19,7 @@ class SupersetPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IConfigDeclaration)
     plugins.implements(plugins.IConfigurer)
+    plugins.implements(plugins.ITranslation)
 
     # IConfigurer
 
