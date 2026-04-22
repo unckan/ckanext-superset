@@ -1,0 +1,228 @@
+# Translations template for ckanext-superset.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the ckanext-superset
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-superset 0.2.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-04-22 19:29+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.15.0\n"
+
+#: ckanext/superset/templates/admin/base.html:5
+msgid "Superset"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:6
+msgid "Create CKAN dataset from Superset dataset"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:13
+msgid "Dataset title"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:23
+msgid "Organization"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:33
+msgid "Groups"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:34
+msgid "Select the groups you want to associate with this dataset."
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:49
+msgid "Dataset description"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:51
+msgid "Dataset created from Apache Superset"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:58
+msgid "Private dataset"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:62
+msgid "Resource name"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:70
+#: ckanext/superset/templates/superset/index.html:110
+msgid "Create CKAN dataset"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:82
+msgid "Importing Apache Superset dataset"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:89
+msgid "Back to Apache Superset dataset list"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:93
+msgid "Chart ID"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:94
+msgid "Chart slice name"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:95
+msgid "Changed on"
+msgstr ""
+
+#: ckanext/superset/templates/superset/create-dataset.html:101
+#: ckanext/superset/templates/superset/databases_list.html:41
+#: ckanext/superset/templates/superset/index.html:147
+#: ckanext/superset/templates/superset/list-datasets.html:42
+msgid ""
+"Apache Superset is an open source data visualization tool that allows users "
+"to create interactive dashboards and visualizations."
+msgstr ""
+
+#: ckanext/superset/templates/superset/databases_list.html:6
+#: ckanext/superset/templates/superset/index.html:151
+#: ckanext/superset/templates/superset/list-datasets.html:46
+msgid "Databases"
+msgstr ""
+
+#: ckanext/superset/templates/superset/databases_list.html:10
+#: ckanext/superset/templates/superset/index.html:47
+msgid "ID"
+msgstr ""
+
+#: ckanext/superset/templates/superset/databases_list.html:11
+msgid "Database name"
+msgstr ""
+
+#: ckanext/superset/templates/superset/databases_list.html:12
+msgid "Author"
+msgstr ""
+
+#: ckanext/superset/templates/superset/databases_list.html:13
+msgid "Updated"
+msgstr ""
+
+#: ckanext/superset/templates/superset/databases_list.html:36
+#: ckanext/superset/templates/superset/index.html:142
+#: ckanext/superset/templates/superset/list-datasets.html:37
+msgid "Apache Superset"
+msgstr ""
+
+#: ckanext/superset/templates/superset/databases_list.html:45
+#: ckanext/superset/templates/superset/index.html:14
+msgid "Charts"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:10
+msgid "Superset Dashboard"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:13
+msgid "Superset instance"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:15
+msgid "CKAN status"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:17
+msgid "All charts"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:18
+msgid "Linked to CKAN"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:19
+msgid "Not yet in CKAN"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:29
+msgid "Filter by type"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:43
+msgid "Superset charts"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:48
+msgid "Type"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:49
+msgid "Slice name"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:50
+msgid "Actions"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:93
+msgid "Show details"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:104
+msgid "View in CKAN"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:106
+msgid "Re-sync CSV"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:119
+msgid "Dash"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:122
+msgid "Tag"
+msgstr ""
+
+#: ckanext/superset/templates/superset/index.html:157
+msgid "Datasets"
+msgstr ""
+
+#: ckanext/superset/templates/superset/list-datasets.html:6
+msgid "DataSets"
+msgstr ""
+
+#: ckanext/superset/templates/superset/list-datasets.html:10
+msgid "Title"
+msgstr ""
+
+#: ckanext/superset/templates/superset/list-datasets.html:11
+msgid "Description"
+msgstr ""
+
+#: ckanext/superset/templates/superset/list-datasets.html:12
+msgid "Database"
+msgstr ""
+
+#: ckanext/superset/templates/superset/list-datasets.html:13
+msgid "Chart"
+msgstr ""
+
+#: ckanext/superset/templates/superset/list-datasets.html:14
+msgid "Visibility"
+msgstr ""
+
+#: ckanext/superset/templates/superset/list-datasets.html:24
+msgid "View"
+msgstr ""
+
+#: ckanext/superset/templates/superset/list-datasets.html:52
+msgid "Dataset"
+msgstr ""
+
