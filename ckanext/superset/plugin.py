@@ -77,3 +77,8 @@ class SupersetPlugin(plugins.SingletonPlugin):
 
     def i18n_domain(self):
         return "ckanext-superset"
+
+    def i18n_locales(self):
+        """Lanaguages this plugin has translations for."""
+        # Return a list of languages that this plugin has translations for.
+        return ["es", "en"]
