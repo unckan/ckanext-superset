@@ -19,7 +19,7 @@ def get_config():
         'superset_provider': config.get("ckanext.superset.instance.provider", "db"),
         'superset_refresh': config.get("ckanext.superset.instance.refresh", "true"),
         'proxy_url': config.get("ckanext.superset.proxy.url"),
-        'proxy_port': config.get("ckanext.superset.proxy.port", '3128'),
+        'proxy_port': int(config.get("ckanext.superset.proxy.port") or 3128),
         'proxy_user': config.get("ckanext.superset.proxy.user"),
         'proxy_pass': config.get("ckanext.superset.proxy.pass"),
     }

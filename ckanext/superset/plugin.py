@@ -42,7 +42,7 @@ class SupersetPlugin(plugins.SingletonPlugin):
         declaration.declare(group.instance.provider, "db")
         declaration.declare_bool(group.instance.refresh, True)
         declaration.declare(group.proxy.url, "")
-        declaration.declare_int(group.proxy.port, 3128)
+        declaration.declare(group.proxy.port, "")
         declaration.declare(group.proxy.user, "")
         # pass is a reserved word in python, so we use with _descend
         declaration.declare(group.proxy._descend("pass"), "")
