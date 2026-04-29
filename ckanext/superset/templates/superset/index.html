@@ -7,11 +7,11 @@
 <section class="module">
     <div class="module-content">
         {% block superset_index_admin_module_1 %}
-        <h2>Superset Dashboard</h2>
+        <h2>{{ _('Superset Dashboard') }}</h2>
         <div class="row">
           <div class="col-sm-6">
-            <p>Superset instance: <a href="{{ superset_url }}" target="_blank">{{ superset_url }}</a></p>
-            <p>Charts: {{ charts_count }}</p>
+            <p>{{ _('Superset instance') }}: <a href="{{ superset_url }}" target="_blank">{{ superset_url }}</a></p>
+            <p>{{ _('Charts') }}: {{ charts_count }}</p>
             <label for="superset-ckan-filter">{{ _('CKAN status') }}</label>
             <select id="superset-ckan-filter" class="form-control form-select">
               <option value="all" selected>{{ _('All charts') }}</option>
@@ -40,7 +40,7 @@
     {% block superset_index_admin_module_2 %}{% endblock %}
 
     <div class="module-content">
-      <h3>Superset charts</h3>
+      <h3>{{ _('Superset charts') }}</h3>
       <table class="table table-striped table-bordered table-condensed" id="superset-charts-table">
           <thead>
               <tr>
@@ -101,13 +101,13 @@
                   <td class="text-nowrap">
                     {% if chart.ckan_dataset %}
                     {% set pkg_name = chart.ckan_dataset.name %}
-                    <a class="btn btn-xs btn-default" href="{{ h.url_for('dataset.read', id=pkg_name) }}" target="_blank">View in CKAN</a>
+                    <a class="btn btn-xs btn-default" href="{{ h.url_for('dataset.read', id=pkg_name) }}" target="_blank">{{ _('View in CKAN') }}</a>
                     <form action="{{ h.url_for('superset_blueprint.update_dataset', chart_id=chart.id) }}" method="POST" style="display: inline;">
-                      <button type="submit" class="btn btn-xs btn-primary">Re-sync CSV</button>
+                      <button type="submit" class="btn btn-xs btn-primary">{{ _('Re-sync CSV') }}</button>
                     </form>
                     {% else %}
                       <a class="btn btn-xs btn-primary" href="{{ h.url_for('superset_blueprint.create_dataset', chart_id=chart.id) }}">
-                        Create CKAN dataset
+                        {{ _('Create CKAN dataset') }}
                       </a>
                     {% endif %}
                   </td>
@@ -116,10 +116,10 @@
               <tr style="display: none;" id="chart-info-{{ chart.id }}" data-viz-type="{{ chart.viz_type }}" data-has-ckan="{{ 'true' if chart.ckan_dataset else 'false' }}">
                   <td colspan="4" style="background-color: #f9f9f9; padding: 8px 12px;">
                     {% for dashboard in chart.dashboards %}
-                      <span class="label label-info">Dash: {{ dashboard.dashboard_title }}</span>
+                      <span class="label label-info">{{ _('Dash') }}: {{ dashboard.dashboard_title }}</span>
                     {% endfor %}
                     {% for tag in chart.tags %}
-                      <span class="label label-default">Tag: {{ tag }}</span>
+                      <span class="label label-default">{{ _('Tag') }}: {{ tag }}</span>
                     {% endfor %}
                     {% if chart.description %}
                       <span class="text-muted"><small>{{ chart.description }}</small></span>
@@ -144,8 +144,7 @@
     <div class="module-content">
       <img src="{{ h.url_for_static('/base/images/apache-superset-logo.png') }}" alt="Apache Superset" style="max-width: 200px; display: block; margin: 0 auto;">
       <p>
-        Apache Superset es una herramienta de visualización de datos de código abierto que permite a los usuarios
-        crear paneles de control y visualizaciones interactivas.
+        {{ _('Apache Superset is an open source data visualization tool that allows users to create interactive dashboards and visualizations.') }}
       </p>
       <p>
           <a href="{{ h.url_for('superset_blueprint.list_databases') }}" class="btn btn-primary">

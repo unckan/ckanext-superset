@@ -1,4 +1,5 @@
 import logging
+import os
 from ckan import plugins
 from ckan.config.declaration import Declaration, Key
 from ckan.plugins import toolkit
@@ -19,6 +20,7 @@ class SupersetPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IConfigDeclaration)
     plugins.implements(plugins.IConfigurer)
+    plugins.implements(plugins.ITranslation)
 
     # IConfigurer
 
@@ -67,3 +69,16 @@ class SupersetPlugin(plugins.SingletonPlugin):
             superset_bp,
             superset_images_bp,
         ]
+
+    # ITranslation
+
+    def i18n_directory(self):
+        return os.path.join(os.path.dirname(__file__), "i18n")
+
+    def i18n_domain(self):
+        return "ckanext-superset"
+
+    def i18n_locales(self):
+        """Lanaguages this plugin has translations for."""
+        # Return a list of languages that this plugin has translations for.
+        return ["es", "en"]
