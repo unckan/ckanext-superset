@@ -103,6 +103,7 @@ class SupersetPlugin(plugins.SingletonPlugin):
         """Lanaguages this plugin has translations for."""
         # Return a list of languages that this plugin has translations for.
         return ["es", "en"]
+
     # IClick
     def get_commands(self):
         return superset_cli.get_commands()
