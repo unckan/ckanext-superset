@@ -1,0 +1,74 @@
+{% extends "package/read_base.html" %}
+
+{% block subtitle %}{{ _('Apache Superset sync') }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
+
+{% block primary_content_inner %}
+  <h2>{{ _('Periodic Apache Superset sync') }}</h2>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">{{ _('Current status') }}</div>
+    <div class="panel-body">
+      <dl class="dl-horizontal">
+        <dt>{{ _('Last sync') }}</dt>
+        <dd>{{ last_sync or _('Never') }}</dd>
+
+        <dt>{{ _('Last status') }}</dt>
+        <dd>
+          {% if last_status == 'ok' %}
+            <span class="label label-success">{{ _('OK') }}</span>
+          {% elif last_status == 'error' %}
+            <span class="label label-danger">{{ _('Error') }}</span>
+            {% if last_error %}<div class="text-muted"><small>{{ last_error }}</small></div>{% endif %}
+          {% else %}
+            <span class="text-muted">{{ _('No runs yet') }}</span>
+          {% endif %}
+        </dd>
+
+        <dt>{{ _('Next sync') }}</dt>
+        <dd>{{ next_sync or _('Not scheduled') }}</dd>
+      </dl>
+    </div>
+  </div>
+
+  <form method="POST" action="{{ h.url_for('superset_blueprint.sync_settings', package_id=pkg.id) }}">
+    {{ h.csrf_input() if h.csrf_input is defined }}
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" id="superset-sync-enabled" name="enabled" {% if enabled %}checked{% endif %}>
+        {{ _('Enable periodic sync') }}
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label for="frequency">{{ _('Frequency') }}</label>
+      <select id="frequency" name="frequency" class="form-control" {% if not enabled %}disabled{% endif %}>
+        {% for value, label in frequency_choices %}
+          <option value="{{ value }}" {% if value == frequency %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ _('Save settings') }}</button>
+  </form>
+
+  <hr>
+
+  <form method="POST"
+        action="{{ h.url_for('superset_blueprint.update_dataset', chart_id=h.get_pkg_dict_extra(pkg, 'superset_chart_id')) }}">
+    {{ h.csrf_input() if h.csrf_input is defined }}
+    <button type="submit" class="btn btn-default">{{ _('Sync now') }}</button>
+    <span class="text-muted"><small>{{ _('Triggers an immediate sync, regardless of the schedule.') }}</small></span>
+  </form>
+
+  <script>
+    (function() {
+      var toggle = document.getElementById('superset-sync-enabled');
+      var select = document.getElementById('frequency');
+      if (!toggle || !select) return;
+      toggle.addEventListener('change', function() {
+        select.disabled = !toggle.checked;
+      });
+    })();
+  </script>
+{% endblock %}
