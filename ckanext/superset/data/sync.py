@@ -19,7 +19,7 @@ from datetime import datetime, timedelta, timezone
 
 from werkzeug.datastructures import FileStorage
 from ckan import model
-from ckan.plugins import toolkit as tk
+from ckan.plugins import plugin_loaded, toolkit as tk
 
 from ckanext.superset.config import get_config
 from ckanext.superset.data.main import SupersetCKAN
@@ -201,6 +201,8 @@ def _create_failure_activity(package_dict, error):
     so it shows up in the standard activity stream — CKAN filters out
     site-user activities from public streams by default.
     """
+    if not plugin_loaded("activity"):
+        return
     if not tk.config.get('ckan.activity_streams_enabled', True):
         return
     try:

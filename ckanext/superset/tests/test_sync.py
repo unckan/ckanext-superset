@@ -183,6 +183,17 @@ class TestSyncSettingsAndScheduler:
                          if a['activity_type'] == sync_module.ACTIVITY_TYPE_SYNC_FAILED]
         assert sync_failures == []
 
+    @pytest.mark.ckan_config('ckan.plugins', 'superset')
+    def test_sync_failure_without_activity_plugin_does_not_crash(self, setup_data):
+        """ Without the activity plugin loaded, a sync failure must still record state without raising. """
+        pkg = factories.SupersetDataset(user=setup_data.sysadmin)
+
+        sync_module._record_result(pkg, status='error', error='Boom: chart unreachable')
+
+        refreshed = toolkit.get_action('package_show')({'ignore_auth': True}, {'id': pkg['id']})
+        assert sync_module.get_extra(refreshed, sync_module.EXTRA_LAST_STATUS) == 'error'
+        assert sync_module.get_extra(refreshed, sync_module.EXTRA_LAST_ERROR) == 'Boom: chart unreachable'
+
     def test_sync_settings_view_requires_login(self, app_httpx_mocked, setup_data):
         pkg = factories.SupersetDataset(user=setup_data.sysadmin)
         url = url_for('superset_blueprint.sync_settings', package_id=pkg['id'])
