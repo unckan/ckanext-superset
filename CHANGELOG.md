@@ -1,6 +1,12 @@
 # Next release
 
-# 0.2.1 2025-09-17
+# 0.3.0
+
+ - Add trabslations (ES) [#53](https://github.com/unckan/ckanext-superset/pull/53)
+ - Allow automatic sync resources [#52](https://github.com/unckan/ckanext-superset/pull/52)
+ - Add filters to the charts list [#50](https://github.com/unckan/ckanext-superset/pull/50)
+
+ # 0.2.1 2025-09-17
 
 - Fix missing name when updating Superset resource [#42](https://github.com/unckan/ckanext-superset/pull/42)
 
