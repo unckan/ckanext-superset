@@ -1,0 +1,13 @@
+{% ckan_extends %}
+
+{% block content_primary_nav %}
+  {{ super() }}
+  {% if h.get_pkg_dict_extra(pkg, 'superset_chart_id') %}
+    {{ h.build_nav_icon(
+        'superset_blueprint.sync_settings',
+        _('Apache Superset sync'),
+        package_id=pkg.id,
+        icon='refresh'
+    ) }}
+  {% endif %}
+{% endblock %}

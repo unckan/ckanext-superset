@@ -9,15 +9,36 @@ from ckanext.superset.actions import superset_dataset as superset_dataset_action
 from ckanext.superset.auth import superset_dataset as superset_dataset_auth
 from ckanext.superset.actions import superset_database as superset_database_actions
 from ckanext.superset.auth import superset_database as superset_database_auth
+from ckanext.superset import cli as superset_cli
+from ckanext.superset.data.sync import ACTIVITY_TYPE_SYNC_FAILED
 
 
 log = logging.getLogger(__name__)
+
+
+def _register_activity_types():
+    """ Register custom activity types in CKAN's activity validators.
+
+    The activity plugin validates `activity_type` against `object_id_validators`;
+    unknown types are rejected. We register ours as a package-bound type so the
+    object_id is treated as a package ID.
+    """
+    try:
+        from ckanext.activity.logic.validators import object_id_validators
+    except ImportError:
+        log.info("ckanext.activity not installed; skipping activity type registration")
+        return
+    object_id_validators[ACTIVITY_TYPE_SYNC_FAILED] = 'package_id_exists'
+
+
+_register_activity_types()
 
 
 class SupersetPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IBlueprint)
+    plugins.implements(plugins.IClick)
     plugins.implements(plugins.IConfigDeclaration)
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITranslation)
@@ -82,3 +103,7 @@ class SupersetPlugin(plugins.SingletonPlugin):
         """Lanaguages this plugin has translations for."""
         # Return a list of languages that this plugin has translations for.
         return ["es", "en"]
+
+    # IClick
+    def get_commands(self):
+        return superset_cli.get_commands()
