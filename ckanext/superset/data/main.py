@@ -155,12 +155,16 @@ class SupersetCKAN:
     def prepare_connection(self):
         """ Define the client and login if required """
         log.info(f"Connecting to {self.superset_url}")
+        timeout = httpx.Timeout(30.0, connect=10.0)
         if self.proxy_url:
             log.info(f"Using proxy {self.proxy_url}:{self.proxy_port}")
             proxy = Proxy(self.proxy_full_url)
-            self.client = httpx.Client(transport=httpx.HTTPTransport(proxy=proxy))
+            self.client = httpx.Client(
+                transport=httpx.HTTPTransport(proxy=proxy),
+                timeout=timeout,
+            )
         else:
-            self.client = httpx.Client()
+            self.client = httpx.Client(timeout=timeout)
 
         # If we have a user, then we need to login
         if self.superset_user:
