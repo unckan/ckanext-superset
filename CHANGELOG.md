@@ -1,5 +1,7 @@
 # Next release
 
+ - Add access check for Superset sync icon in primary navigation [#58](https://github.com/unckan/ckanext-superset/pull/58)
+
 # 0.3.0
 
  - Add trabslations (ES) [#53](https://github.com/unckan/ckanext-superset/pull/53)

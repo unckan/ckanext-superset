@@ -235,3 +235,25 @@ class TestSupersetSyncTab:
         response = app.get(url, headers=auth)
         assert response.status_code == 200
         assert 'Apache Superset sync' not in response.body
+
+    def test_tab_visible_for_org_editor(self, app, setup_data):
+        """Org editor has package_patch, so the tab must be visible."""
+        editor = factories.UserWithToken()
+        org = factories.Organization(users=[{'name': editor['name'], 'capacity': 'editor'}])
+        pkg = SupersetDataset(owner_org=org['id'])
+        auth = {"Authorization": editor['token']}
+        url = url_for('dataset.read', id=pkg['name'])
+        response = app.get(url, headers=auth)
+        assert response.status_code == 200
+        assert 'Apache Superset sync' in response.body
+
+    def test_tab_hidden_for_org_member(self, app, setup_data):
+        """Org member (read-only) lacks package_patch, so the tab must be hidden."""
+        member = factories.UserWithToken()
+        org = factories.Organization(users=[{'name': member['name'], 'capacity': 'member'}])
+        pkg = SupersetDataset(owner_org=org['id'])
+        auth = {"Authorization": member['token']}
+        url = url_for('dataset.read', id=pkg['name'])
+        response = app.get(url, headers=auth)
+        assert response.status_code == 200
+        assert 'Apache Superset sync' not in response.body
