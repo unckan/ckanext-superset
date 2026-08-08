@@ -4,6 +4,7 @@ import logging
 from ckan.lib.helpers import url_for
 from ckan.plugins import toolkit
 from ckan.tests import factories
+from ckanext.superset.tests.factories import SupersetDataset
 
 
 log = logging.getLogger(__name__)
@@ -198,3 +199,61 @@ class TestSupersetViews:
         response = app.get(url, headers=auth)
         assert response.status_code == 403
         assert 'Superset' not in response.body
+
+
+@pytest.mark.usefixtures('with_plugins', 'clean_db', 'clean_index')
+class TestSupersetSyncTab:
+    """Tests for the 'Apache Superset sync' tab visibility on the package page."""
+
+    def test_tab_visible_for_sysadmin_with_chart_id(self, app, setup_data):
+        """Tab is shown when the package has superset_chart_id and user has package_patch access."""
+        org = factories.Organization()
+        pkg = SupersetDataset(owner_org=org['id'])
+        auth = {"Authorization": setup_data.sysadmin['token']}
+        url = url_for('dataset.read', id=pkg['name'])
+        response = app.get(url, headers=auth)
+        assert response.status_code == 200
+        assert 'Apache Superset sync' in response.body
+
+    def test_tab_hidden_without_chart_id(self, app, setup_data):
+        """Tab is not shown when the package lacks the superset_chart_id extra."""
+        org = factories.Organization()
+        pkg = factories.Dataset(owner_org=org['id'])
+        auth = {"Authorization": setup_data.sysadmin['token']}
+        url = url_for('dataset.read', id=pkg['name'])
+        response = app.get(url, headers=auth)
+        assert response.status_code == 200
+        assert 'Apache Superset sync' not in response.body
+
+    def test_tab_hidden_for_user_without_package_patch(self, app, setup_data):
+        """Tab is not shown for a user who lacks package_patch permission."""
+        org = factories.Organization()
+        pkg = SupersetDataset(owner_org=org['id'])
+        # user_regular is not a member of the org, so has no package_patch right
+        auth = {"Authorization": setup_data.user_regular['token']}
+        url = url_for('dataset.read', id=pkg['name'])
+        response = app.get(url, headers=auth)
+        assert response.status_code == 200
+        assert 'Apache Superset sync' not in response.body
+
+    def test_tab_visible_for_org_editor(self, app, setup_data):
+        """Org editor has package_patch, so the tab must be visible."""
+        editor = factories.UserWithToken()
+        org = factories.Organization(users=[{'name': editor['name'], 'capacity': 'editor'}])
+        pkg = SupersetDataset(owner_org=org['id'])
+        auth = {"Authorization": editor['token']}
+        url = url_for('dataset.read', id=pkg['name'])
+        response = app.get(url, headers=auth)
+        assert response.status_code == 200
+        assert 'Apache Superset sync' in response.body
+
+    def test_tab_hidden_for_org_member(self, app, setup_data):
+        """Org member (read-only) lacks package_patch, so the tab must be hidden."""
+        member = factories.UserWithToken()
+        org = factories.Organization(users=[{'name': member['name'], 'capacity': 'member'}])
+        pkg = SupersetDataset(owner_org=org['id'])
+        auth = {"Authorization": member['token']}
+        url = url_for('dataset.read', id=pkg['name'])
+        response = app.get(url, headers=auth)
+        assert response.status_code == 200
+        assert 'Apache Superset sync' not in response.body
