@@ -2,6 +2,7 @@ import logging
 from flask import Blueprint
 from flask import send_file
 
+from ckanext.superset.blueprints.errors import register_superset_error_handler, superset_error_text
 from ckanext.superset.config import get_config
 from ckanext.superset.decorators import require_sysadmin_user
 from ckanext.superset.data.main import SupersetCKAN
@@ -10,6 +11,7 @@ from ckanext.superset.data.chart import SupersetChart
 
 log = logging.getLogger(__name__)
 superset_images_bp = Blueprint('superset_images', __name__, url_prefix='/superset-images')
+register_superset_error_handler(superset_images_bp, superset_error_text)
 
 
 @superset_images_bp.route('/chart/<int:chart_id>', methods=['GET'])
