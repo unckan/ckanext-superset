@@ -6,6 +6,7 @@ from ckan import model
 from ckan.common import current_user, request
 from ckan.plugins import toolkit as tk
 
+from ckanext.superset.blueprints.errors import register_superset_error_handler
 from ckanext.superset.config import get_config
 from ckanext.superset.decorators import require_sysadmin_user
 from ckanext.superset.data.main import SupersetCKAN
@@ -16,6 +17,7 @@ from ckanext.superset.utils import slug
 
 log = logging.getLogger(__name__)
 superset_bp = Blueprint('superset_blueprint', __name__, url_prefix='/apache-superset')
+register_superset_error_handler(superset_bp)
 
 
 @superset_bp.route('/', methods=['GET'])

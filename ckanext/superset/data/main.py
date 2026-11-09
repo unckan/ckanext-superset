@@ -202,7 +202,7 @@ class SupersetCKAN:
             if login_response.status_code != 302:
                 error = f"Unexpected status code: {login_response.status_code} from Superset login"
                 log.critical(error)
-                login_response.raise_for_status()
+                raise SupersetRequestException(error)
             # Save cookies from the login response
             self.client.cookies.update(login_response.cookies)
 
@@ -255,14 +255,14 @@ class SupersetCKAN:
             self.handle_error(url, e, error)
         except httpx.TimeoutException as e:
             error = "Request to Superset timed out."
-            self.handle_error(url, e, error)
+            self.handle_error(url, e, error, status_code=504)
         except Exception as e:
             error = "An unexpected error occurred while communicating with Superset."
             self.handle_error(url, e, error)
 
         return None, error
 
-    def handle_error(self, url, exception, public_message):
+    def handle_error(self, url, exception, public_message, status_code=502):
         """ Log detailed error information and raise an exception """
         # error_type is the error class name
         error_type = exception.__class__.__name__
@@ -272,7 +272,7 @@ class SupersetCKAN:
             f"Traceback: {traceback.format_exc(limit=10)}"
         )
         log.critical(error_details)  # Log interno para push-errors
-        raise SupersetRequestException(public_message) from exception
+        raise SupersetRequestException(public_message, status_code=status_code) from exception
 
     def get_headers(self, format_='json'):
         """ Get the headers for the httpx client """
