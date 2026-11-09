@@ -1,5 +1,7 @@
 # Next release
 
+# 0.3.1 2026-11-09
+
  - Add access check for Superset sync icon in primary navigation [#58](https://github.com/unckan/ckanext-superset/pull/58)
  - Show an error page (502 Bad Gateway / 504 Gateway Timeout) instead of a 500 when Superset fails or times out [#60](https://github.com/unckan/ckanext-superset/pull/60)
 
