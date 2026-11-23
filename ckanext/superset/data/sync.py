@@ -243,13 +243,24 @@ def _create_failure_activity(package_dict, error):
 def find_due_package_ids(now=None):
     """ Return IDs of active packages whose next sync time has arrived.
 
-    Pre-conditions enforced via PackageExtra rows:
+    Required dataset extras:
     - superset_chart_id present
     - superset_sync_enabled == 'true'
     - superset_next_sync <= now (ISO-8601 lexicographic comparison is correct)
     """
     now = now or datetime.now(timezone.utc)
     now_iso = now.isoformat()
+
+    package = model.Package
+    active_packages = model.Session.query(package.id).filter(package.state == 'active')
+
+    if tk.check_ckan_version(min_version='2.12'):
+        rows = active_packages.filter(
+            package.extras[EXTRA_CHART_ID].astext.isnot(None),
+            package.extras[EXTRA_ENABLED].astext == 'true',
+            package.extras[EXTRA_NEXT_SYNC].astext <= now_iso,
+        ).all()
+        return [row[0] for row in rows]
 
     PE = model.PackageExtra
 
@@ -265,11 +276,10 @@ def find_due_package_ids(now=None):
         PE.state == 'active',
     )
 
-    rows = model.Session.query(model.Package.id).filter(
-        model.Package.id.in_(chart_pkgs.subquery()),
-        model.Package.id.in_(enabled_pkgs.subquery()),
-        model.Package.id.in_(due_pkgs.subquery()),
-        model.Package.state == 'active',
+    rows = active_packages.filter(
+        package.id.in_(chart_pkgs.subquery()),
+        package.id.in_(enabled_pkgs.subquery()),
+        package.id.in_(due_pkgs.subquery()),
     ).all()
 
     return [r[0] for r in rows]
